@@ -1,0 +1,7 @@
+, Neurosymbolic, CoT, Baseline, Scratchpad,
+Mistral-7B, , , , , 
+Qwen-7B k=1, 0.527, , 0.615 | 0.6256(t= 0.8 regex w no extra output) | 0.615 (t=0.2), ,
+Qwen-7B k=3, 0.635, 0.551, 0.6059 (r), , 
+Qwen-7B k=5, 0.6404, , 0.5862 (r), , 
+Qwen-32B k=3, 0.724, , , , 
+Llama-7B, , , , , 

@@ -1,0 +1,1408 @@
+=== Example 0 ===
+Prompt:
+The following is a first-order logic (FOL) problem.
+The problem is to determine whether the conclusion follows from the premises.
+The premises are given in the form of a set of first-order logic sentences.
+The conclusion is given in the form of a single first-order logic sentence.
+The task is to translate each of the premises and conclusions into FOL expressions.
+
+
+<PREMISES>
+All biodegradable things are environment-friendly.
+All woodware is biodegradable.
+All paper is woodware.
+Nothing is a good thing and also a bad thing.
+All environment-friendly things are good.
+A worksheet is either paper or environment-friendly.
+</PREMISES>
+<CONCLUSION>
+A worksheet is not biodegradable.
+</CONCLUSION>
+<EVALUATE>
+
+Let's think step by step. We want to evaluate if a worksheet is not dispensable. From premise 6, we know that a worksheet is either paper or is environment-friendly. If it is paper, then from premise 3, a worksheet is woodware, and from premise 2, a worksheet is dispensable. If it is environment-friendly, we know it is good from premise 5, but we know nothing about whether it is dispensable. Therefore, we don't know if a worksheet is dispensible or not, so the statement is uncertain.
+ANSWER:	Uncertain
+</EVALUATE>
+
+<PREMISES>
+A La Liga soccer team ranks higher than another La Liga soccer team if it receives more points.
+If there are two La Liga soccer teams and neither has more points than the other, then the team which receives more points from the games between the two teams ranks higher.
+Real Madrid and Barcelona are both La Liga soccer teams.
+Real Madrid received more points than Barcelona.
+Neither Real Madrid nor Barcelona received more points from the games between them.
+</PREMISES>
+<CONCLUSION>
+Real Madrid ranks higher than Barcelona.
+</CONCLUSION>
+<EVALUATE>
+
+Let's think step by step. We want to evaluate if in La Liga 2021-2022, Real Madrid ranks higher than Barcelona. From premise 1, we know that a La Liga soccer team ranks higher than another if it receives more points. From premise 4, we know that in La Liga 2021-2022, Real Madrid received more points than Barcelona. Therefore, in La Liga 2021-2022, Real Madrid received more points than Barcelona, so Real Madrid ranks higher than Barcelona, so the statement is true.
+ANSWER:	True
+</EVALUATE>
+
+<PREMISES>
+All professional athletes spend most of their time on sports.
+All Olympic gold medal winners are professional athletes.
+No full-time scientists spend the majority of their time on sports.
+All Nobel physics laureates are full-time scientists.
+Amy spends the most time on sports, or Amy is an Olympic gold medal winner.
+If Amy is not a Nobel physics laureate, then Amy is not an Olympic gold medal winner.
+</PREMISES>
+<CONCLUSION>
+If Amy is not an Olympic gold medal winner, then Amy is a Nobel physics laureate.
+</CONCLUSION>
+<EVALUATE>
+
+Let's think step by step. We want to evaluate the statement "if Amy is not an Olympic gold medal winner, then Amy is a Nobel laureate". Let's assume that Amy is not an Olympic gold medal winner. This doesn't tell us anything about whether Amy is a Nobel laureate, so the statement isn't true, meaning it is either False or Uncertain. To distinguish between the two, notice that we could have a scenario where Amy is neither an Olympic gold medal winner nor a Nobel laureate. None of the premises are violated in this case. This means the statement must be false.
+ANSWER:	False
+</EVALUATE>
+
+<PREMISES>
+People in this club who perform in school talent shows often attend and are very engaged with school events.
+People in this club either perform in school talent shows often or are inactive and disinterested community members.
+People in this club who chaperone high school dances are not students who attend the school.
+All people in this club who are inactive and disinterested members of their community chaperone high school dances.
+All young children and teenagers in this club who wish to further their academic careers and educational opportunities are students who attend the school.
+Bonnie is in this club and she either both attends and is very engaged with school events and is a student who attends the school or is not someone who both attends and is very engaged with school events and is not a student who attends the school.
+</PREMISES>
+<CONCLUSION>
+Bonnie performs in school talent shows often.
+</CONCLUSION>
+<EVALUATE>
+
+Generation 1:
+Error
+Processed: Error
+
+Reference: Uncertain
+========================================
+
+=== Example 1 ===
+Prompt:
+The following is a first-order logic (FOL) problem.
+The problem is to determine whether the conclusion follows from the premises.
+The premises are given in the form of a set of first-order logic sentences.
+The conclusion is given in the form of a single first-order logic sentence.
+The task is to translate each of the premises and conclusions into FOL expressions.
+
+
+<PREMISES>
+All biodegradable things are environment-friendly.
+All woodware is biodegradable.
+All paper is woodware.
+Nothing is a good thing and also a bad thing.
+All environment-friendly things are good.
+A worksheet is either paper or environment-friendly.
+</PREMISES>
+<CONCLUSION>
+A worksheet is not biodegradable.
+</CONCLUSION>
+<EVALUATE>
+
+Let's think step by step. We want to evaluate if a worksheet is not dispensable. From premise 6, we know that a worksheet is either paper or is environment-friendly. If it is paper, then from premise 3, a worksheet is woodware, and from premise 2, a worksheet is dispensable. If it is environment-friendly, we know it is good from premise 5, but we know nothing about whether it is dispensable. Therefore, we don't know if a worksheet is dispensible or not, so the statement is uncertain.
+ANSWER:	Uncertain
+</EVALUATE>
+
+<PREMISES>
+A La Liga soccer team ranks higher than another La Liga soccer team if it receives more points.
+If there are two La Liga soccer teams and neither has more points than the other, then the team which receives more points from the games between the two teams ranks higher.
+Real Madrid and Barcelona are both La Liga soccer teams.
+Real Madrid received more points than Barcelona.
+Neither Real Madrid nor Barcelona received more points from the games between them.
+</PREMISES>
+<CONCLUSION>
+Real Madrid ranks higher than Barcelona.
+</CONCLUSION>
+<EVALUATE>
+
+Let's think step by step. We want to evaluate if in La Liga 2021-2022, Real Madrid ranks higher than Barcelona. From premise 1, we know that a La Liga soccer team ranks higher than another if it receives more points. From premise 4, we know that in La Liga 2021-2022, Real Madrid received more points than Barcelona. Therefore, in La Liga 2021-2022, Real Madrid received more points than Barcelona, so Real Madrid ranks higher than Barcelona, so the statement is true.
+ANSWER:	True
+</EVALUATE>
+
+<PREMISES>
+All professional athletes spend most of their time on sports.
+All Olympic gold medal winners are professional athletes.
+No full-time scientists spend the majority of their time on sports.
+All Nobel physics laureates are full-time scientists.
+Amy spends the most time on sports, or Amy is an Olympic gold medal winner.
+If Amy is not a Nobel physics laureate, then Amy is not an Olympic gold medal winner.
+</PREMISES>
+<CONCLUSION>
+If Amy is not an Olympic gold medal winner, then Amy is a Nobel physics laureate.
+</CONCLUSION>
+<EVALUATE>
+
+Let's think step by step. We want to evaluate the statement "if Amy is not an Olympic gold medal winner, then Amy is a Nobel laureate". Let's assume that Amy is not an Olympic gold medal winner. This doesn't tell us anything about whether Amy is a Nobel laureate, so the statement isn't true, meaning it is either False or Uncertain. To distinguish between the two, notice that we could have a scenario where Amy is neither an Olympic gold medal winner nor a Nobel laureate. None of the premises are violated in this case. This means the statement must be false.
+ANSWER:	False
+</EVALUATE>
+
+<PREMISES>
+People in this club who perform in school talent shows often attend and are very engaged with school events.
+People in this club either perform in school talent shows often or are inactive and disinterested community members.
+People in this club who chaperone high school dances are not students who attend the school.
+All people in this club who are inactive and disinterested members of their community chaperone high school dances.
+All young children and teenagers in this club who wish to further their academic careers and educational opportunities are students who attend the school.
+Bonnie is in this club and she either both attends and is very engaged with school events and is a student who attends the school or is not someone who both attends and is very engaged with school events and is not a student who attends the school.
+</PREMISES>
+<CONCLUSION>
+If Bonnie is either both a young child or teenager who wishes to further her academic career and educational opportunities and chaperones high school dances or neither is a young child nor teenager who wishes to further her academic career and educational opportunities, then Bonnie is either a student who attends the school or is an inactive and disinterested member of the community.
+</CONCLUSION>
+<EVALUATE>
+
+Generation 1:
+Error
+Processed: Error
+
+Reference: True
+========================================
+
+=== Example 2 ===
+Prompt:
+The following is a first-order logic (FOL) problem.
+The problem is to determine whether the conclusion follows from the premises.
+The premises are given in the form of a set of first-order logic sentences.
+The conclusion is given in the form of a single first-order logic sentence.
+The task is to translate each of the premises and conclusions into FOL expressions.
+
+
+<PREMISES>
+All biodegradable things are environment-friendly.
+All woodware is biodegradable.
+All paper is woodware.
+Nothing is a good thing and also a bad thing.
+All environment-friendly things are good.
+A worksheet is either paper or environment-friendly.
+</PREMISES>
+<CONCLUSION>
+A worksheet is not biodegradable.
+</CONCLUSION>
+<EVALUATE>
+
+Let's think step by step. We want to evaluate if a worksheet is not dispensable. From premise 6, we know that a worksheet is either paper or is environment-friendly. If it is paper, then from premise 3, a worksheet is woodware, and from premise 2, a worksheet is dispensable. If it is environment-friendly, we know it is good from premise 5, but we know nothing about whether it is dispensable. Therefore, we don't know if a worksheet is dispensible or not, so the statement is uncertain.
+ANSWER:	Uncertain
+</EVALUATE>
+
+<PREMISES>
+A La Liga soccer team ranks higher than another La Liga soccer team if it receives more points.
+If there are two La Liga soccer teams and neither has more points than the other, then the team which receives more points from the games between the two teams ranks higher.
+Real Madrid and Barcelona are both La Liga soccer teams.
+Real Madrid received more points than Barcelona.
+Neither Real Madrid nor Barcelona received more points from the games between them.
+</PREMISES>
+<CONCLUSION>
+Real Madrid ranks higher than Barcelona.
+</CONCLUSION>
+<EVALUATE>
+
+Let's think step by step. We want to evaluate if in La Liga 2021-2022, Real Madrid ranks higher than Barcelona. From premise 1, we know that a La Liga soccer team ranks higher than another if it receives more points. From premise 4, we know that in La Liga 2021-2022, Real Madrid received more points than Barcelona. Therefore, in La Liga 2021-2022, Real Madrid received more points than Barcelona, so Real Madrid ranks higher than Barcelona, so the statement is true.
+ANSWER:	True
+</EVALUATE>
+
+<PREMISES>
+All professional athletes spend most of their time on sports.
+All Olympic gold medal winners are professional athletes.
+No full-time scientists spend the majority of their time on sports.
+All Nobel physics laureates are full-time scientists.
+Amy spends the most time on sports, or Amy is an Olympic gold medal winner.
+If Amy is not a Nobel physics laureate, then Amy is not an Olympic gold medal winner.
+</PREMISES>
+<CONCLUSION>
+If Amy is not an Olympic gold medal winner, then Amy is a Nobel physics laureate.
+</CONCLUSION>
+<EVALUATE>
+
+Let's think step by step. We want to evaluate the statement "if Amy is not an Olympic gold medal winner, then Amy is a Nobel laureate". Let's assume that Amy is not an Olympic gold medal winner. This doesn't tell us anything about whether Amy is a Nobel laureate, so the statement isn't true, meaning it is either False or Uncertain. To distinguish between the two, notice that we could have a scenario where Amy is neither an Olympic gold medal winner nor a Nobel laureate. None of the premises are violated in this case. This means the statement must be false.
+ANSWER:	False
+</EVALUATE>
+
+<PREMISES>
+People in this club who perform in school talent shows often attend and are very engaged with school events.
+People in this club either perform in school talent shows often or are inactive and disinterested community members.
+People in this club who chaperone high school dances are not students who attend the school.
+All people in this club who are inactive and disinterested members of their community chaperone high school dances.
+All young children and teenagers in this club who wish to further their academic careers and educational opportunities are students who attend the school.
+Bonnie is in this club and she either both attends and is very engaged with school events and is a student who attends the school or is not someone who both attends and is very engaged with school events and is not a student who attends the school.
+</PREMISES>
+<CONCLUSION>
+If Bonnie either chaperones high school dances or, if she does not, she performs in school talent shows often, then Bonnie is both a young child or teenager who wishes to further her academic career and educational opportunities and an inactive and disinterested member of the community.
+</CONCLUSION>
+<EVALUATE>
+
+Generation 1:
+Error
+Processed: Error
+
+Reference: False
+========================================
+
+=== Example 3 ===
+Prompt:
+The following is a first-order logic (FOL) problem.
+The problem is to determine whether the conclusion follows from the premises.
+The premises are given in the form of a set of first-order logic sentences.
+The conclusion is given in the form of a single first-order logic sentence.
+The task is to translate each of the premises and conclusions into FOL expressions.
+
+
+<PREMISES>
+All biodegradable things are environment-friendly.
+All woodware is biodegradable.
+All paper is woodware.
+Nothing is a good thing and also a bad thing.
+All environment-friendly things are good.
+A worksheet is either paper or environment-friendly.
+</PREMISES>
+<CONCLUSION>
+A worksheet is not biodegradable.
+</CONCLUSION>
+<EVALUATE>
+
+Let's think step by step. We want to evaluate if a worksheet is not dispensable. From premise 6, we know that a worksheet is either paper or is environment-friendly. If it is paper, then from premise 3, a worksheet is woodware, and from premise 2, a worksheet is dispensable. If it is environment-friendly, we know it is good from premise 5, but we know nothing about whether it is dispensable. Therefore, we don't know if a worksheet is dispensible or not, so the statement is uncertain.
+ANSWER:	Uncertain
+</EVALUATE>
+
+<PREMISES>
+A La Liga soccer team ranks higher than another La Liga soccer team if it receives more points.
+If there are two La Liga soccer teams and neither has more points than the other, then the team which receives more points from the games between the two teams ranks higher.
+Real Madrid and Barcelona are both La Liga soccer teams.
+Real Madrid received more points than Barcelona.
+Neither Real Madrid nor Barcelona received more points from the games between them.
+</PREMISES>
+<CONCLUSION>
+Real Madrid ranks higher than Barcelona.
+</CONCLUSION>
+<EVALUATE>
+
+Let's think step by step. We want to evaluate if in La Liga 2021-2022, Real Madrid ranks higher than Barcelona. From premise 1, we know that a La Liga soccer team ranks higher than another if it receives more points. From premise 4, we know that in La Liga 2021-2022, Real Madrid received more points than Barcelona. Therefore, in La Liga 2021-2022, Real Madrid received more points than Barcelona, so Real Madrid ranks higher than Barcelona, so the statement is true.
+ANSWER:	True
+</EVALUATE>
+
+<PREMISES>
+All professional athletes spend most of their time on sports.
+All Olympic gold medal winners are professional athletes.
+No full-time scientists spend the majority of their time on sports.
+All Nobel physics laureates are full-time scientists.
+Amy spends the most time on sports, or Amy is an Olympic gold medal winner.
+If Amy is not a Nobel physics laureate, then Amy is not an Olympic gold medal winner.
+</PREMISES>
+<CONCLUSION>
+If Amy is not an Olympic gold medal winner, then Amy is a Nobel physics laureate.
+</CONCLUSION>
+<EVALUATE>
+
+Let's think step by step. We want to evaluate the statement "if Amy is not an Olympic gold medal winner, then Amy is a Nobel laureate". Let's assume that Amy is not an Olympic gold medal winner. This doesn't tell us anything about whether Amy is a Nobel laureate, so the statement isn't true, meaning it is either False or Uncertain. To distinguish between the two, notice that we could have a scenario where Amy is neither an Olympic gold medal winner nor a Nobel laureate. None of the premises are violated in this case. This means the statement must be false.
+ANSWER:	False
+</EVALUATE>
+
+<PREMISES>
+All employees who schedule a meeting with their customers will go to the company building today.
+Everyone who has lunch in the company building schedules meetings with their customers.
+Employees have lunch either in the company building or at home.
+If an employee has lunch at home, they are working remotely from home.
+All employees who are in other countries work remotely from home.
+No managers work remotely from home.
+James will appear in the company today if and only if he is a manager.
+</PREMISES>
+<CONCLUSION>
+James has lunch in the company.
+</CONCLUSION>
+<EVALUATE>
+
+Generation 1:
+Error
+Processed: Error
+
+Reference: Uncertain
+========================================
+
+=== Example 4 ===
+Prompt:
+The following is a first-order logic (FOL) problem.
+The problem is to determine whether the conclusion follows from the premises.
+The premises are given in the form of a set of first-order logic sentences.
+The conclusion is given in the form of a single first-order logic sentence.
+The task is to translate each of the premises and conclusions into FOL expressions.
+
+
+<PREMISES>
+All biodegradable things are environment-friendly.
+All woodware is biodegradable.
+All paper is woodware.
+Nothing is a good thing and also a bad thing.
+All environment-friendly things are good.
+A worksheet is either paper or environment-friendly.
+</PREMISES>
+<CONCLUSION>
+A worksheet is not biodegradable.
+</CONCLUSION>
+<EVALUATE>
+
+Let's think step by step. We want to evaluate if a worksheet is not dispensable. From premise 6, we know that a worksheet is either paper or is environment-friendly. If it is paper, then from premise 3, a worksheet is woodware, and from premise 2, a worksheet is dispensable. If it is environment-friendly, we know it is good from premise 5, but we know nothing about whether it is dispensable. Therefore, we don't know if a worksheet is dispensible or not, so the statement is uncertain.
+ANSWER:	Uncertain
+</EVALUATE>
+
+<PREMISES>
+A La Liga soccer team ranks higher than another La Liga soccer team if it receives more points.
+If there are two La Liga soccer teams and neither has more points than the other, then the team which receives more points from the games between the two teams ranks higher.
+Real Madrid and Barcelona are both La Liga soccer teams.
+Real Madrid received more points than Barcelona.
+Neither Real Madrid nor Barcelona received more points from the games between them.
+</PREMISES>
+<CONCLUSION>
+Real Madrid ranks higher than Barcelona.
+</CONCLUSION>
+<EVALUATE>
+
+Let's think step by step. We want to evaluate if in La Liga 2021-2022, Real Madrid ranks higher than Barcelona. From premise 1, we know that a La Liga soccer team ranks higher than another if it receives more points. From premise 4, we know that in La Liga 2021-2022, Real Madrid received more points than Barcelona. Therefore, in La Liga 2021-2022, Real Madrid received more points than Barcelona, so Real Madrid ranks higher than Barcelona, so the statement is true.
+ANSWER:	True
+</EVALUATE>
+
+<PREMISES>
+All professional athletes spend most of their time on sports.
+All Olympic gold medal winners are professional athletes.
+No full-time scientists spend the majority of their time on sports.
+All Nobel physics laureates are full-time scientists.
+Amy spends the most time on sports, or Amy is an Olympic gold medal winner.
+If Amy is not a Nobel physics laureate, then Amy is not an Olympic gold medal winner.
+</PREMISES>
+<CONCLUSION>
+If Amy is not an Olympic gold medal winner, then Amy is a Nobel physics laureate.
+</CONCLUSION>
+<EVALUATE>
+
+Let's think step by step. We want to evaluate the statement "if Amy is not an Olympic gold medal winner, then Amy is a Nobel laureate". Let's assume that Amy is not an Olympic gold medal winner. This doesn't tell us anything about whether Amy is a Nobel laureate, so the statement isn't true, meaning it is either False or Uncertain. To distinguish between the two, notice that we could have a scenario where Amy is neither an Olympic gold medal winner nor a Nobel laureate. None of the premises are violated in this case. This means the statement must be false.
+ANSWER:	False
+</EVALUATE>
+
+<PREMISES>
+All employees who schedule a meeting with their customers will go to the company building today.
+Everyone who has lunch in the company building schedules meetings with their customers.
+Employees have lunch either in the company building or at home.
+If an employee has lunch at home, they are working remotely from home.
+All employees who are in other countries work remotely from home.
+No managers work remotely from home.
+James will appear in the company today if and only if he is a manager.
+</PREMISES>
+<CONCLUSION>
+James does not have lunch in the company.
+</CONCLUSION>
+<EVALUATE>
+
+Generation 1:
+Error
+Processed: Error
+
+Reference: Uncertain
+========================================
+
+=== Example 5 ===
+Prompt:
+The following is a first-order logic (FOL) problem.
+The problem is to determine whether the conclusion follows from the premises.
+The premises are given in the form of a set of first-order logic sentences.
+The conclusion is given in the form of a single first-order logic sentence.
+The task is to translate each of the premises and conclusions into FOL expressions.
+
+
+<PREMISES>
+All biodegradable things are environment-friendly.
+All woodware is biodegradable.
+All paper is woodware.
+Nothing is a good thing and also a bad thing.
+All environment-friendly things are good.
+A worksheet is either paper or environment-friendly.
+</PREMISES>
+<CONCLUSION>
+A worksheet is not biodegradable.
+</CONCLUSION>
+<EVALUATE>
+
+Let's think step by step. We want to evaluate if a worksheet is not dispensable. From premise 6, we know that a worksheet is either paper or is environment-friendly. If it is paper, then from premise 3, a worksheet is woodware, and from premise 2, a worksheet is dispensable. If it is environment-friendly, we know it is good from premise 5, but we know nothing about whether it is dispensable. Therefore, we don't know if a worksheet is dispensible or not, so the statement is uncertain.
+ANSWER:	Uncertain
+</EVALUATE>
+
+<PREMISES>
+A La Liga soccer team ranks higher than another La Liga soccer team if it receives more points.
+If there are two La Liga soccer teams and neither has more points than the other, then the team which receives more points from the games between the two teams ranks higher.
+Real Madrid and Barcelona are both La Liga soccer teams.
+Real Madrid received more points than Barcelona.
+Neither Real Madrid nor Barcelona received more points from the games between them.
+</PREMISES>
+<CONCLUSION>
+Real Madrid ranks higher than Barcelona.
+</CONCLUSION>
+<EVALUATE>
+
+Let's think step by step. We want to evaluate if in La Liga 2021-2022, Real Madrid ranks higher than Barcelona. From premise 1, we know that a La Liga soccer team ranks higher than another if it receives more points. From premise 4, we know that in La Liga 2021-2022, Real Madrid received more points than Barcelona. Therefore, in La Liga 2021-2022, Real Madrid received more points than Barcelona, so Real Madrid ranks higher than Barcelona, so the statement is true.
+ANSWER:	True
+</EVALUATE>
+
+<PREMISES>
+All professional athletes spend most of their time on sports.
+All Olympic gold medal winners are professional athletes.
+No full-time scientists spend the majority of their time on sports.
+All Nobel physics laureates are full-time scientists.
+Amy spends the most time on sports, or Amy is an Olympic gold medal winner.
+If Amy is not a Nobel physics laureate, then Amy is not an Olympic gold medal winner.
+</PREMISES>
+<CONCLUSION>
+If Amy is not an Olympic gold medal winner, then Amy is a Nobel physics laureate.
+</CONCLUSION>
+<EVALUATE>
+
+Let's think step by step. We want to evaluate the statement "if Amy is not an Olympic gold medal winner, then Amy is a Nobel laureate". Let's assume that Amy is not an Olympic gold medal winner. This doesn't tell us anything about whether Amy is a Nobel laureate, so the statement isn't true, meaning it is either False or Uncertain. To distinguish between the two, notice that we could have a scenario where Amy is neither an Olympic gold medal winner nor a Nobel laureate. None of the premises are violated in this case. This means the statement must be false.
+ANSWER:	False
+</EVALUATE>
+
+<PREMISES>
+All employees who schedule a meeting with their customers will go to the company building today.
+Everyone who has lunch in the company building schedules meetings with their customers.
+Employees have lunch either in the company building or at home.
+If an employee has lunch at home, they are working remotely from home.
+All employees who are in other countries work remotely from home.
+No managers work remotely from home.
+James will appear in the company today if and only if he is a manager.
+</PREMISES>
+<CONCLUSION>
+If James is either a manager or in other countries,  then James does not either has lunch at home or work remotely from home. If James either has lunch at home or works remotely from home, then he is neither a manager nor does he work in other countries. [contrapositive is more natural]
+</CONCLUSION>
+<EVALUATE>
+
+Generation 1:
+Error
+Processed: Error
+
+Reference: True
+========================================
+
+=== Example 6 ===
+Prompt:
+The following is a first-order logic (FOL) problem.
+The problem is to determine whether the conclusion follows from the premises.
+The premises are given in the form of a set of first-order logic sentences.
+The conclusion is given in the form of a single first-order logic sentence.
+The task is to translate each of the premises and conclusions into FOL expressions.
+
+
+<PREMISES>
+All biodegradable things are environment-friendly.
+All woodware is biodegradable.
+All paper is woodware.
+Nothing is a good thing and also a bad thing.
+All environment-friendly things are good.
+A worksheet is either paper or environment-friendly.
+</PREMISES>
+<CONCLUSION>
+A worksheet is not biodegradable.
+</CONCLUSION>
+<EVALUATE>
+
+Let's think step by step. We want to evaluate if a worksheet is not dispensable. From premise 6, we know that a worksheet is either paper or is environment-friendly. If it is paper, then from premise 3, a worksheet is woodware, and from premise 2, a worksheet is dispensable. If it is environment-friendly, we know it is good from premise 5, but we know nothing about whether it is dispensable. Therefore, we don't know if a worksheet is dispensible or not, so the statement is uncertain.
+ANSWER:	Uncertain
+</EVALUATE>
+
+<PREMISES>
+A La Liga soccer team ranks higher than another La Liga soccer team if it receives more points.
+If there are two La Liga soccer teams and neither has more points than the other, then the team which receives more points from the games between the two teams ranks higher.
+Real Madrid and Barcelona are both La Liga soccer teams.
+Real Madrid received more points than Barcelona.
+Neither Real Madrid nor Barcelona received more points from the games between them.
+</PREMISES>
+<CONCLUSION>
+Real Madrid ranks higher than Barcelona.
+</CONCLUSION>
+<EVALUATE>
+
+Let's think step by step. We want to evaluate if in La Liga 2021-2022, Real Madrid ranks higher than Barcelona. From premise 1, we know that a La Liga soccer team ranks higher than another if it receives more points. From premise 4, we know that in La Liga 2021-2022, Real Madrid received more points than Barcelona. Therefore, in La Liga 2021-2022, Real Madrid received more points than Barcelona, so Real Madrid ranks higher than Barcelona, so the statement is true.
+ANSWER:	True
+</EVALUATE>
+
+<PREMISES>
+All professional athletes spend most of their time on sports.
+All Olympic gold medal winners are professional athletes.
+No full-time scientists spend the majority of their time on sports.
+All Nobel physics laureates are full-time scientists.
+Amy spends the most time on sports, or Amy is an Olympic gold medal winner.
+If Amy is not a Nobel physics laureate, then Amy is not an Olympic gold medal winner.
+</PREMISES>
+<CONCLUSION>
+If Amy is not an Olympic gold medal winner, then Amy is a Nobel physics laureate.
+</CONCLUSION>
+<EVALUATE>
+
+Let's think step by step. We want to evaluate the statement "if Amy is not an Olympic gold medal winner, then Amy is a Nobel laureate". Let's assume that Amy is not an Olympic gold medal winner. This doesn't tell us anything about whether Amy is a Nobel laureate, so the statement isn't true, meaning it is either False or Uncertain. To distinguish between the two, notice that we could have a scenario where Amy is neither an Olympic gold medal winner nor a Nobel laureate. None of the premises are violated in this case. This means the statement must be false.
+ANSWER:	False
+</EVALUATE>
+
+<PREMISES>
+When the Monkeypox virus occurs in a being, it may get Monkeypox.
+Monkeypox virus can occur in certain animals.
+Humans are mammals.
+Mammals are animals.
+Symptoms of Monkeypox include fever, headache, muscle pains, and tiredness.
+People feel tired when they get the flu.
+</PREMISES>
+<CONCLUSION>
+There is an animal.
+</CONCLUSION>
+<EVALUATE>
+
+Generation 1:
+Error
+Processed: Error
+
+Reference: True
+========================================
+
+=== Example 7 ===
+Prompt:
+The following is a first-order logic (FOL) problem.
+The problem is to determine whether the conclusion follows from the premises.
+The premises are given in the form of a set of first-order logic sentences.
+The conclusion is given in the form of a single first-order logic sentence.
+The task is to translate each of the premises and conclusions into FOL expressions.
+
+
+<PREMISES>
+All biodegradable things are environment-friendly.
+All woodware is biodegradable.
+All paper is woodware.
+Nothing is a good thing and also a bad thing.
+All environment-friendly things are good.
+A worksheet is either paper or environment-friendly.
+</PREMISES>
+<CONCLUSION>
+A worksheet is not biodegradable.
+</CONCLUSION>
+<EVALUATE>
+
+Let's think step by step. We want to evaluate if a worksheet is not dispensable. From premise 6, we know that a worksheet is either paper or is environment-friendly. If it is paper, then from premise 3, a worksheet is woodware, and from premise 2, a worksheet is dispensable. If it is environment-friendly, we know it is good from premise 5, but we know nothing about whether it is dispensable. Therefore, we don't know if a worksheet is dispensible or not, so the statement is uncertain.
+ANSWER:	Uncertain
+</EVALUATE>
+
+<PREMISES>
+A La Liga soccer team ranks higher than another La Liga soccer team if it receives more points.
+If there are two La Liga soccer teams and neither has more points than the other, then the team which receives more points from the games between the two teams ranks higher.
+Real Madrid and Barcelona are both La Liga soccer teams.
+Real Madrid received more points than Barcelona.
+Neither Real Madrid nor Barcelona received more points from the games between them.
+</PREMISES>
+<CONCLUSION>
+Real Madrid ranks higher than Barcelona.
+</CONCLUSION>
+<EVALUATE>
+
+Let's think step by step. We want to evaluate if in La Liga 2021-2022, Real Madrid ranks higher than Barcelona. From premise 1, we know that a La Liga soccer team ranks higher than another if it receives more points. From premise 4, we know that in La Liga 2021-2022, Real Madrid received more points than Barcelona. Therefore, in La Liga 2021-2022, Real Madrid received more points than Barcelona, so Real Madrid ranks higher than Barcelona, so the statement is true.
+ANSWER:	True
+</EVALUATE>
+
+<PREMISES>
+All professional athletes spend most of their time on sports.
+All Olympic gold medal winners are professional athletes.
+No full-time scientists spend the majority of their time on sports.
+All Nobel physics laureates are full-time scientists.
+Amy spends the most time on sports, or Amy is an Olympic gold medal winner.
+If Amy is not a Nobel physics laureate, then Amy is not an Olympic gold medal winner.
+</PREMISES>
+<CONCLUSION>
+If Amy is not an Olympic gold medal winner, then Amy is a Nobel physics laureate.
+</CONCLUSION>
+<EVALUATE>
+
+Let's think step by step. We want to evaluate the statement "if Amy is not an Olympic gold medal winner, then Amy is a Nobel laureate". Let's assume that Amy is not an Olympic gold medal winner. This doesn't tell us anything about whether Amy is a Nobel laureate, so the statement isn't true, meaning it is either False or Uncertain. To distinguish between the two, notice that we could have a scenario where Amy is neither an Olympic gold medal winner nor a Nobel laureate. None of the premises are violated in this case. This means the statement must be false.
+ANSWER:	False
+</EVALUATE>
+
+<PREMISES>
+When the Monkeypox virus occurs in a being, it may get Monkeypox.
+Monkeypox virus can occur in certain animals.
+Humans are mammals.
+Mammals are animals.
+Symptoms of Monkeypox include fever, headache, muscle pains, and tiredness.
+People feel tired when they get the flu.
+</PREMISES>
+<CONCLUSION>
+No one gets the flu.
+</CONCLUSION>
+<EVALUATE>
+
+Generation 1:
+Error
+Processed: Error
+
+Reference: Uncertain
+========================================
+
+=== Example 8 ===
+Prompt:
+The following is a first-order logic (FOL) problem.
+The problem is to determine whether the conclusion follows from the premises.
+The premises are given in the form of a set of first-order logic sentences.
+The conclusion is given in the form of a single first-order logic sentence.
+The task is to translate each of the premises and conclusions into FOL expressions.
+
+
+<PREMISES>
+All biodegradable things are environment-friendly.
+All woodware is biodegradable.
+All paper is woodware.
+Nothing is a good thing and also a bad thing.
+All environment-friendly things are good.
+A worksheet is either paper or environment-friendly.
+</PREMISES>
+<CONCLUSION>
+A worksheet is not biodegradable.
+</CONCLUSION>
+<EVALUATE>
+
+Let's think step by step. We want to evaluate if a worksheet is not dispensable. From premise 6, we know that a worksheet is either paper or is environment-friendly. If it is paper, then from premise 3, a worksheet is woodware, and from premise 2, a worksheet is dispensable. If it is environment-friendly, we know it is good from premise 5, but we know nothing about whether it is dispensable. Therefore, we don't know if a worksheet is dispensible or not, so the statement is uncertain.
+ANSWER:	Uncertain
+</EVALUATE>
+
+<PREMISES>
+A La Liga soccer team ranks higher than another La Liga soccer team if it receives more points.
+If there are two La Liga soccer teams and neither has more points than the other, then the team which receives more points from the games between the two teams ranks higher.
+Real Madrid and Barcelona are both La Liga soccer teams.
+Real Madrid received more points than Barcelona.
+Neither Real Madrid nor Barcelona received more points from the games between them.
+</PREMISES>
+<CONCLUSION>
+Real Madrid ranks higher than Barcelona.
+</CONCLUSION>
+<EVALUATE>
+
+Let's think step by step. We want to evaluate if in La Liga 2021-2022, Real Madrid ranks higher than Barcelona. From premise 1, we know that a La Liga soccer team ranks higher than another if it receives more points. From premise 4, we know that in La Liga 2021-2022, Real Madrid received more points than Barcelona. Therefore, in La Liga 2021-2022, Real Madrid received more points than Barcelona, so Real Madrid ranks higher than Barcelona, so the statement is true.
+ANSWER:	True
+</EVALUATE>
+
+<PREMISES>
+All professional athletes spend most of their time on sports.
+All Olympic gold medal winners are professional athletes.
+No full-time scientists spend the majority of their time on sports.
+All Nobel physics laureates are full-time scientists.
+Amy spends the most time on sports, or Amy is an Olympic gold medal winner.
+If Amy is not a Nobel physics laureate, then Amy is not an Olympic gold medal winner.
+</PREMISES>
+<CONCLUSION>
+If Amy is not an Olympic gold medal winner, then Amy is a Nobel physics laureate.
+</CONCLUSION>
+<EVALUATE>
+
+Let's think step by step. We want to evaluate the statement "if Amy is not an Olympic gold medal winner, then Amy is a Nobel laureate". Let's assume that Amy is not an Olympic gold medal winner. This doesn't tell us anything about whether Amy is a Nobel laureate, so the statement isn't true, meaning it is either False or Uncertain. To distinguish between the two, notice that we could have a scenario where Amy is neither an Olympic gold medal winner nor a Nobel laureate. None of the premises are violated in this case. This means the statement must be false.
+ANSWER:	False
+</EVALUATE>
+
+<PREMISES>
+When the Monkeypox virus occurs in a being, it may get Monkeypox.
+Monkeypox virus can occur in certain animals.
+Humans are mammals.
+Mammals are animals.
+Symptoms of Monkeypox include fever, headache, muscle pains, and tiredness.
+People feel tired when they get the flu.
+</PREMISES>
+<CONCLUSION>
+Symptoms of Monkeypox include coughing.
+</CONCLUSION>
+<EVALUATE>
+
+Generation 1:
+Error
+Processed: Error
+
+Reference: Uncertain
+========================================
+
+=== Example 9 ===
+Prompt:
+The following is a first-order logic (FOL) problem.
+The problem is to determine whether the conclusion follows from the premises.
+The premises are given in the form of a set of first-order logic sentences.
+The conclusion is given in the form of a single first-order logic sentence.
+The task is to translate each of the premises and conclusions into FOL expressions.
+
+
+<PREMISES>
+All biodegradable things are environment-friendly.
+All woodware is biodegradable.
+All paper is woodware.
+Nothing is a good thing and also a bad thing.
+All environment-friendly things are good.
+A worksheet is either paper or environment-friendly.
+</PREMISES>
+<CONCLUSION>
+A worksheet is not biodegradable.
+</CONCLUSION>
+<EVALUATE>
+
+Let's think step by step. We want to evaluate if a worksheet is not dispensable. From premise 6, we know that a worksheet is either paper or is environment-friendly. If it is paper, then from premise 3, a worksheet is woodware, and from premise 2, a worksheet is dispensable. If it is environment-friendly, we know it is good from premise 5, but we know nothing about whether it is dispensable. Therefore, we don't know if a worksheet is dispensible or not, so the statement is uncertain.
+ANSWER:	Uncertain
+</EVALUATE>
+
+<PREMISES>
+A La Liga soccer team ranks higher than another La Liga soccer team if it receives more points.
+If there are two La Liga soccer teams and neither has more points than the other, then the team which receives more points from the games between the two teams ranks higher.
+Real Madrid and Barcelona are both La Liga soccer teams.
+Real Madrid received more points than Barcelona.
+Neither Real Madrid nor Barcelona received more points from the games between them.
+</PREMISES>
+<CONCLUSION>
+Real Madrid ranks higher than Barcelona.
+</CONCLUSION>
+<EVALUATE>
+
+Let's think step by step. We want to evaluate if in La Liga 2021-2022, Real Madrid ranks higher than Barcelona. From premise 1, we know that a La Liga soccer team ranks higher than another if it receives more points. From premise 4, we know that in La Liga 2021-2022, Real Madrid received more points than Barcelona. Therefore, in La Liga 2021-2022, Real Madrid received more points than Barcelona, so Real Madrid ranks higher than Barcelona, so the statement is true.
+ANSWER:	True
+</EVALUATE>
+
+<PREMISES>
+All professional athletes spend most of their time on sports.
+All Olympic gold medal winners are professional athletes.
+No full-time scientists spend the majority of their time on sports.
+All Nobel physics laureates are full-time scientists.
+Amy spends the most time on sports, or Amy is an Olympic gold medal winner.
+If Amy is not a Nobel physics laureate, then Amy is not an Olympic gold medal winner.
+</PREMISES>
+<CONCLUSION>
+If Amy is not an Olympic gold medal winner, then Amy is a Nobel physics laureate.
+</CONCLUSION>
+<EVALUATE>
+
+Let's think step by step. We want to evaluate the statement "if Amy is not an Olympic gold medal winner, then Amy is a Nobel laureate". Let's assume that Amy is not an Olympic gold medal winner. This doesn't tell us anything about whether Amy is a Nobel laureate, so the statement isn't true, meaning it is either False or Uncertain. To distinguish between the two, notice that we could have a scenario where Amy is neither an Olympic gold medal winner nor a Nobel laureate. None of the premises are violated in this case. This means the statement must be false.
+ANSWER:	False
+</EVALUATE>
+
+<PREMISES>
+There are six types of wild turkeys: Eastern wild turkey, Osceola wild turkey, Gould’s wild turkey, Merriam’s wild turkey, Rio Grande wild turkey, and Ocellated wild turkey.
+Tom is not an Eastern wild turkey.
+Tom is not an Osceola wild turkey.
+Tom is not a Gould's wild turkey.
+Tom is neither a Merriam's wild turkey nor a Rio Grande wild turkey.
+Tom is a wild turkey.
+</PREMISES>
+<CONCLUSION>
+Tom is an Ocellated wild turkey.
+</CONCLUSION>
+<EVALUATE>
+
+Generation 1:
+Error
+Processed: Error
+
+Reference: True
+========================================
+
+=== Example 10 ===
+Prompt:
+The following is a first-order logic (FOL) problem.
+The problem is to determine whether the conclusion follows from the premises.
+The premises are given in the form of a set of first-order logic sentences.
+The conclusion is given in the form of a single first-order logic sentence.
+The task is to translate each of the premises and conclusions into FOL expressions.
+
+
+<PREMISES>
+All biodegradable things are environment-friendly.
+All woodware is biodegradable.
+All paper is woodware.
+Nothing is a good thing and also a bad thing.
+All environment-friendly things are good.
+A worksheet is either paper or environment-friendly.
+</PREMISES>
+<CONCLUSION>
+A worksheet is not biodegradable.
+</CONCLUSION>
+<EVALUATE>
+
+Let's think step by step. We want to evaluate if a worksheet is not dispensable. From premise 6, we know that a worksheet is either paper or is environment-friendly. If it is paper, then from premise 3, a worksheet is woodware, and from premise 2, a worksheet is dispensable. If it is environment-friendly, we know it is good from premise 5, but we know nothing about whether it is dispensable. Therefore, we don't know if a worksheet is dispensible or not, so the statement is uncertain.
+ANSWER:	Uncertain
+</EVALUATE>
+
+<PREMISES>
+A La Liga soccer team ranks higher than another La Liga soccer team if it receives more points.
+If there are two La Liga soccer teams and neither has more points than the other, then the team which receives more points from the games between the two teams ranks higher.
+Real Madrid and Barcelona are both La Liga soccer teams.
+Real Madrid received more points than Barcelona.
+Neither Real Madrid nor Barcelona received more points from the games between them.
+</PREMISES>
+<CONCLUSION>
+Real Madrid ranks higher than Barcelona.
+</CONCLUSION>
+<EVALUATE>
+
+Let's think step by step. We want to evaluate if in La Liga 2021-2022, Real Madrid ranks higher than Barcelona. From premise 1, we know that a La Liga soccer team ranks higher than another if it receives more points. From premise 4, we know that in La Liga 2021-2022, Real Madrid received more points than Barcelona. Therefore, in La Liga 2021-2022, Real Madrid received more points than Barcelona, so Real Madrid ranks higher than Barcelona, so the statement is true.
+ANSWER:	True
+</EVALUATE>
+
+<PREMISES>
+All professional athletes spend most of their time on sports.
+All Olympic gold medal winners are professional athletes.
+No full-time scientists spend the majority of their time on sports.
+All Nobel physics laureates are full-time scientists.
+Amy spends the most time on sports, or Amy is an Olympic gold medal winner.
+If Amy is not a Nobel physics laureate, then Amy is not an Olympic gold medal winner.
+</PREMISES>
+<CONCLUSION>
+If Amy is not an Olympic gold medal winner, then Amy is a Nobel physics laureate.
+</CONCLUSION>
+<EVALUATE>
+
+Let's think step by step. We want to evaluate the statement "if Amy is not an Olympic gold medal winner, then Amy is a Nobel laureate". Let's assume that Amy is not an Olympic gold medal winner. This doesn't tell us anything about whether Amy is a Nobel laureate, so the statement isn't true, meaning it is either False or Uncertain. To distinguish between the two, notice that we could have a scenario where Amy is neither an Olympic gold medal winner nor a Nobel laureate. None of the premises are violated in this case. This means the statement must be false.
+ANSWER:	False
+</EVALUATE>
+
+<PREMISES>
+There are six types of wild turkeys: Eastern wild turkey, Osceola wild turkey, Gould’s wild turkey, Merriam’s wild turkey, Rio Grande wild turkey, and Ocellated wild turkey.
+Tom is not an Eastern wild turkey.
+Tom is not an Osceola wild turkey.
+Tom is not a Gould's wild turkey.
+Tom is neither a Merriam's wild turkey nor a Rio Grande wild turkey.
+Tom is a wild turkey.
+</PREMISES>
+<CONCLUSION>
+Tom is an Eastern wild turkey.
+</CONCLUSION>
+<EVALUATE>
+
+Generation 1:
+Error
+Processed: Error
+
+Reference: False
+========================================
+
+=== Example 11 ===
+Prompt:
+The following is a first-order logic (FOL) problem.
+The problem is to determine whether the conclusion follows from the premises.
+The premises are given in the form of a set of first-order logic sentences.
+The conclusion is given in the form of a single first-order logic sentence.
+The task is to translate each of the premises and conclusions into FOL expressions.
+
+
+<PREMISES>
+All biodegradable things are environment-friendly.
+All woodware is biodegradable.
+All paper is woodware.
+Nothing is a good thing and also a bad thing.
+All environment-friendly things are good.
+A worksheet is either paper or environment-friendly.
+</PREMISES>
+<CONCLUSION>
+A worksheet is not biodegradable.
+</CONCLUSION>
+<EVALUATE>
+
+Let's think step by step. We want to evaluate if a worksheet is not dispensable. From premise 6, we know that a worksheet is either paper or is environment-friendly. If it is paper, then from premise 3, a worksheet is woodware, and from premise 2, a worksheet is dispensable. If it is environment-friendly, we know it is good from premise 5, but we know nothing about whether it is dispensable. Therefore, we don't know if a worksheet is dispensible or not, so the statement is uncertain.
+ANSWER:	Uncertain
+</EVALUATE>
+
+<PREMISES>
+A La Liga soccer team ranks higher than another La Liga soccer team if it receives more points.
+If there are two La Liga soccer teams and neither has more points than the other, then the team which receives more points from the games between the two teams ranks higher.
+Real Madrid and Barcelona are both La Liga soccer teams.
+Real Madrid received more points than Barcelona.
+Neither Real Madrid nor Barcelona received more points from the games between them.
+</PREMISES>
+<CONCLUSION>
+Real Madrid ranks higher than Barcelona.
+</CONCLUSION>
+<EVALUATE>
+
+Let's think step by step. We want to evaluate if in La Liga 2021-2022, Real Madrid ranks higher than Barcelona. From premise 1, we know that a La Liga soccer team ranks higher than another if it receives more points. From premise 4, we know that in La Liga 2021-2022, Real Madrid received more points than Barcelona. Therefore, in La Liga 2021-2022, Real Madrid received more points than Barcelona, so Real Madrid ranks higher than Barcelona, so the statement is true.
+ANSWER:	True
+</EVALUATE>
+
+<PREMISES>
+All professional athletes spend most of their time on sports.
+All Olympic gold medal winners are professional athletes.
+No full-time scientists spend the majority of their time on sports.
+All Nobel physics laureates are full-time scientists.
+Amy spends the most time on sports, or Amy is an Olympic gold medal winner.
+If Amy is not a Nobel physics laureate, then Amy is not an Olympic gold medal winner.
+</PREMISES>
+<CONCLUSION>
+If Amy is not an Olympic gold medal winner, then Amy is a Nobel physics laureate.
+</CONCLUSION>
+<EVALUATE>
+
+Let's think step by step. We want to evaluate the statement "if Amy is not an Olympic gold medal winner, then Amy is a Nobel laureate". Let's assume that Amy is not an Olympic gold medal winner. This doesn't tell us anything about whether Amy is a Nobel laureate, so the statement isn't true, meaning it is either False or Uncertain. To distinguish between the two, notice that we could have a scenario where Amy is neither an Olympic gold medal winner nor a Nobel laureate. None of the premises are violated in this case. This means the statement must be false.
+ANSWER:	False
+</EVALUATE>
+
+<PREMISES>
+There are six types of wild turkeys: Eastern wild turkey, Osceola wild turkey, Gould’s wild turkey, Merriam’s wild turkey, Rio Grande wild turkey, and Ocellated wild turkey.
+Tom is not an Eastern wild turkey.
+Tom is not an Osceola wild turkey.
+Tom is not a Gould's wild turkey.
+Tom is neither a Merriam's wild turkey nor a Rio Grande wild turkey.
+Tom is a wild turkey.
+</PREMISES>
+<CONCLUSION>
+Joey is a wild turkey.
+</CONCLUSION>
+<EVALUATE>
+
+Generation 1:
+Error
+Processed: Error
+
+Reference: Uncertain
+========================================
+
+=== Example 12 ===
+Prompt:
+The following is a first-order logic (FOL) problem.
+The problem is to determine whether the conclusion follows from the premises.
+The premises are given in the form of a set of first-order logic sentences.
+The conclusion is given in the form of a single first-order logic sentence.
+The task is to translate each of the premises and conclusions into FOL expressions.
+
+
+<PREMISES>
+All biodegradable things are environment-friendly.
+All woodware is biodegradable.
+All paper is woodware.
+Nothing is a good thing and also a bad thing.
+All environment-friendly things are good.
+A worksheet is either paper or environment-friendly.
+</PREMISES>
+<CONCLUSION>
+A worksheet is not biodegradable.
+</CONCLUSION>
+<EVALUATE>
+
+Let's think step by step. We want to evaluate if a worksheet is not dispensable. From premise 6, we know that a worksheet is either paper or is environment-friendly. If it is paper, then from premise 3, a worksheet is woodware, and from premise 2, a worksheet is dispensable. If it is environment-friendly, we know it is good from premise 5, but we know nothing about whether it is dispensable. Therefore, we don't know if a worksheet is dispensible or not, so the statement is uncertain.
+ANSWER:	Uncertain
+</EVALUATE>
+
+<PREMISES>
+A La Liga soccer team ranks higher than another La Liga soccer team if it receives more points.
+If there are two La Liga soccer teams and neither has more points than the other, then the team which receives more points from the games between the two teams ranks higher.
+Real Madrid and Barcelona are both La Liga soccer teams.
+Real Madrid received more points than Barcelona.
+Neither Real Madrid nor Barcelona received more points from the games between them.
+</PREMISES>
+<CONCLUSION>
+Real Madrid ranks higher than Barcelona.
+</CONCLUSION>
+<EVALUATE>
+
+Let's think step by step. We want to evaluate if in La Liga 2021-2022, Real Madrid ranks higher than Barcelona. From premise 1, we know that a La Liga soccer team ranks higher than another if it receives more points. From premise 4, we know that in La Liga 2021-2022, Real Madrid received more points than Barcelona. Therefore, in La Liga 2021-2022, Real Madrid received more points than Barcelona, so Real Madrid ranks higher than Barcelona, so the statement is true.
+ANSWER:	True
+</EVALUATE>
+
+<PREMISES>
+All professional athletes spend most of their time on sports.
+All Olympic gold medal winners are professional athletes.
+No full-time scientists spend the majority of their time on sports.
+All Nobel physics laureates are full-time scientists.
+Amy spends the most time on sports, or Amy is an Olympic gold medal winner.
+If Amy is not a Nobel physics laureate, then Amy is not an Olympic gold medal winner.
+</PREMISES>
+<CONCLUSION>
+If Amy is not an Olympic gold medal winner, then Amy is a Nobel physics laureate.
+</CONCLUSION>
+<EVALUATE>
+
+Let's think step by step. We want to evaluate the statement "if Amy is not an Olympic gold medal winner, then Amy is a Nobel laureate". Let's assume that Amy is not an Olympic gold medal winner. This doesn't tell us anything about whether Amy is a Nobel laureate, so the statement isn't true, meaning it is either False or Uncertain. To distinguish between the two, notice that we could have a scenario where Amy is neither an Olympic gold medal winner nor a Nobel laureate. None of the premises are violated in this case. This means the statement must be false.
+ANSWER:	False
+</EVALUATE>
+
+<PREMISES>
+A Japanese game company created the game the Legend of Zelda.
+All games on the Top 10 list are made by Japanese game companies.
+If a game sells more than one million copies, then it will be included in the Top 10 list.
+The Legend of Zelda sold more than one million copies.
+</PREMISES>
+<CONCLUSION>
+The Legend of Zelda is on the Top 10 list.
+</CONCLUSION>
+<EVALUATE>
+
+Generation 1:
+Error
+Processed: Error
+
+Reference: True
+========================================
+
+=== Example 13 ===
+Prompt:
+The following is a first-order logic (FOL) problem.
+The problem is to determine whether the conclusion follows from the premises.
+The premises are given in the form of a set of first-order logic sentences.
+The conclusion is given in the form of a single first-order logic sentence.
+The task is to translate each of the premises and conclusions into FOL expressions.
+
+
+<PREMISES>
+All biodegradable things are environment-friendly.
+All woodware is biodegradable.
+All paper is woodware.
+Nothing is a good thing and also a bad thing.
+All environment-friendly things are good.
+A worksheet is either paper or environment-friendly.
+</PREMISES>
+<CONCLUSION>
+A worksheet is not biodegradable.
+</CONCLUSION>
+<EVALUATE>
+
+Let's think step by step. We want to evaluate if a worksheet is not dispensable. From premise 6, we know that a worksheet is either paper or is environment-friendly. If it is paper, then from premise 3, a worksheet is woodware, and from premise 2, a worksheet is dispensable. If it is environment-friendly, we know it is good from premise 5, but we know nothing about whether it is dispensable. Therefore, we don't know if a worksheet is dispensible or not, so the statement is uncertain.
+ANSWER:	Uncertain
+</EVALUATE>
+
+<PREMISES>
+A La Liga soccer team ranks higher than another La Liga soccer team if it receives more points.
+If there are two La Liga soccer teams and neither has more points than the other, then the team which receives more points from the games between the two teams ranks higher.
+Real Madrid and Barcelona are both La Liga soccer teams.
+Real Madrid received more points than Barcelona.
+Neither Real Madrid nor Barcelona received more points from the games between them.
+</PREMISES>
+<CONCLUSION>
+Real Madrid ranks higher than Barcelona.
+</CONCLUSION>
+<EVALUATE>
+
+Let's think step by step. We want to evaluate if in La Liga 2021-2022, Real Madrid ranks higher than Barcelona. From premise 1, we know that a La Liga soccer team ranks higher than another if it receives more points. From premise 4, we know that in La Liga 2021-2022, Real Madrid received more points than Barcelona. Therefore, in La Liga 2021-2022, Real Madrid received more points than Barcelona, so Real Madrid ranks higher than Barcelona, so the statement is true.
+ANSWER:	True
+</EVALUATE>
+
+<PREMISES>
+All professional athletes spend most of their time on sports.
+All Olympic gold medal winners are professional athletes.
+No full-time scientists spend the majority of their time on sports.
+All Nobel physics laureates are full-time scientists.
+Amy spends the most time on sports, or Amy is an Olympic gold medal winner.
+If Amy is not a Nobel physics laureate, then Amy is not an Olympic gold medal winner.
+</PREMISES>
+<CONCLUSION>
+If Amy is not an Olympic gold medal winner, then Amy is a Nobel physics laureate.
+</CONCLUSION>
+<EVALUATE>
+
+Let's think step by step. We want to evaluate the statement "if Amy is not an Olympic gold medal winner, then Amy is a Nobel laureate". Let's assume that Amy is not an Olympic gold medal winner. This doesn't tell us anything about whether Amy is a Nobel laureate, so the statement isn't true, meaning it is either False or Uncertain. To distinguish between the two, notice that we could have a scenario where Amy is neither an Olympic gold medal winner nor a Nobel laureate. None of the premises are violated in this case. This means the statement must be false.
+ANSWER:	False
+</EVALUATE>
+
+<PREMISES>
+A Japanese game company created the game the Legend of Zelda.
+All games on the Top 10 list are made by Japanese game companies.
+If a game sells more than one million copies, then it will be included in the Top 10 list.
+The Legend of Zelda sold more than one million copies.
+</PREMISES>
+<CONCLUSION>
+FIFA 22 is made by a Japanese video game company.
+</CONCLUSION>
+<EVALUATE>
+
+Generation 1:
+Error
+Processed: Error
+
+Reference: Uncertain
+========================================
+
+=== Example 14 ===
+Prompt:
+The following is a first-order logic (FOL) problem.
+The problem is to determine whether the conclusion follows from the premises.
+The premises are given in the form of a set of first-order logic sentences.
+The conclusion is given in the form of a single first-order logic sentence.
+The task is to translate each of the premises and conclusions into FOL expressions.
+
+
+<PREMISES>
+All biodegradable things are environment-friendly.
+All woodware is biodegradable.
+All paper is woodware.
+Nothing is a good thing and also a bad thing.
+All environment-friendly things are good.
+A worksheet is either paper or environment-friendly.
+</PREMISES>
+<CONCLUSION>
+A worksheet is not biodegradable.
+</CONCLUSION>
+<EVALUATE>
+
+Let's think step by step. We want to evaluate if a worksheet is not dispensable. From premise 6, we know that a worksheet is either paper or is environment-friendly. If it is paper, then from premise 3, a worksheet is woodware, and from premise 2, a worksheet is dispensable. If it is environment-friendly, we know it is good from premise 5, but we know nothing about whether it is dispensable. Therefore, we don't know if a worksheet is dispensible or not, so the statement is uncertain.
+ANSWER:	Uncertain
+</EVALUATE>
+
+<PREMISES>
+A La Liga soccer team ranks higher than another La Liga soccer team if it receives more points.
+If there are two La Liga soccer teams and neither has more points than the other, then the team which receives more points from the games between the two teams ranks higher.
+Real Madrid and Barcelona are both La Liga soccer teams.
+Real Madrid received more points than Barcelona.
+Neither Real Madrid nor Barcelona received more points from the games between them.
+</PREMISES>
+<CONCLUSION>
+Real Madrid ranks higher than Barcelona.
+</CONCLUSION>
+<EVALUATE>
+
+Let's think step by step. We want to evaluate if in La Liga 2021-2022, Real Madrid ranks higher than Barcelona. From premise 1, we know that a La Liga soccer team ranks higher than another if it receives more points. From premise 4, we know that in La Liga 2021-2022, Real Madrid received more points than Barcelona. Therefore, in La Liga 2021-2022, Real Madrid received more points than Barcelona, so Real Madrid ranks higher than Barcelona, so the statement is true.
+ANSWER:	True
+</EVALUATE>
+
+<PREMISES>
+All professional athletes spend most of their time on sports.
+All Olympic gold medal winners are professional athletes.
+No full-time scientists spend the majority of their time on sports.
+All Nobel physics laureates are full-time scientists.
+Amy spends the most time on sports, or Amy is an Olympic gold medal winner.
+If Amy is not a Nobel physics laureate, then Amy is not an Olympic gold medal winner.
+</PREMISES>
+<CONCLUSION>
+If Amy is not an Olympic gold medal winner, then Amy is a Nobel physics laureate.
+</CONCLUSION>
+<EVALUATE>
+
+Let's think step by step. We want to evaluate the statement "if Amy is not an Olympic gold medal winner, then Amy is a Nobel laureate". Let's assume that Amy is not an Olympic gold medal winner. This doesn't tell us anything about whether Amy is a Nobel laureate, so the statement isn't true, meaning it is either False or Uncertain. To distinguish between the two, notice that we could have a scenario where Amy is neither an Olympic gold medal winner nor a Nobel laureate. None of the premises are violated in this case. This means the statement must be false.
+ANSWER:	False
+</EVALUATE>
+
+<PREMISES>
+A Japanese game company created the game the Legend of Zelda.
+All games on the Top 10 list are made by Japanese game companies.
+If a game sells more than one million copies, then it will be included in the Top 10 list.
+The Legend of Zelda sold more than one million copies.
+</PREMISES>
+<CONCLUSION>
+The Legend of Zelda is not on the Top 10 list.
+</CONCLUSION>
+<EVALUATE>
+
+Generation 1:
+Error
+Processed: Error
+
+Reference: False
+========================================
+
+=== Example 15 ===
+Prompt:
+The following is a first-order logic (FOL) problem.
+The problem is to determine whether the conclusion follows from the premises.
+The premises are given in the form of a set of first-order logic sentences.
+The conclusion is given in the form of a single first-order logic sentence.
+The task is to translate each of the premises and conclusions into FOL expressions.
+
+
+<PREMISES>
+All biodegradable things are environment-friendly.
+All woodware is biodegradable.
+All paper is woodware.
+Nothing is a good thing and also a bad thing.
+All environment-friendly things are good.
+A worksheet is either paper or environment-friendly.
+</PREMISES>
+<CONCLUSION>
+A worksheet is not biodegradable.
+</CONCLUSION>
+<EVALUATE>
+
+Let's think step by step. We want to evaluate if a worksheet is not dispensable. From premise 6, we know that a worksheet is either paper or is environment-friendly. If it is paper, then from premise 3, a worksheet is woodware, and from premise 2, a worksheet is dispensable. If it is environment-friendly, we know it is good from premise 5, but we know nothing about whether it is dispensable. Therefore, we don't know if a worksheet is dispensible or not, so the statement is uncertain.
+ANSWER:	Uncertain
+</EVALUATE>
+
+<PREMISES>
+A La Liga soccer team ranks higher than another La Liga soccer team if it receives more points.
+If there are two La Liga soccer teams and neither has more points than the other, then the team which receives more points from the games between the two teams ranks higher.
+Real Madrid and Barcelona are both La Liga soccer teams.
+Real Madrid received more points than Barcelona.
+Neither Real Madrid nor Barcelona received more points from the games between them.
+</PREMISES>
+<CONCLUSION>
+Real Madrid ranks higher than Barcelona.
+</CONCLUSION>
+<EVALUATE>
+
+Let's think step by step. We want to evaluate if in La Liga 2021-2022, Real Madrid ranks higher than Barcelona. From premise 1, we know that a La Liga soccer team ranks higher than another if it receives more points. From premise 4, we know that in La Liga 2021-2022, Real Madrid received more points than Barcelona. Therefore, in La Liga 2021-2022, Real Madrid received more points than Barcelona, so Real Madrid ranks higher than Barcelona, so the statement is true.
+ANSWER:	True
+</EVALUATE>
+
+<PREMISES>
+All professional athletes spend most of their time on sports.
+All Olympic gold medal winners are professional athletes.
+No full-time scientists spend the majority of their time on sports.
+All Nobel physics laureates are full-time scientists.
+Amy spends the most time on sports, or Amy is an Olympic gold medal winner.
+If Amy is not a Nobel physics laureate, then Amy is not an Olympic gold medal winner.
+</PREMISES>
+<CONCLUSION>
+If Amy is not an Olympic gold medal winner, then Amy is a Nobel physics laureate.
+</CONCLUSION>
+<EVALUATE>
+
+Let's think step by step. We want to evaluate the statement "if Amy is not an Olympic gold medal winner, then Amy is a Nobel laureate". Let's assume that Amy is not an Olympic gold medal winner. This doesn't tell us anything about whether Amy is a Nobel laureate, so the statement isn't true, meaning it is either False or Uncertain. To distinguish between the two, notice that we could have a scenario where Amy is neither an Olympic gold medal winner nor a Nobel laureate. None of the premises are violated in this case. This means the statement must be false.
+ANSWER:	False
+</EVALUATE>
+
+<PREMISES>
+All squares are four-sided.
+All four-sided things are shapes.
+</PREMISES>
+<CONCLUSION>
+All squares are shapes.
+</CONCLUSION>
+<EVALUATE>
+
+Generation 1:
+Error
+Processed: Error
+
+Reference: True
+========================================
+
+=== Example 16 ===
+Prompt:
+The following is a first-order logic (FOL) problem.
+The problem is to determine whether the conclusion follows from the premises.
+The premises are given in the form of a set of first-order logic sentences.
+The conclusion is given in the form of a single first-order logic sentence.
+The task is to translate each of the premises and conclusions into FOL expressions.
+
+
+<PREMISES>
+All biodegradable things are environment-friendly.
+All woodware is biodegradable.
+All paper is woodware.
+Nothing is a good thing and also a bad thing.
+All environment-friendly things are good.
+A worksheet is either paper or environment-friendly.
+</PREMISES>
+<CONCLUSION>
+A worksheet is not biodegradable.
+</CONCLUSION>
+<EVALUATE>
+
+Let's think step by step. We want to evaluate if a worksheet is not dispensable. From premise 6, we know that a worksheet is either paper or is environment-friendly. If it is paper, then from premise 3, a worksheet is woodware, and from premise 2, a worksheet is dispensable. If it is environment-friendly, we know it is good from premise 5, but we know nothing about whether it is dispensable. Therefore, we don't know if a worksheet is dispensible or not, so the statement is uncertain.
+ANSWER:	Uncertain
+</EVALUATE>
+
+<PREMISES>
+A La Liga soccer team ranks higher than another La Liga soccer team if it receives more points.
+If there are two La Liga soccer teams and neither has more points than the other, then the team which receives more points from the games between the two teams ranks higher.
+Real Madrid and Barcelona are both La Liga soccer teams.
+Real Madrid received more points than Barcelona.
+Neither Real Madrid nor Barcelona received more points from the games between them.
+</PREMISES>
+<CONCLUSION>
+Real Madrid ranks higher than Barcelona.
+</CONCLUSION>
+<EVALUATE>
+
+Let's think step by step. We want to evaluate if in La Liga 2021-2022, Real Madrid ranks higher than Barcelona. From premise 1, we know that a La Liga soccer team ranks higher than another if it receives more points. From premise 4, we know that in La Liga 2021-2022, Real Madrid received more points than Barcelona. Therefore, in La Liga 2021-2022, Real Madrid received more points than Barcelona, so Real Madrid ranks higher than Barcelona, so the statement is true.
+ANSWER:	True
+</EVALUATE>
+
+<PREMISES>
+All professional athletes spend most of their time on sports.
+All Olympic gold medal winners are professional athletes.
+No full-time scientists spend the majority of their time on sports.
+All Nobel physics laureates are full-time scientists.
+Amy spends the most time on sports, or Amy is an Olympic gold medal winner.
+If Amy is not a Nobel physics laureate, then Amy is not an Olympic gold medal winner.
+</PREMISES>
+<CONCLUSION>
+If Amy is not an Olympic gold medal winner, then Amy is a Nobel physics laureate.
+</CONCLUSION>
+<EVALUATE>
+
+Let's think step by step. We want to evaluate the statement "if Amy is not an Olympic gold medal winner, then Amy is a Nobel laureate". Let's assume that Amy is not an Olympic gold medal winner. This doesn't tell us anything about whether Amy is a Nobel laureate, so the statement isn't true, meaning it is either False or Uncertain. To distinguish between the two, notice that we could have a scenario where Amy is neither an Olympic gold medal winner nor a Nobel laureate. None of the premises are violated in this case. This means the statement must be false.
+ANSWER:	False
+</EVALUATE>
+
+<PREMISES>
+All rabbits that can be spotted near the campus are cute.
+Some turtles can be spotted near the campus.
+The only animals that can be spotted near the campus are rabbits and squirrels.
+If something is skittish, then it is not calm.
+All the squirrels that can be spotted near the campus are skittish.
+Rockie can be spotted near the campus, and it is calm.
+</PREMISES>
+<CONCLUSION>
+Rockie is a turtle.
+</CONCLUSION>
+<EVALUATE>
+
+Generation 1:
+Error
+Processed: Error
+
+Reference: Uncertain
+========================================
+
+=== Example 17 ===
+Prompt:
+The following is a first-order logic (FOL) problem.
+The problem is to determine whether the conclusion follows from the premises.
+The premises are given in the form of a set of first-order logic sentences.
+The conclusion is given in the form of a single first-order logic sentence.
+The task is to translate each of the premises and conclusions into FOL expressions.
+
+
+<PREMISES>
+All biodegradable things are environment-friendly.
+All woodware is biodegradable.
+All paper is woodware.
+Nothing is a good thing and also a bad thing.
+All environment-friendly things are good.
+A worksheet is either paper or environment-friendly.
+</PREMISES>
+<CONCLUSION>
+A worksheet is not biodegradable.
+</CONCLUSION>
+<EVALUATE>
+
+Let's think step by step. We want to evaluate if a worksheet is not dispensable. From premise 6, we know that a worksheet is either paper or is environment-friendly. If it is paper, then from premise 3, a worksheet is woodware, and from premise 2, a worksheet is dispensable. If it is environment-friendly, we know it is good from premise 5, but we know nothing about whether it is dispensable. Therefore, we don't know if a worksheet is dispensible or not, so the statement is uncertain.
+ANSWER:	Uncertain
+</EVALUATE>
+
+<PREMISES>
+A La Liga soccer team ranks higher than another La Liga soccer team if it receives more points.
+If there are two La Liga soccer teams and neither has more points than the other, then the team which receives more points from the games between the two teams ranks higher.
+Real Madrid and Barcelona are both La Liga soccer teams.
+Real Madrid received more points than Barcelona.
+Neither Real Madrid nor Barcelona received more points from the games between them.
+</PREMISES>
+<CONCLUSION>
+Real Madrid ranks higher than Barcelona.
+</CONCLUSION>
+<EVALUATE>
+
+Let's think step by step. We want to evaluate if in La Liga 2021-2022, Real Madrid ranks higher than Barcelona. From premise 1, we know that a La Liga soccer team ranks higher than another if it receives more points. From premise 4, we know that in La Liga 2021-2022, Real Madrid received more points than Barcelona. Therefore, in La Liga 2021-2022, Real Madrid received more points than Barcelona, so Real Madrid ranks higher than Barcelona, so the statement is true.
+ANSWER:	True
+</EVALUATE>
+
+<PREMISES>
+All professional athletes spend most of their time on sports.
+All Olympic gold medal winners are professional athletes.
+No full-time scientists spend the majority of their time on sports.
+All Nobel physics laureates are full-time scientists.
+Amy spends the most time on sports, or Amy is an Olympic gold medal winner.
+If Amy is not a Nobel physics laureate, then Amy is not an Olympic gold medal winner.
+</PREMISES>
+<CONCLUSION>
+If Amy is not an Olympic gold medal winner, then Amy is a Nobel physics laureate.
+</CONCLUSION>
+<EVALUATE>
+
+Let's think step by step. We want to evaluate the statement "if Amy is not an Olympic gold medal winner, then Amy is a Nobel laureate". Let's assume that Amy is not an Olympic gold medal winner. This doesn't tell us anything about whether Amy is a Nobel laureate, so the statement isn't true, meaning it is either False or Uncertain. To distinguish between the two, notice that we could have a scenario where Amy is neither an Olympic gold medal winner nor a Nobel laureate. None of the premises are violated in this case. This means the statement must be false.
+ANSWER:	False
+</EVALUATE>
+
+<PREMISES>
+All rabbits that can be spotted near the campus are cute.
+Some turtles can be spotted near the campus.
+The only animals that can be spotted near the campus are rabbits and squirrels.
+If something is skittish, then it is not calm.
+All the squirrels that can be spotted near the campus are skittish.
+Rockie can be spotted near the campus, and it is calm.
+</PREMISES>
+<CONCLUSION>
+Rockie is not a turtle.
+</CONCLUSION>
+<EVALUATE>
+

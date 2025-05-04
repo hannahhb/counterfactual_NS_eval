@@ -1,0 +1,3 @@
+Accuracy: 54.32%
+Correct: 44/81
+Parameters: mode=cot, shots=8, model=bigcode/starcoder2-7b, k=10

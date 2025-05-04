@@ -1,0 +1,3 @@
+Accuracy: 43.21%
+Correct: 35/81
+Parameters: mode=neurosymbolic, shots=8, model=mistralai/Mistral-7B-Instruct-v0.1, k=10

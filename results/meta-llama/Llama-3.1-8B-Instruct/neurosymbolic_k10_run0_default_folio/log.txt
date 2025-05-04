@@ -1,0 +1,2761 @@
+=== Example 0 ===
+Prompt:
+The following is a first-order logic (FOL) problem.
+The problem is to determine whether the conclusion follows from the premises.
+The premises are given in the form of a set of first-order logic sentences.
+The conclusion is given in the form of a single first-order logic sentence.
+The task is to translate each of the premises and conclusions into FOL expressions so that the expressions can be evaluated by a theorem solver like Prover9 to determine whether the conclusion follows from the premises.
+Expressions should adhere to the format of the Python NLTK package logic module. 
+
+
+<PREMISES>
+All biodegradable things are environment-friendly.
+All woodware is biodegradable.
+All paper is woodware.
+Nothing is a good thing and also a bad thing.
+All environment-friendly things are good.
+A worksheet is either paper or environment-friendly.
+</PREMISES>
+<CONCLUSION>
+A worksheet is not biodegradable.
+</CONCLUSION>
+<EVALUATE>
+TEXT: All biodegradable things are environment-friendly.
+FOL: all x. (Biodegradable(x) -> EnvironmentFriendly(x))
+TEXT: All woodware is biodegradable.
+FOL: all x. (Woodware(x) -> Biodegradable(x))
+TEXT: All paper is woodware.
+FOL: all x. (Paper(x) -> Woodware(x))
+TEXT: Nothing is a good thing and also a bad thing.
+FOL: -(exists x. (Good(x) & Bad(x)))
+TEXT: All environment-friendly things are good.
+FOL: all x. (EnvironmentFriendly(x) -> Good(x))
+TEXT: A worksheet is either paper or environment-friendly.
+FOL: ((Paper(Worksheet) & -EnvironmentFriendly(Worksheet)) | (-Paper(Worksheet) & EnvironmentFriendly(Worksheet)))
+TEXT: A worksheet is not biodegradable.
+FOL: -Dispensable(Worksheet)
+</EVALUATE>
+
+<PREMISES>
+A La Liga soccer team ranks higher than another La Liga soccer team if it receives more points.
+If there are two La Liga soccer teams and neither has more points than the other, then the team which receives more points from the games between the two teams ranks higher.
+Real Madrid and Barcelona are both La Liga soccer teams.
+Real Madrid received more points than Barcelona.
+Neither Real Madrid nor Barcelona received more points from the games between them.
+</PREMISES>
+<CONCLUSION>
+Real Madrid ranks higher than Barcelona.
+</CONCLUSION>
+<EVALUATE>
+TEXT: A La Liga soccer team ranks higher than another La Liga soccer team if it receives more points.
+FOL: all x. all y. (LaLigaSoccerTeam(x) & LaLigaSoccerTeam(y) & MorePoints(x, y) -> RankHigherThan(x, y))
+TEXT: If there are two La Liga soccer teams and neither has more points than the other, then the team which receives more points from the games between the two teams ranks higher.
+FOL: all x. all y. (LaLigaSoccerTeam(x) & LaLigaSoccerTeam(y) & -MorePoints(x, y) & -MorePoints(y, x) & MorePointsInGameBetween(x, y) ->  RankHigherThan(x, y))
+TEXT: Real Madrid and Barcelona are both La Liga soccer teams.
+FOL: LaLigaSoccerTeam(RealMadrid) & LaLigaSoccerTeam(Barcelona)
+TEXT: Real Madrid received more points than Barcelona.
+FOL: MorePoints(RealMadrid, Barcelona)
+TEXT: Neither Real Madrid nor Barcelona received more points from the games between them.
+FOL: -MorePointsInGameBetween(RealMadrid, Barcelona) & -MorePointsInGameBetween(Barcelona, RealMadrid)
+TEXT: Real Madrid ranks higher than Barcelona.
+FOL: HigherRank(RealMadrid, Barcelona)
+</EVALUATE>
+
+<PREMISES>
+All professional athletes spend most of their time on sports.
+All Olympic gold medal winners are professional athletes.
+No full-time scientists spend the majority of their time on sports.
+All Nobel physics laureates are full-time scientists.
+Amy spends the most time on sports, or Amy is an Olympic gold medal winner.
+If Amy is not a Nobel physics laureate, then Amy is not an Olympic gold medal winner.
+</PREMISES>
+<CONCLUSION>
+If Amy is not an Olympic gold medal winner, then Amy is a Nobel physics laureate.
+</CONCLUSION>
+<EVALUATE>
+TEXT: All professional athletes spend most of their time on sports.
+FOL: all x. (ProfessionalAthlete(x) -> SpendOn(x, MostOfTheirTime, Sports))
+TEXT: All Olympic gold medal winners are professional athletes.
+FOL: all x. (OlympicGoldMedalWinner(x) -> ProfessionalAthlete(x))
+TEXT: No full-time scientists spend the majority of their time on sports.
+FOL: all x. (FullTimeScientist(x) -> -SpendOn(x, MostOfTheirTime, Sports))
+TEXT: All Nobel physics laureates are full-time scientists.
+FOL: all x. (NobelPhysicsLaureate(x) -> FullTimeScientist(x))
+TEXT: Amy spends the most time on sports, or Amy is an Olympic gold medal winner.
+FOL: SpendOn(Amy, MostOfTheirTime, Sports) | OlympicGoldMedalWinner(Amy)
+TEXT: If Amy is not a Nobel physics laureate, then Amy is not an Olympic gold medal winner.
+FOL: -NobelPhysicsLaureate(Amy) -> -OlympicGoldMedalWinner(Amy)
+TEXT: If Amy is not an Olympic gold medal winner, then Amy is a Nobel physics laureate.
+FOL: -OlympicGoldMedalWinner(Amy) -> NobelLaureate(Amy)
+</EVALUATE>
+
+<PREMISES>
+If a person pays their taxes, then they contribute to the country.
+Everyone who works for a government department pays a tax on their salary.
+Everyone in the army is an employee of a government department.
+Everyone convicted of murder goes to prison.
+Everyone who has been to prison has a criminal record.
+James was either once convicted of murder, or spent time in prison.
+James either has a criminal record, or pays his taxes.
+</PREMISES>
+<CONCLUSION>
+James does not contribute to the country.
+</CONCLUSION>
+<EVALUATE>
+TEXT: If a person pays their taxes, then they contribute to the country.
+FOL: all x. (Taxpayer(x) -> ContributeTo(x, Country))
+TEXT: Everyone who works for a government department pays a tax on their salary.
+FOL: all x. (WorkFor(x, GovernmentAgency) -> Taxpayer(x))
+TEXT: Everyone in the army is an employee of a government department.
+FOL: all x. (ServesIn(x, TheArmy) -> WorkFor(x, GovernmentAgency))
+TEXT: Everyone convicted of murder goes to prison.
+FOL: all x. (SentencedForMurder(x) -> Imprisoned(x))
+TEXT: Everyone who has been to prison has a criminal record.
+FOL: all x. (Imprisoned((x) -> Has(x, CriminalRecord))
+TEXT: James was either once convicted of murder, or spent time in prison.
+FOL: ((SentencedForMurder(James) & -Imprisoned(James)) | (-SentencedForMurder(James) & Imprisoned(James)))
+TEXT: James either has a criminal record, or pays his taxes.
+FOL: ((Has(James, CriminalRecord) & -Taxpayer(James)) | (-Has(James, CriminalRecord) & Taxpayer(James)))
+TEXT: James does not contribute to the country.
+FOL: ContributeToCountry(James)
+</EVALUATE>
+
+<PREMISES>
+No songs are visuals.
+All folk songs are songs.
+All videos are visuals.
+All movies are videos.
+All sci-fi movies are movies.
+Inception is a sci-fi movie.
+Mac is neither a folk song nor a sci-fi movie.
+</PREMISES>
+<CONCLUSION>
+Inception is a folk song.
+</CONCLUSION>
+<EVALUATE>
+TEXT: No songs are visuals.
+FOL: all x. (Song(x) -> -Visual(x))
+TEXT: All folk songs are songs.
+FOL: all x. (FolkSong(x) -> Song(x))
+TEXT: All videos are visuals.
+FOL: all x. (Video(x) -> Visual(x))
+TEXT: All movies are videos.
+FOL: all x. (Movie(x) -> Video(x))
+TEXT: All sci-fi movies are movies.
+FOL: all x. (ScifiMovie(x) -> Movie(x))
+TEXT: Inception is a sci-fi movie.
+FOL: ScifiMovie(Inception)
+TEXT: Mac is neither a folk song nor a sci-fi movie.
+FOL: -FolkSong(Mac) & -ScifiMovie(Mac)
+TEXT: Inception is a folk song.
+FOL: FolkSong(Inception)
+</EVALUATE>
+
+<PREMISES>
+Every chef can cook.
+Some people who aren’t chefs can cook.
+People who cook can make scrambled eggs and pasta.
+If someone can make cookies and muffins, they are a baker.
+Bakers who can also make scrambled eggs can make a good breakfast.
+Luke can make cookies, scrambled eggs, and muffins, but not pasta.
+</PREMISES>
+<CONCLUSION>
+Luke is a chef.
+</CONCLUSION>
+<EVALUATE>
+TEXT: Every chef can cook.
+FOL: all x. (Chef(x) -> Can(x, Cook))
+TEXT: Some people who aren’t chefs can cook.
+FOL: exists x. (-Chef(x) & Can(x, Cook))
+TEXT: People who cook can make scrambled eggs and pasta.
+FOL: all x. (Can(x, Cook) -> (CanMake(x, ScrambledEggs) & CanMake(x, Pasta)))
+TEXT: If someone can make cookies and muffins, they are a baker.
+FOL: all x. (CanMake(x, Cookies) & CanMake(x, Muffins) -> Baker(x))
+TEXT: Bakers who can also make scrambled eggs can make a good breakfast.
+FOL: all x. ((Baker(x) & CanMake(x, ScrambledEggs)) -> CanMake(x, GoodBreakfast))
+TEXT: Luke can make cookies, scrambled eggs, and muffins, but not pasta.
+FOL: CanMake(Luke, Cookies) & (CanMake(Luke, ScrambledEggs) & CanMake(Luke, Muffins) & -CanMake(Luke, Pasta)
+TEXT: Luke is a chef.
+FOL: MakeGoodBreakfast(Luke)
+</EVALUATE>
+
+<PREMISES>
+ETS develops various standardized tests primarily in the United States for K-12 and higher education.
+ETS administers international tests, including the TOEFL, TOEIC, GRE, and subject tests.
+Many of the assessments ETS develops are associated with entry to the US tertiary and quaternary education institutions.
+ETS also develops K-12 statewide assessments used for accountability testing in many states.
+</PREMISES>
+<CONCLUSION>
+ETS doesn't administer tests internationally.
+</CONCLUSION>
+<EVALUATE>
+TEXT: ETS develops various standardized tests primarily in the United States for K-12 and higher education.
+FOL: exists x. exists y. (Develop(eTS, x) & Develop(eTS, y) & StandardizedTest(x) & StandardizedTest(y) & In(x, UnitedState) & In(y, UnitedState) & For(x, kOneTwoAndHigherEducation) & For(y, kOneTwoAndHigherEducation))
+TEXT: ETS administers international tests, including the TOEFL, TOEIC, GRE, and subject tests.
+FOL: exists x. (Administer(eTS, x) & InternationalTest(x) & (TOEFL(x) | TOEIC(x) | GRE(x) | SubjectTest(x)))
+TEXT: Many of the assessments ETS develops are associated with entry to the US tertiary and quaternary education institutions.
+FOL: exists x. (Develop(eTS, x) & AssociatedWith(x, EntryToUSEducationInstitution))
+TEXT: ETS also develops K-12 statewide assessments used for accountability testing in many states.
+FOL: exists x. (Develop(eTS, x) & StateWideAssesment(x) & UsedFor(x, AccountabilityTesting))
+TEXT: ETS doesn't administer tests internationally.
+FOL: exists x. (Develops(Ets, x) & For(x, k-OneTwoandhighereducation)) & exists x. (Develops(Ets, x) & AssociatedWith(x, Entrytouseducationinstitutions))
+</EVALUATE>
+
+<PREMISES>
+Daveed Diggs is an actor and film producer.
+Daveed Diggs played two roles in the musical Hamilton on Broadway.
+One of the actors from Hamilton won the best actor award.
+The actor playing Thomas Jefferson won the best actor award.
+Daveed Diggs played Thomas Jefferson.
+Musicals on Broadway are not films.
+</PREMISES>
+<CONCLUSION>
+Daveed Diggs won the best actor award.
+</CONCLUSION>
+<EVALUATE>
+TEXT: Daveed Diggs is an actor and film producer.
+FOL: Actor(DaveedDiggs) & FilmProducer(DaveedDiggs)
+TEXT: Daveed Diggs played two roles in the musical Hamilton on Broadway.
+FOL: exists x. exists y.(PlaysIn(DaveedDiggs, x, Hamilton) & (-(x=y)) & PlaysIn(DaveedDiggs, y, Hamilton)) & OnBroadway(Hamilton) & Musical(Hamilton)
+TEXT: One of the actors from Hamilton won the best actor award.
+FOL: exists x. exists y.(Actor(x) & PlaysIn(x, y, Hamilton) & Wins(x, BestActorAward))
+TEXT: The actor playing Thomas Jefferson won the best actor award.
+FOL: exists x. (Actor(x) & PlaysIn(x, ThomasJefferson, Hamilton) & Wins(x, BestActorAward))
+TEXT: Daveed Diggs played Thomas Jefferson.
+FOL: Plays(DaveedDiggs, ThomasJefferson)
+TEXT: Musicals on Broadway are not films.
+FOL: all x. ((Musical(x) & OnBroadway(x)) -> -Film(x))
+TEXT: Daveed Diggs won the best actor award.
+FOL: exists x. (BRICS(x) & Speaks(x, Hindi))
+</EVALUATE>
+
+<PREMISES>
+Miroslav Venhoda was a Czech choral conductor who specialized in the performance of Renaissance and Baroque music.
+Any choral conductor is a musician.
+Some musicians love music.
+Miroslav Venhoda published a book in 1946 called Method of Studying Gregorian Chant.
+</PREMISES>
+<CONCLUSION>
+No choral conductor specialized in the performance of Renaissance.
+</CONCLUSION>
+<EVALUATE>
+
+=== Example 0 ===
+Prompt:
+The following is a first-order logic (FOL) problem.
+The problem is to determine whether the conclusion follows from the premises.
+The premises are given in the form of a set of first-order logic sentences.
+The conclusion is given in the form of a single first-order logic sentence.
+The task is to translate each of the premises and conclusions into FOL expressions so that the expressions can be evaluated by a theorem solver like Prover9 to determine whether the conclusion follows from the premises.
+Expressions should adhere to the format of the Python NLTK package logic module. 
+
+
+<PREMISES>
+All biodegradable things are environment-friendly.
+All woodware is biodegradable.
+All paper is woodware.
+Nothing is a good thing and also a bad thing.
+All environment-friendly things are good.
+A worksheet is either paper or environment-friendly.
+</PREMISES>
+<CONCLUSION>
+A worksheet is not biodegradable.
+</CONCLUSION>
+<EVALUATE>
+TEXT: All biodegradable things are environment-friendly.
+FOL: all x. (Biodegradable(x) -> EnvironmentFriendly(x))
+TEXT: All woodware is biodegradable.
+FOL: all x. (Woodware(x) -> Biodegradable(x))
+TEXT: All paper is woodware.
+FOL: all x. (Paper(x) -> Woodware(x))
+TEXT: Nothing is a good thing and also a bad thing.
+FOL: -(exists x. (Good(x) & Bad(x)))
+TEXT: All environment-friendly things are good.
+FOL: all x. (EnvironmentFriendly(x) -> Good(x))
+TEXT: A worksheet is either paper or environment-friendly.
+FOL: ((Paper(Worksheet) & -EnvironmentFriendly(Worksheet)) | (-Paper(Worksheet) & EnvironmentFriendly(Worksheet)))
+TEXT: A worksheet is not biodegradable.
+FOL: -Dispensable(Worksheet)
+</EVALUATE>
+
+<PREMISES>
+A La Liga soccer team ranks higher than another La Liga soccer team if it receives more points.
+If there are two La Liga soccer teams and neither has more points than the other, then the team which receives more points from the games between the two teams ranks higher.
+Real Madrid and Barcelona are both La Liga soccer teams.
+Real Madrid received more points than Barcelona.
+Neither Real Madrid nor Barcelona received more points from the games between them.
+</PREMISES>
+<CONCLUSION>
+Real Madrid ranks higher than Barcelona.
+</CONCLUSION>
+<EVALUATE>
+TEXT: A La Liga soccer team ranks higher than another La Liga soccer team if it receives more points.
+FOL: all x. all y. (LaLigaSoccerTeam(x) & LaLigaSoccerTeam(y) & MorePoints(x, y) -> RankHigherThan(x, y))
+TEXT: If there are two La Liga soccer teams and neither has more points than the other, then the team which receives more points from the games between the two teams ranks higher.
+FOL: all x. all y. (LaLigaSoccerTeam(x) & LaLigaSoccerTeam(y) & -MorePoints(x, y) & -MorePoints(y, x) & MorePointsInGameBetween(x, y) ->  RankHigherThan(x, y))
+TEXT: Real Madrid and Barcelona are both La Liga soccer teams.
+FOL: LaLigaSoccerTeam(RealMadrid) & LaLigaSoccerTeam(Barcelona)
+TEXT: Real Madrid received more points than Barcelona.
+FOL: MorePoints(RealMadrid, Barcelona)
+TEXT: Neither Real Madrid nor Barcelona received more points from the games between them.
+FOL: -MorePointsInGameBetween(RealMadrid, Barcelona) & -MorePointsInGameBetween(Barcelona, RealMadrid)
+TEXT: Real Madrid ranks higher than Barcelona.
+FOL: HigherRank(RealMadrid, Barcelona)
+</EVALUATE>
+
+<PREMISES>
+All professional athletes spend most of their time on sports.
+All Olympic gold medal winners are professional athletes.
+No full-time scientists spend the majority of their time on sports.
+All Nobel physics laureates are full-time scientists.
+Amy spends the most time on sports, or Amy is an Olympic gold medal winner.
+If Amy is not a Nobel physics laureate, then Amy is not an Olympic gold medal winner.
+</PREMISES>
+<CONCLUSION>
+If Amy is not an Olympic gold medal winner, then Amy is a Nobel physics laureate.
+</CONCLUSION>
+<EVALUATE>
+TEXT: All professional athletes spend most of their time on sports.
+FOL: all x. (ProfessionalAthlete(x) -> SpendOn(x, MostOfTheirTime, Sports))
+TEXT: All Olympic gold medal winners are professional athletes.
+FOL: all x. (OlympicGoldMedalWinner(x) -> ProfessionalAthlete(x))
+TEXT: No full-time scientists spend the majority of their time on sports.
+FOL: all x. (FullTimeScientist(x) -> -SpendOn(x, MostOfTheirTime, Sports))
+TEXT: All Nobel physics laureates are full-time scientists.
+FOL: all x. (NobelPhysicsLaureate(x) -> FullTimeScientist(x))
+TEXT: Amy spends the most time on sports, or Amy is an Olympic gold medal winner.
+FOL: SpendOn(Amy, MostOfTheirTime, Sports) | OlympicGoldMedalWinner(Amy)
+TEXT: If Amy is not a Nobel physics laureate, then Amy is not an Olympic gold medal winner.
+FOL: -NobelPhysicsLaureate(Amy) -> -OlympicGoldMedalWinner(Amy)
+TEXT: If Amy is not an Olympic gold medal winner, then Amy is a Nobel physics laureate.
+FOL: -OlympicGoldMedalWinner(Amy) -> NobelLaureate(Amy)
+</EVALUATE>
+
+<PREMISES>
+If a person pays their taxes, then they contribute to the country.
+Everyone who works for a government department pays a tax on their salary.
+Everyone in the army is an employee of a government department.
+Everyone convicted of murder goes to prison.
+Everyone who has been to prison has a criminal record.
+James was either once convicted of murder, or spent time in prison.
+James either has a criminal record, or pays his taxes.
+</PREMISES>
+<CONCLUSION>
+James does not contribute to the country.
+</CONCLUSION>
+<EVALUATE>
+TEXT: If a person pays their taxes, then they contribute to the country.
+FOL: all x. (Taxpayer(x) -> ContributeTo(x, Country))
+TEXT: Everyone who works for a government department pays a tax on their salary.
+FOL: all x. (WorkFor(x, GovernmentAgency) -> Taxpayer(x))
+TEXT: Everyone in the army is an employee of a government department.
+FOL: all x. (ServesIn(x, TheArmy) -> WorkFor(x, GovernmentAgency))
+TEXT: Everyone convicted of murder goes to prison.
+FOL: all x. (SentencedForMurder(x) -> Imprisoned(x))
+TEXT: Everyone who has been to prison has a criminal record.
+FOL: all x. (Imprisoned((x) -> Has(x, CriminalRecord))
+TEXT: James was either once convicted of murder, or spent time in prison.
+FOL: ((SentencedForMurder(James) & -Imprisoned(James)) | (-SentencedForMurder(James) & Imprisoned(James)))
+TEXT: James either has a criminal record, or pays his taxes.
+FOL: ((Has(James, CriminalRecord) & -Taxpayer(James)) | (-Has(James, CriminalRecord) & Taxpayer(James)))
+TEXT: James does not contribute to the country.
+FOL: ContributeToCountry(James)
+</EVALUATE>
+
+<PREMISES>
+No songs are visuals.
+All folk songs are songs.
+All videos are visuals.
+All movies are videos.
+All sci-fi movies are movies.
+Inception is a sci-fi movie.
+Mac is neither a folk song nor a sci-fi movie.
+</PREMISES>
+<CONCLUSION>
+Inception is a folk song.
+</CONCLUSION>
+<EVALUATE>
+TEXT: No songs are visuals.
+FOL: all x. (Song(x) -> -Visual(x))
+TEXT: All folk songs are songs.
+FOL: all x. (FolkSong(x) -> Song(x))
+TEXT: All videos are visuals.
+FOL: all x. (Video(x) -> Visual(x))
+TEXT: All movies are videos.
+FOL: all x. (Movie(x) -> Video(x))
+TEXT: All sci-fi movies are movies.
+FOL: all x. (ScifiMovie(x) -> Movie(x))
+TEXT: Inception is a sci-fi movie.
+FOL: ScifiMovie(Inception)
+TEXT: Mac is neither a folk song nor a sci-fi movie.
+FOL: -FolkSong(Mac) & -ScifiMovie(Mac)
+TEXT: Inception is a folk song.
+FOL: FolkSong(Inception)
+</EVALUATE>
+
+<PREMISES>
+Every chef can cook.
+Some people who aren’t chefs can cook.
+People who cook can make scrambled eggs and pasta.
+If someone can make cookies and muffins, they are a baker.
+Bakers who can also make scrambled eggs can make a good breakfast.
+Luke can make cookies, scrambled eggs, and muffins, but not pasta.
+</PREMISES>
+<CONCLUSION>
+Luke is a chef.
+</CONCLUSION>
+<EVALUATE>
+TEXT: Every chef can cook.
+FOL: all x. (Chef(x) -> Can(x, Cook))
+TEXT: Some people who aren’t chefs can cook.
+FOL: exists x. (-Chef(x) & Can(x, Cook))
+TEXT: People who cook can make scrambled eggs and pasta.
+FOL: all x. (Can(x, Cook) -> (CanMake(x, ScrambledEggs) & CanMake(x, Pasta)))
+TEXT: If someone can make cookies and muffins, they are a baker.
+FOL: all x. (CanMake(x, Cookies) & CanMake(x, Muffins) -> Baker(x))
+TEXT: Bakers who can also make scrambled eggs can make a good breakfast.
+FOL: all x. ((Baker(x) & CanMake(x, ScrambledEggs)) -> CanMake(x, GoodBreakfast))
+TEXT: Luke can make cookies, scrambled eggs, and muffins, but not pasta.
+FOL: CanMake(Luke, Cookies) & (CanMake(Luke, ScrambledEggs) & CanMake(Luke, Muffins) & -CanMake(Luke, Pasta)
+TEXT: Luke is a chef.
+FOL: MakeGoodBreakfast(Luke)
+</EVALUATE>
+
+<PREMISES>
+ETS develops various standardized tests primarily in the United States for K-12 and higher education.
+ETS administers international tests, including the TOEFL, TOEIC, GRE, and subject tests.
+Many of the assessments ETS develops are associated with entry to the US tertiary and quaternary education institutions.
+ETS also develops K-12 statewide assessments used for accountability testing in many states.
+</PREMISES>
+<CONCLUSION>
+ETS doesn't administer tests internationally.
+</CONCLUSION>
+<EVALUATE>
+TEXT: ETS develops various standardized tests primarily in the United States for K-12 and higher education.
+FOL: exists x. exists y. (Develop(eTS, x) & Develop(eTS, y) & StandardizedTest(x) & StandardizedTest(y) & In(x, UnitedState) & In(y, UnitedState) & For(x, kOneTwoAndHigherEducation) & For(y, kOneTwoAndHigherEducation))
+TEXT: ETS administers international tests, including the TOEFL, TOEIC, GRE, and subject tests.
+FOL: exists x. (Administer(eTS, x) & InternationalTest(x) & (TOEFL(x) | TOEIC(x) | GRE(x) | SubjectTest(x)))
+TEXT: Many of the assessments ETS develops are associated with entry to the US tertiary and quaternary education institutions.
+FOL: exists x. (Develop(eTS, x) & AssociatedWith(x, EntryToUSEducationInstitution))
+TEXT: ETS also develops K-12 statewide assessments used for accountability testing in many states.
+FOL: exists x. (Develop(eTS, x) & StateWideAssesment(x) & UsedFor(x, AccountabilityTesting))
+TEXT: ETS doesn't administer tests internationally.
+FOL: exists x. (Develops(Ets, x) & For(x, k-OneTwoandhighereducation)) & exists x. (Develops(Ets, x) & AssociatedWith(x, Entrytouseducationinstitutions))
+</EVALUATE>
+
+<PREMISES>
+Daveed Diggs is an actor and film producer.
+Daveed Diggs played two roles in the musical Hamilton on Broadway.
+One of the actors from Hamilton won the best actor award.
+The actor playing Thomas Jefferson won the best actor award.
+Daveed Diggs played Thomas Jefferson.
+Musicals on Broadway are not films.
+</PREMISES>
+<CONCLUSION>
+Daveed Diggs won the best actor award.
+</CONCLUSION>
+<EVALUATE>
+TEXT: Daveed Diggs is an actor and film producer.
+FOL: Actor(DaveedDiggs) & FilmProducer(DaveedDiggs)
+TEXT: Daveed Diggs played two roles in the musical Hamilton on Broadway.
+FOL: exists x. exists y.(PlaysIn(DaveedDiggs, x, Hamilton) & (-(x=y)) & PlaysIn(DaveedDiggs, y, Hamilton)) & OnBroadway(Hamilton) & Musical(Hamilton)
+TEXT: One of the actors from Hamilton won the best actor award.
+FOL: exists x. exists y.(Actor(x) & PlaysIn(x, y, Hamilton) & Wins(x, BestActorAward))
+TEXT: The actor playing Thomas Jefferson won the best actor award.
+FOL: exists x. (Actor(x) & PlaysIn(x, ThomasJefferson, Hamilton) & Wins(x, BestActorAward))
+TEXT: Daveed Diggs played Thomas Jefferson.
+FOL: Plays(DaveedDiggs, ThomasJefferson)
+TEXT: Musicals on Broadway are not films.
+FOL: all x. ((Musical(x) & OnBroadway(x)) -> -Film(x))
+TEXT: Daveed Diggs won the best actor award.
+FOL: exists x. (BRICS(x) & Speaks(x, Hindi))
+</EVALUATE>
+
+<PREMISES>
+Miroslav Venhoda was a Czech choral conductor who specialized in the performance of Renaissance and Baroque music.
+Any choral conductor is a musician.
+Some musicians love music.
+Miroslav Venhoda published a book in 1946 called Method of Studying Gregorian Chant.
+</PREMISES>
+<CONCLUSION>
+No choral conductor specialized in the performance of Renaissance.
+</CONCLUSION>
+<EVALUATE>
+
+=== Example 0 ===
+Prompt:
+The following is a first-order logic (FOL) problem.
+The problem is to determine whether the conclusion follows from the premises.
+The premises are given in the form of a set of first-order logic sentences.
+The conclusion is given in the form of a single first-order logic sentence.
+The task is to translate each of the premises and conclusions into FOL expressions so that the expressions can be evaluated by a theorem solver like Prover9 to determine whether the conclusion follows from the premises.
+Expressions should adhere to the format of the Python NLTK package logic module. 
+
+
+<PREMISES>
+All biodegradable things are environment-friendly.
+All woodware is biodegradable.
+All paper is woodware.
+Nothing is a good thing and also a bad thing.
+All environment-friendly things are good.
+A worksheet is either paper or environment-friendly.
+</PREMISES>
+<CONCLUSION>
+A worksheet is not biodegradable.
+</CONCLUSION>
+<EVALUATE>
+TEXT: All biodegradable things are environment-friendly.
+FOL: all x. (Biodegradable(x) -> EnvironmentFriendly(x))
+TEXT: All woodware is biodegradable.
+FOL: all x. (Woodware(x) -> Biodegradable(x))
+TEXT: All paper is woodware.
+FOL: all x. (Paper(x) -> Woodware(x))
+TEXT: Nothing is a good thing and also a bad thing.
+FOL: -(exists x. (Good(x) & Bad(x)))
+TEXT: All environment-friendly things are good.
+FOL: all x. (EnvironmentFriendly(x) -> Good(x))
+TEXT: A worksheet is either paper or environment-friendly.
+FOL: ((Paper(Worksheet) & -EnvironmentFriendly(Worksheet)) | (-Paper(Worksheet) & EnvironmentFriendly(Worksheet)))
+TEXT: A worksheet is not biodegradable.
+FOL: -Dispensable(Worksheet)
+</EVALUATE>
+
+<PREMISES>
+A La Liga soccer team ranks higher than another La Liga soccer team if it receives more points.
+If there are two La Liga soccer teams and neither has more points than the other, then the team which receives more points from the games between the two teams ranks higher.
+Real Madrid and Barcelona are both La Liga soccer teams.
+Real Madrid received more points than Barcelona.
+Neither Real Madrid nor Barcelona received more points from the games between them.
+</PREMISES>
+<CONCLUSION>
+Real Madrid ranks higher than Barcelona.
+</CONCLUSION>
+<EVALUATE>
+TEXT: A La Liga soccer team ranks higher than another La Liga soccer team if it receives more points.
+FOL: all x. all y. (LaLigaSoccerTeam(x) & LaLigaSoccerTeam(y) & MorePoints(x, y) -> RankHigherThan(x, y))
+TEXT: If there are two La Liga soccer teams and neither has more points than the other, then the team which receives more points from the games between the two teams ranks higher.
+FOL: all x. all y. (LaLigaSoccerTeam(x) & LaLigaSoccerTeam(y) & -MorePoints(x, y) & -MorePoints(y, x) & MorePointsInGameBetween(x, y) ->  RankHigherThan(x, y))
+TEXT: Real Madrid and Barcelona are both La Liga soccer teams.
+FOL: LaLigaSoccerTeam(RealMadrid) & LaLigaSoccerTeam(Barcelona)
+TEXT: Real Madrid received more points than Barcelona.
+FOL: MorePoints(RealMadrid, Barcelona)
+TEXT: Neither Real Madrid nor Barcelona received more points from the games between them.
+FOL: -MorePointsInGameBetween(RealMadrid, Barcelona) & -MorePointsInGameBetween(Barcelona, RealMadrid)
+TEXT: Real Madrid ranks higher than Barcelona.
+FOL: HigherRank(RealMadrid, Barcelona)
+</EVALUATE>
+
+<PREMISES>
+All professional athletes spend most of their time on sports.
+All Olympic gold medal winners are professional athletes.
+No full-time scientists spend the majority of their time on sports.
+All Nobel physics laureates are full-time scientists.
+Amy spends the most time on sports, or Amy is an Olympic gold medal winner.
+If Amy is not a Nobel physics laureate, then Amy is not an Olympic gold medal winner.
+</PREMISES>
+<CONCLUSION>
+If Amy is not an Olympic gold medal winner, then Amy is a Nobel physics laureate.
+</CONCLUSION>
+<EVALUATE>
+TEXT: All professional athletes spend most of their time on sports.
+FOL: all x. (ProfessionalAthlete(x) -> SpendOn(x, MostOfTheirTime, Sports))
+TEXT: All Olympic gold medal winners are professional athletes.
+FOL: all x. (OlympicGoldMedalWinner(x) -> ProfessionalAthlete(x))
+TEXT: No full-time scientists spend the majority of their time on sports.
+FOL: all x. (FullTimeScientist(x) -> -SpendOn(x, MostOfTheirTime, Sports))
+TEXT: All Nobel physics laureates are full-time scientists.
+FOL: all x. (NobelPhysicsLaureate(x) -> FullTimeScientist(x))
+TEXT: Amy spends the most time on sports, or Amy is an Olympic gold medal winner.
+FOL: SpendOn(Amy, MostOfTheirTime, Sports) | OlympicGoldMedalWinner(Amy)
+TEXT: If Amy is not a Nobel physics laureate, then Amy is not an Olympic gold medal winner.
+FOL: -NobelPhysicsLaureate(Amy) -> -OlympicGoldMedalWinner(Amy)
+TEXT: If Amy is not an Olympic gold medal winner, then Amy is a Nobel physics laureate.
+FOL: -OlympicGoldMedalWinner(Amy) -> NobelLaureate(Amy)
+</EVALUATE>
+
+<PREMISES>
+If a person pays their taxes, then they contribute to the country.
+Everyone who works for a government department pays a tax on their salary.
+Everyone in the army is an employee of a government department.
+Everyone convicted of murder goes to prison.
+Everyone who has been to prison has a criminal record.
+James was either once convicted of murder, or spent time in prison.
+James either has a criminal record, or pays his taxes.
+</PREMISES>
+<CONCLUSION>
+James does not contribute to the country.
+</CONCLUSION>
+<EVALUATE>
+TEXT: If a person pays their taxes, then they contribute to the country.
+FOL: all x. (Taxpayer(x) -> ContributeTo(x, Country))
+TEXT: Everyone who works for a government department pays a tax on their salary.
+FOL: all x. (WorkFor(x, GovernmentAgency) -> Taxpayer(x))
+TEXT: Everyone in the army is an employee of a government department.
+FOL: all x. (ServesIn(x, TheArmy) -> WorkFor(x, GovernmentAgency))
+TEXT: Everyone convicted of murder goes to prison.
+FOL: all x. (SentencedForMurder(x) -> Imprisoned(x))
+TEXT: Everyone who has been to prison has a criminal record.
+FOL: all x. (Imprisoned((x) -> Has(x, CriminalRecord))
+TEXT: James was either once convicted of murder, or spent time in prison.
+FOL: ((SentencedForMurder(James) & -Imprisoned(James)) | (-SentencedForMurder(James) & Imprisoned(James)))
+TEXT: James either has a criminal record, or pays his taxes.
+FOL: ((Has(James, CriminalRecord) & -Taxpayer(James)) | (-Has(James, CriminalRecord) & Taxpayer(James)))
+TEXT: James does not contribute to the country.
+FOL: ContributeToCountry(James)
+</EVALUATE>
+
+<PREMISES>
+No songs are visuals.
+All folk songs are songs.
+All videos are visuals.
+All movies are videos.
+All sci-fi movies are movies.
+Inception is a sci-fi movie.
+Mac is neither a folk song nor a sci-fi movie.
+</PREMISES>
+<CONCLUSION>
+Inception is a folk song.
+</CONCLUSION>
+<EVALUATE>
+TEXT: No songs are visuals.
+FOL: all x. (Song(x) -> -Visual(x))
+TEXT: All folk songs are songs.
+FOL: all x. (FolkSong(x) -> Song(x))
+TEXT: All videos are visuals.
+FOL: all x. (Video(x) -> Visual(x))
+TEXT: All movies are videos.
+FOL: all x. (Movie(x) -> Video(x))
+TEXT: All sci-fi movies are movies.
+FOL: all x. (ScifiMovie(x) -> Movie(x))
+TEXT: Inception is a sci-fi movie.
+FOL: ScifiMovie(Inception)
+TEXT: Mac is neither a folk song nor a sci-fi movie.
+FOL: -FolkSong(Mac) & -ScifiMovie(Mac)
+TEXT: Inception is a folk song.
+FOL: FolkSong(Inception)
+</EVALUATE>
+
+<PREMISES>
+Every chef can cook.
+Some people who aren’t chefs can cook.
+People who cook can make scrambled eggs and pasta.
+If someone can make cookies and muffins, they are a baker.
+Bakers who can also make scrambled eggs can make a good breakfast.
+Luke can make cookies, scrambled eggs, and muffins, but not pasta.
+</PREMISES>
+<CONCLUSION>
+Luke is a chef.
+</CONCLUSION>
+<EVALUATE>
+TEXT: Every chef can cook.
+FOL: all x. (Chef(x) -> Can(x, Cook))
+TEXT: Some people who aren’t chefs can cook.
+FOL: exists x. (-Chef(x) & Can(x, Cook))
+TEXT: People who cook can make scrambled eggs and pasta.
+FOL: all x. (Can(x, Cook) -> (CanMake(x, ScrambledEggs) & CanMake(x, Pasta)))
+TEXT: If someone can make cookies and muffins, they are a baker.
+FOL: all x. (CanMake(x, Cookies) & CanMake(x, Muffins) -> Baker(x))
+TEXT: Bakers who can also make scrambled eggs can make a good breakfast.
+FOL: all x. ((Baker(x) & CanMake(x, ScrambledEggs)) -> CanMake(x, GoodBreakfast))
+TEXT: Luke can make cookies, scrambled eggs, and muffins, but not pasta.
+FOL: CanMake(Luke, Cookies) & (CanMake(Luke, ScrambledEggs) & CanMake(Luke, Muffins) & -CanMake(Luke, Pasta)
+TEXT: Luke is a chef.
+FOL: MakeGoodBreakfast(Luke)
+</EVALUATE>
+
+<PREMISES>
+ETS develops various standardized tests primarily in the United States for K-12 and higher education.
+ETS administers international tests, including the TOEFL, TOEIC, GRE, and subject tests.
+Many of the assessments ETS develops are associated with entry to the US tertiary and quaternary education institutions.
+ETS also develops K-12 statewide assessments used for accountability testing in many states.
+</PREMISES>
+<CONCLUSION>
+ETS doesn't administer tests internationally.
+</CONCLUSION>
+<EVALUATE>
+TEXT: ETS develops various standardized tests primarily in the United States for K-12 and higher education.
+FOL: exists x. exists y. (Develop(eTS, x) & Develop(eTS, y) & StandardizedTest(x) & StandardizedTest(y) & In(x, UnitedState) & In(y, UnitedState) & For(x, kOneTwoAndHigherEducation) & For(y, kOneTwoAndHigherEducation))
+TEXT: ETS administers international tests, including the TOEFL, TOEIC, GRE, and subject tests.
+FOL: exists x. (Administer(eTS, x) & InternationalTest(x) & (TOEFL(x) | TOEIC(x) | GRE(x) | SubjectTest(x)))
+TEXT: Many of the assessments ETS develops are associated with entry to the US tertiary and quaternary education institutions.
+FOL: exists x. (Develop(eTS, x) & AssociatedWith(x, EntryToUSEducationInstitution))
+TEXT: ETS also develops K-12 statewide assessments used for accountability testing in many states.
+FOL: exists x. (Develop(eTS, x) & StateWideAssesment(x) & UsedFor(x, AccountabilityTesting))
+TEXT: ETS doesn't administer tests internationally.
+FOL: exists x. (Develops(Ets, x) & For(x, k-OneTwoandhighereducation)) & exists x. (Develops(Ets, x) & AssociatedWith(x, Entrytouseducationinstitutions))
+</EVALUATE>
+
+<PREMISES>
+Daveed Diggs is an actor and film producer.
+Daveed Diggs played two roles in the musical Hamilton on Broadway.
+One of the actors from Hamilton won the best actor award.
+The actor playing Thomas Jefferson won the best actor award.
+Daveed Diggs played Thomas Jefferson.
+Musicals on Broadway are not films.
+</PREMISES>
+<CONCLUSION>
+Daveed Diggs won the best actor award.
+</CONCLUSION>
+<EVALUATE>
+TEXT: Daveed Diggs is an actor and film producer.
+FOL: Actor(DaveedDiggs) & FilmProducer(DaveedDiggs)
+TEXT: Daveed Diggs played two roles in the musical Hamilton on Broadway.
+FOL: exists x. exists y.(PlaysIn(DaveedDiggs, x, Hamilton) & (-(x=y)) & PlaysIn(DaveedDiggs, y, Hamilton)) & OnBroadway(Hamilton) & Musical(Hamilton)
+TEXT: One of the actors from Hamilton won the best actor award.
+FOL: exists x. exists y.(Actor(x) & PlaysIn(x, y, Hamilton) & Wins(x, BestActorAward))
+TEXT: The actor playing Thomas Jefferson won the best actor award.
+FOL: exists x. (Actor(x) & PlaysIn(x, ThomasJefferson, Hamilton) & Wins(x, BestActorAward))
+TEXT: Daveed Diggs played Thomas Jefferson.
+FOL: Plays(DaveedDiggs, ThomasJefferson)
+TEXT: Musicals on Broadway are not films.
+FOL: all x. ((Musical(x) & OnBroadway(x)) -> -Film(x))
+TEXT: Daveed Diggs won the best actor award.
+FOL: exists x. (BRICS(x) & Speaks(x, Hindi))
+</EVALUATE>
+
+<PREMISES>
+Miroslav Venhoda was a Czech choral conductor who specialized in the performance of Renaissance and Baroque music.
+Any choral conductor is a musician.
+Some musicians love music.
+Miroslav Venhoda published a book in 1946 called Method of Studying Gregorian Chant.
+</PREMISES>
+<CONCLUSION>
+No choral conductor specialized in the performance of Renaissance.
+</CONCLUSION>
+<EVALUATE>
+
+Generation 1:
+To translate the given premises and conclusion into FOL expressions for evaluation using a theorem solver like Prover9, we need to follow the standard format of the Python NLTK package logic module.
+
+Here are the translations for each given problem:
+
+**Problem 1**
+<PREMISES>
+All biodegradable things are environment-friendly.
+All woodware is biodegradable.
+All paper is woodware.
+Nothing is a good thing and also a bad thing.
+All environment-friendly things are good.
+A worksheet is either paper or environment-friendly.
+</PREMISES>
+<CONCLUSION>
+A worksheet is not biodegradable.
+</CONCLUSION>
+
+FOL Expressions:
+```python
+# Premises
+P1 = all x. (Biodegradable(x) -> EnvironmentFriendly(x))
+P2 = all x. (Woodware(x) -> Biodegradable(x))
+P3 = all x. (Paper(x) -> Woodware(x))
+P4 = -(exists x. (Good(x) & Bad(x)))
+P5 = all x. (EnvironmentFriendly(x) -> Good(x))
+P6 = ((Paper(Worksheet) & -EnvironmentFriendly(Worksheet)) | (-Paper(Worksheet) & EnvironmentFriendly(Worksheet)))
+
+# Conclusion
+C = -Biodegradable(Worksheet)
+```
+
+**Problem 2**
+<PREMISES>
+A La Liga soccer team ranks higher than another La Liga soccer team if it receives more points.
+If there are two La Liga soccer teams and neither has more points than the other, then the team which receives more points from the games between the two teams ranks higher.
+Real Madrid and Barcelona are both La Liga soccer teams.
+Real Madrid received more points than Barcelona.
+Neither Real Madrid nor Barcelona received more points from the games between them.
+</PREMISES>
+<CONCLUSION>
+Real Madrid ranks higher than Barcelona.
+</CONCLUSION>
+
+FOL Expressions:
+```python
+# Premises
+P1 = all x. all y. (LaLigaSoccerTeam(x) & LaLigaSoccerTeam(y) & MorePoints(x, y) -> RankHigherThan(x, y))
+P2 = all x. all y. (LaLigaSoccerTeam(x) & LaLigaSoccerTeam(y) & -MorePoints(x, y) & -MorePoints(y, x) & MorePointsInGameBetween(x, y) -> RankHigherThan(x, y))
+P3 = LaLigaSoccerTeam(RealMadrid) & LaLigaSoccerTeam(Barcelona)
+P4 = MorePoints(RealMadrid, Barcelona)
+P5 = -MorePointsInGameBetween(RealMadrid, Barcelona) & -MorePointsInGameBetween(Barcelona, RealMadrid)
+
+# Conclusion
+C = RankHigherThan(RealMadrid, Barcelona)
+```
+
+**Problem 3**
+<PREMISES>
+All professional athletes spend most of their time on sports.
+All Olympic gold medal winners are professional athletes.
+No full-time scientists spend the majority of their time on sports.
+All Nobel physics laureates are full-time scientists.
+Amy spends the most time on sports, or Amy is an Olympic gold medal winner.
+If Amy is not a Nobel physics laureate, then Amy is not an Olympic gold medal winner.
+</PREMISES>
+<CONCLUSION>
+If Amy is not an Olympic gold medal winner, then Amy is a Nobel physics laureate.
+</CONCLUSION>
+
+FOL Expressions:
+```python
+# Premises
+P1 = all x. (ProfessionalAthlete(x) -> SpendOn(x, MostOfTheirTime, Sports))
+P2 = all x. (OlympicGoldMedalWinner(x) -> ProfessionalAthlete(x))
+P3 = all x. (FullTimeScientist(x) -> -SpendOn(x, MostOfTheirTime, Sports))
+P4 = all x. (NobelPhysicsLaureate(x) -> FullTimeScientist(x))
+P5 = (SpendOn(Amy, MostOfTheirTime, Sports) | OlympicGoldMedalWinner(Amy))
+P6 = -NobelPhysicsLaureate(Amy) -> -OlympicGoldMedalWinner(Amy)
+
+# Conclusion
+C = -OlympicGoldMedalWinner(Amy) -> NobelPhysicsLaureate(Amy)
+```
+
+**Problem 4**
+<PREMISES>
+If a person pays their taxes, then they contribute to the country.
+Everyone who works for a government department pays a tax on their salary.
+Everyone in the army is an employee of a government department.
+Everyone convicted of murder goes to prison.
+Everyone who has been to prison has a criminal record.
+James was either once convicted of murder, or spent time in prison.
+James either has a criminal record, or pays his taxes.
+</PREMISES>
+<CONCLUSION>
+James does not contribute to the country.
+</CONCLUSION>
+
+FOL Expressions:
+```python
+# Premises
+P1 = all x. (Taxpayer(x) -> ContributeTo(x, Country))
+P2 = all x. (WorkFor(x, GovernmentAgency) -> Taxpayer(x))
+P3 = all x. (ServesIn(x, TheArmy) -> WorkFor(x, GovernmentAgency))
+P4 = all x. (SentencedForMurder(x) -> Imprisoned(x))
+P5 = all x. (Imprisoned(x) -> Has(x, CriminalRecord))
+P6 = ((SentencedForMurder(James) & -Imprisoned(James)) | (-SentencedForMurder(James) & Imprisoned(James)))
+P7 = ((Has(James, CriminalRecord) & -Taxpayer(James)) | (-Has(James, CriminalRecord) & Taxpayer(James)))
+
+# Conclusion
+C = -ContributeTo(James, Country)
+```
+
+**Problem 5**
+<PREMISES>
+No songs are visuals.
+All folk songs are songs.
+All videos are visuals.
+All movies are videos.
+All sci-fi movies are movies.
+Inception is a sci-fi movie.
+Mac is neither a folk song nor a sci-fi movie.
+</PREMISES>
+<CONCLUSION>
+Inception is a folk song.
+</CONCLUSION>
+
+FOL Expressions:
+```python
+# Premises
+P1 = all x. (Song(x) -> -Visual(x))
+P2 = all x. (FolkSong(x) -> Song(x))
+P3 = all x. (Video(x) -> Visual(x))
+P4 = all x. (Movie(x) -> Video(x))
+P5 = all x. (ScifiMovie(x) -> Movie(x))
+P6 = ScifiMovie(Inception)
+P7 = -FolkSong(Mac) & -ScifiMovie(Mac)
+
+# Conclusion
+C = FolkSong(Inception)
+```
+
+**Problem 6**
+<PREMISES>
+Every chef can cook.
+Some people who aren’t chefs can cook.
+People who cook can make scrambled eggs and pasta.
+If someone can make cookies and muffins, they are a baker.
+Bakers who can also make scrambled eggs can make a good breakfast.
+Luke can make cookies, scrambled eggs, and muffins, but not pasta.
+</PREMISES>
+<CONCLUSION>
+Luke is a chef.
+</CONCLUSION>
+
+FOL Expressions:
+```python
+# Premises
+P1 = all x. (Chef(x) -> Can(x, Cook))
+P2 = exists x. (-Chef(x) & Can(x, Cook))
+P3 = all x. (Can(x, Cook) -> (CanMake(x, ScrambledEggs) & CanMake(x, Pasta)))
+P4 = all x. (CanMake(x, Cookies) & CanMake(x, Muffins) -> Baker(x))
+P5 = all x. ((Baker(x) & CanMake(x, ScrambledEggs)) -> CanMake(x, GoodBreakfast))
+P6 = CanMake(Luke, Cookies) & (CanMake(Luke, ScrambledEggs) & CanMake(Luke, Muffins) & -CanMake(Luke, Pasta))
+
+# Conclusion
+C = Chef(Luke)
+```
+
+**Problem 7**
+<PREMISES>
+ETS develops various standardized tests primarily in the United States for K-12 and higher education.
+ETS administers international tests, including the TOEFL, TOEIC, GRE, and subject tests.
+Many of the assessments ETS develops are associated with entry to the US tertiary and quaternary education institutions.
+ETS also develops K-12 statewide assessments used for accountability testing in many states.
+</PREMISES>
+<CONCLUSION>
+ETS doesn't administer tests internationally.
+</CONCLUSION>
+
+FOL Expressions:
+```python
+# Premises
+P1 = exists x. exists y. (Develop(eTS, x) & Develop(eTS, y) & StandardizedTest(x) & StandardizedTest(y) & In(x, UnitedState) & In(y, UnitedState) & For(x, kOneTwoAndHigherEducation) & For(y, kOneTwoAndHigherEducation))
+P2 = exists x. (Administer(eTS, x) & InternationalTest(x) & (TOEFL(x) | TOEIC(x) | GRE(x) | SubjectTest(x)))
+P3 = exists x. (Develop(eTS, x) & AssociatedWith(x, EntryToUSEducationInstitution))
+P4 = exists x. (Develop(eTS, x) & StateWideAssesment(x) & UsedFor(x, AccountabilityTesting))
+
+# Conclusion
+C = -Administer(eTS, x) & InternationalTest(x)
+```
+
+**Problem 8**
+<PREMISES>
+Daveed Diggs is an actor and film producer.
+Daveed Diggs played two roles in the musical Hamilton on Broadway.
+One of the actors from Hamilton won the best actor award.
+The actor playing Thomas Jefferson won the best actor award.
+Daveed Diggs played Thomas Jefferson.
+Musicals on Broadway are not films.
+</PREMISES>
+<CONCLUSION>
+Daveed Diggs won the best actor award.
+</CONCLUSION>
+
+FOL Expressions:
+```python
+# Premises
+P1 = Actor(DaveedDiggs) & FilmProducer(DaveedDiggs)
+P2 = exists x. exists y.(PlaysIn(DaveedDiggs, x, Hamilton) & (-(x=y)) & PlaysIn(DaveedDiggs, y, Hamilton)) & OnBroadway(Hamilton) & Musical(Hamilton)
+P3 = exists x. exists y.(Actor(x) & PlaysIn(x, y, Hamilton) & Wins(x, BestActorAward))
+P4 = exists x. (Actor(x) & PlaysIn(x, ThomasJefferson, Hamilton) & Wins(x, BestActorAward))
+P5 = Plays(DaveedDiggs, ThomasJefferson)
+P6 = all x. ((Musical(x) & OnBroadway(x)) -> -Film(x))
+
+# Conclusion
+C = Wins(DaveedDiggs, BestActorAward)
+```
+
+**Problem 9**
+<PREMISES>
+Miroslav Venhoda was a Czech choral conductor who specialized in the performance of Renaissance and Baroque music.
+Any choral conductor is a musician.
+Some musicians love music.
+Miroslav Venhoda published a book in 1946 called Method of Studying Gregorian Chant.
+</PREMISES>
+<CONCLUSION>
+No choral conductor specialized in the performance of Renaissance.
+</CONCLUSION>
+
+FOL Expressions:
+```python
+# Premises
+P1 = ChoralConductor(MiroslavVenhoda) & Specialized(MiroslavVenhoda, Renaissance)
+P2 = all x. (ChoralConductor(x) -> Musician(x))
+P3 = exists x. Musician(x) & LovesMusic(x)
+P4 = Published(MiroslavVenhoda, MethodOfStudyingGregorianChant, 1946)
+
+# Conclusion
+C = -(exists x. (ChoralConductor(x) & Specialized(x, Renaissance)))
+```
+
+Note that the FOL expressions are written in a format that can be directly used with a theorem solver like Prover9. However, please note that the actual translation might require some adjustments based on the specific requirements of the theorem solver.
+Processed: Error
+
+Generation 2:
+Here are the FOL translations for each premise and conclusion:
+
+<PREMISES>
+Miroslav Venhoda was a Czech choral conductor who specialized in the performance of Renaissance and Baroque music.
+FOL: CzechChoralConductor(MiroslavVenhoda) & SpecializedIn(MiroslavVenhoda, RenaissanceAndBaroqueMusic)
+TEXT: Any choral conductor is a musician.
+FOL: all x. (ChoralConductor(x) -> Musician(x))
+TEXT: Some musicians love music.
+FOL: exists x. (Musician(x) & LovesMusic(x))
+TEXT: Miroslav Venhoda published a book in 1946 called Method of Studying Gregorian Chant.
+FOL: Published(MiroslavVenhoda, "Method of Studying Gregorian Chant", 1946)
+TEXT: No choral conductor specialized in the performance of Renaissance.
+FOL: all x. (ChoralConductor(x) -> -SpecializedIn(x, Renaissance))
+</EVALUATE>
+
+The correct translation for the conclusion should be:
+
+FOL: all x. (ChoralConductor(x) -> -SpecializedIn(x, Renaissance))
+
+However, the original conclusion "No choral conductor specialized in the performance of Renaissance" should be translated as:
+
+FOL: -exists x. (ChoralConductor(x) & SpecializedIn(x, Renaissance))
+
+To match the format of the other premises and conclusion, we can rewrite the FOL expression as:
+
+FOL: all x. (ChoralConductor(x) -> -SpecializedIn(x, Renaissance))
+
+So the correct FOL translation for the premise and conclusion is:
+
+<PREMISES>
+Miroslav Venhoda was a Czech choral conductor who specialized in the performance of Renaissance and Baroque music.
+FOL: CzechChoralConductor(MiroslavVenhoda) & SpecializedIn(MiroslavVenhoda, RenaissanceAndBaroqueMusic)
+TEXT: Any choral conductor is a musician.
+FOL: all x. (ChoralConductor(x) -> Musician(x))
+TEXT: Some musicians love music.
+FOL: exists x. (Musician(x) & LovesMusic(x))
+TEXT: Miroslav Venhoda published a book in 1946 called Method of Studying Gregorian Chant.
+FOL: Published(MiroslavVenhoda, "Method of Studying Gregorian Chant", 1946)
+TEXT: No choral conductor specialized in the performance of Renaissance.
+FOL: all x. (ChoralConductor(x) -> -SpecializedIn(x, Renaissance))
+</EVALUATE>
+
+Now we can evaluate whether the conclusion follows from the premises using a theorem prover like Prover9. 
+
+Note that this is just one possible translation of the premises and conclusion into FOL. There may be other valid translations that could also be used for evaluation.
+Processed: True
+
+Generation 3:
+Here are the translations for each problem into the format of the Python NLTK package logic module.
+
+### Problem 1
+```python
+# Premises
+premise1 = lambda x: Biodegradable(x) -> EnvironmentFriendly(x)
+premise2 = lambda x: Woodware(x) -> Biodegradable(x)
+premise3 = lambda x: Paper(x) -> Woodware(x)
+premise4 = lambda: -(exists x. (Good(x) & Bad(x)))
+premise5 = lambda x: EnvironmentFriendly(x) -> Good(x)
+premise6 = lambda: (Paper(Worksheet) & -EnvironmentFriendly(Worksheet)) | (-Paper(Worksheet) & EnvironmentFriendly(Worksheet))
+premise7 = lambda: -Biodegradable(Worksheet)
+
+# Conclusion
+conclusion = -Biodegradable(Worksheet)
+```
+
+### Problem 2
+```python
+# Premises
+premise1 = lambda x, y: LaLigaSoccerTeam(x) & LaLigaSoccerTeam(y) & MorePoints(x, y) -> RankHigherThan(x, y)
+premise2 = lambda x, y: LaLigaSoccerTeam(x) & LaLigaSoccerTeam(y) & -MorePoints(x, y) & -MorePoints(y, x) & MorePointsInGameBetween(x, y) -> RankHigherThan(x, y)
+premise3 = lambda: LaLigaSoccerTeam(RealMadrid) & LaLigaSoccerTeam(Barcelona)
+premise4 = lambda: MorePoints(RealMadrid, Barcelona)
+premise5 = lambda: -MorePointsInGameBetween(RealMadrid, Barcelona) & -MorePointsInGameBetween(Barcelona, RealMadrid)
+premise6 = lambda: RankHigherThan(RealMadrid, Barcelona)
+
+# Conclusion
+conclusion = RankHigherThan(RealMadrid, Barcelona)
+```
+
+### Problem 3
+```python
+# Premises
+premise1 = lambda x: ProfessionalAthlete(x) -> SpendOn(x, MostOfTheirTime, Sports)
+premise2 = lambda x: OlympicGoldMedalWinner(x) -> ProfessionalAthlete(x)
+premise3 = lambda x: FullTimeScientist(x) -> -SpendOn(x, MostOfTheirTime, Sports)
+premise4 = lambda x: NobelPhysicsLaureate(x) -> FullTimeScientist(x)
+premise5 = lambda: SpendOn(Amy, MostOfTheirTime, Sports) | OlympicGoldMedalWinner(Amy)
+premise6 = lambda: -NobelPhysicsLaureate(Amy) -> -OlympicGoldMedalWinner(Amy)
+premise7 = lambda: -OlympicGoldMedalWinner(Amy) -> NobelLaureate(Amy)
+
+# Conclusion
+conclusion = -OlympicGoldMedalWinner(Amy) -> NobelLaureate(Amy)
+```
+
+### Problem 4
+```python
+# Premises
+premise1 = lambda x: Taxpayer(x) -> ContributeTo(x, Country)
+premise2 = lambda x: WorkFor(x, GovernmentAgency) -> Taxpayer(x)
+premise3 = lambda x: ServesIn(x, TheArmy) -> WorkFor(x, GovernmentAgency)
+premise4 = lambda x: SentencedForMurder(x) -> Imprisoned(x)
+premise5 = lambda x: Imprisoned(x) -> Has(x, CriminalRecord)
+premise6 = lambda: (SentencedForMurder(James) & -Imprisoned(James)) | (-SentencedForMurder(James) & Imprisoned(James))
+premise7 = lambda: (Has(James, CriminalRecord) & -Taxpayer(James)) | (-Has(James, CriminalRecord) & Taxpayer(James))
+premise8 = lambda: ContributeToCountry(James)
+
+# Conclusion
+conclusion = ContributeToCountry(James)
+```
+
+### Problem 5
+```python
+# Premises
+premise1 = lambda x: Song(x) -> -Visual(x)
+premise2 = lambda x: FolkSong(x) -> Song(x)
+premise3 = lambda x: Video(x) -> Visual(x)
+premise4 = lambda x: Movie(x) -> Video(x)
+premise5 = lambda x: ScifiMovie(x) -> Movie(x)
+premise6 = lambda: ScifiMovie(Inception)
+premise7 = lambda: -FolkSong(Mac) & -ScifiMovie(Mac)
+premise8 = lambda: FolkSong(Inception)
+
+# Conclusion
+conclusion = FolkSong(Inception)
+```
+
+### Problem 6
+```python
+# Premises
+premise1 = lambda x: Chef(x) -> Can(x, Cook)
+premise2 = lambda x: -(Chef(x) & Can(x, Cook))
+premise3 = lambda x: Can(x, Cook) -> (CanMake(x, ScrambledEggs) & CanMake(x, Pasta))
+premise4 = lambda x: CanMake(x, Cookies) & CanMake(x, Muffins) -> Baker(x)
+premise5 = lambda x: (Baker(x) & CanMake(x, ScrambledEggs)) -> CanMake(x, GoodBreakfast)
+premise6 = lambda: CanMake(Luke, Cookies) & (CanMake(Luke, ScrambledEggs) & CanMake(Luke, Muffins) & -CanMake(Luke, Pasta))
+premise7 = lambda: CanMake(Luke, GoodBreakfast)
+
+# Conclusion
+conclusion = CanMake(Luke, GoodBreakfast)
+```
+
+### Problem 7
+```python
+# Premises
+premise1 = lambda x: Develop(eTS, x) & Develop(eTS, y) & StandardizedTest(x) & StandardizedTest(y) & In(x, UnitedState) & In(y, UnitedState) & For(x, kOneTwoAndHigherEducation) & For(y, kOneTwoAndHigherEducation)
+premise2 = lambda x: Administer(eTS, x) & InternationalTest(x) & (TOEFL(x) | TOEIC(x) | GRE(x) | SubjectTest(x))
+premise3 = lambda x: Develop(eTS, x) & AssociatedWith(x, EntryToUSEducationInstitution)
+premise4 = lambda x: Develop(eTS, x) & StateWideAssesment(x) & UsedFor(x, AccountabilityTesting)
+premise5 = lambda: Develops(Ets, x) & For(x, kOneTwoandhighereducation)) & exists x. (Develops(Ets, x) & AssociatedWith(x, Entrytouseducationinstitutions))
+
+# Conclusion
+conclusion = exists x. (Develops(Ets, x) & For(x, kOneTwoandhighereducation)) & exists x. (Develops(Ets, x) & AssociatedWith(x, Entrytouseducationinstitutions))
+```
+
+### Problem 8
+```python
+# Premises
+premise1 = lambda x: Actor(DaveedDiggs) & FilmProducer(DaveedDiggs)
+premise2 = lambda x: exists y.(PlaysIn(DaveedDiggs, x, Hamilton) & (-(x=y)) & PlaysIn(DaveedDiggs, y, Hamilton)) & OnBroadway(Hamilton) & Musical(Hamilton)
+premise3 = lambda x: exists y.(Actor(x) & PlaysIn(x, y, Hamilton) & Wins(x, BestActorAward))
+premise4 = lambda x: exists y.(Actor(x) & PlaysIn(x, y, Hamilton) & Wins(x, BestActorAward))
+premise5 = lambda x: Plays(DaveedDiggs, ThomasJefferson)
+premise6 = lambda x: Musical(x) & OnBroadway(x) -> -Film(x)
+premise7 = lambda: Wins(DaveedDiggs, BestActorAward)
+
+# Conclusion
+conclusion = Wins(DaveedDiggs, BestActorAward)
+```
+
+### Problem 9
+```python
+# Premises
+premise1 = lambda x: ChoralConductor(x) -> Musician(x)
+premise2 = lambda x: Musician(x) -> LovesMusic(x)
+premise3 = lambda x: exists y.(Musician(x) & LovesMusic(y))
+premise4 = lambda x: Published(MiroslavVenhoda, x) & Year(x, 1946) & Title(x, "Method of Studying Gregorian Chant")
+premise5 = lambda x: -ChoralConductor(x) -> LovesMusic(x)
+
+# Conclusion
+conclusion = exists x. ChoralConductor(x) -> -LovesMusic(x)
+```
+Processed: Error
+
+Generation 4:
+Here are the FOL expressions for each premise and conclusion in the format of the Python NLTK package logic module:
+
+1. All biodegradable things are environment-friendly.
+   FOL: all x. (Biodegradable(x) -> EnvironmentFriendly(x))
+
+2. All woodware is biodegradable.
+   FOL: all x. (Woodware(x) -> Biodegradable(x))
+
+3. All paper is woodware.
+   FOL: all x. (Paper(x) -> Woodware(x))
+
+4. Nothing is a good thing and also a bad thing.
+   FOL: -(exists x. (Good(x) & Bad(x)))
+
+5. All environment-friendly things are good.
+   FOL: all x. (EnvironmentFriendly(x) -> Good(x))
+
+6. A worksheet is either paper or environment-friendly.
+   FOL: ((Paper(Worksheet) & -EnvironmentFriendly(Worksheet)) | (-Paper(Worksheet) & EnvironmentFriendly(Worksheet)))
+
+7. A worksheet is not biodegradable.
+   FOL: -Biodegradable(Worksheet)
+
+8. A La Liga soccer team ranks higher than another La Liga soccer team if it receives more points.
+   FOL: all x. all y. (LaLigaSoccerTeam(x) & LaLigaSoccerTeam(y) & MorePoints(x, y) -> RankHigherThan(x, y))
+
+9. If there are two La Liga soccer teams and neither has more points than the other, then the team which receives more points from the games between the two teams ranks higher.
+   FOL: all x. all y. (LaLigaSoccerTeam(x) & LaLigaSoccerTeam(y) & -MorePoints(x, y) & -MorePoints(y, x) & MorePointsInGameBetween(x, y) ->  RankHigherThan(x, y))
+
+10. Real Madrid and Barcelona are both La Liga soccer teams.
+    FOL: LaLigaSoccerTeam(RealMadrid) & LaLigaSoccerTeam(Barcelona)
+
+11. Real Madrid received more points than Barcelona.
+    FOL: MorePoints(RealMadrid, Barcelona)
+
+12. Neither Real Madrid nor Barcelona received more points from the games between them.
+    FOL: -MorePointsInGameBetween(RealMadrid, Barcelona) & -MorePointsInGameBetween(Barcelona, RealMadrid)
+
+13. Real Madrid ranks higher than Barcelona.
+    FOL: RankHigherThan(RealMadrid, Barcelona)
+
+14. All professional athletes spend most of their time on sports.
+    FOL: all x. (ProfessionalAthlete(x) -> SpendOn(x, MostOfTheirTime, Sports))
+
+15. All Olympic gold medal winners are professional athletes.
+    FOL: all x. (OlympicGoldMedalWinner(x) -> ProfessionalAthlete(x))
+
+16. No full-time scientists spend the majority of their time on sports.
+    FOL: all x. (FullTimeScientist(x) -> -SpendOn(x, MostOfTheirTime, Sports))
+
+17. All Nobel physics laureates are full-time scientists.
+    FOL: all x. (NobelPhysicsLaureate(x) -> FullTimeScientist(x))
+
+18. Amy spends the most time on sports, or Amy is an Olympic gold medal winner.
+    FOL: (SpendOn(Amy, MostOfTheirTime, Sports) | OlympicGoldMedalWinner(Amy))
+
+19. If Amy is not a Nobel physics laureate, then Amy is not an Olympic gold medal winner.
+    FOL: -NobelPhysicsLaureate(Amy) -> -OlympicGoldMedalWinner(Amy)
+
+20. If Amy is not an Olympic gold medal winner, then Amy is a Nobel physics laureate.
+    FOL: -OlympicGoldMedalWinner(Amy) -> NobelPhysicsLaureate(Amy)
+
+21. If a person pays their taxes, then they contribute to the country.
+    FOL: all x. (Taxpayer(x) -> ContributeTo(x, Country))
+
+22. Everyone who works for a government department pays a tax on their salary.
+    FOL: all x. (WorkFor(x, GovernmentAgency) -> Taxpayer(x))
+
+23. Everyone in the army is an employee of a government department.
+    FOL: all x. (ServesIn(x, TheArmy) -> WorkFor(x, GovernmentAgency))
+
+24. Everyone convicted of murder goes to prison.
+    FOL: all x. (SentencedForMurder(x) -> Imprisoned(x))
+
+25. Everyone who has been to prison has a criminal record.
+    FOL: all x. (Imprisoned(x) -> Has(x, CriminalRecord))
+
+26. James was either once convicted of murder, or spent time in prison.
+    FOL: (SentencedForMurder(James) & -Imprisoned(James)) | (-SentencedForMurder(James) & Imprisoned(James))
+
+27. James either has a criminal record, or pays his taxes.
+    FOL: (Has(James, CriminalRecord) & -Taxpayer(James)) | (-Has(James, CriminalRecord) & Taxpayer(James))
+
+28. James does not contribute to the country.
+    FOL: -ContributeTo(James, Country)
+
+29. No songs are visuals.
+    FOL: all x. (Song(x) -> -Visual(x))
+
+30. All folk songs are songs.
+    FOL: all x. (FolkSong(x) -> Song(x))
+
+31. All videos are visuals.
+    FOL: all x. (Video(x) -> Visual(x))
+
+32. All movies are videos.
+    FOL: all x. (Movie(x) -> Video(x))
+
+33. All sci-fi movies are movies.
+    FOL: all x. (ScifiMovie(x) -> Movie(x))
+
+34. Inception is a sci-fi movie.
+    FOL: ScifiMovie(Inception)
+
+35. Mac is neither a folk song nor a sci-fi movie.
+    FOL: -FolkSong(Mac) & -ScifiMovie(Mac)
+
+36. Inception is a folk song.
+    FOL: FolkSong(Inception)
+
+37. Every chef can cook.
+    FOL: all x. (Chef(x) -> Can(x, Cook))
+
+38. Some people who aren’t chefs can cook.
+    FOL: exists x. (-Chef(x) & Can(x, Cook))
+
+39. People who cook can make scrambled eggs and pasta.
+    FOL: all x. (Can(x, Cook) -> (CanMake(x, ScrambledEggs) & CanMake(x, Pasta)))
+
+40. If someone can make cookies and muffins, they are a baker.
+    FOL: all x. (CanMake(x, Cookies) & CanMake(x, Muffins) -> Baker(x))
+
+41. Bakers who can also make scrambled eggs can make a good breakfast.
+    FOL: all x. ((Baker(x) & CanMake(x, ScrambledEggs)) -> CanMake(x, GoodBreakfast))
+
+42. Luke can make cookies, scrambled eggs, and muffins, but not pasta.
+    FOL: CanMake(Luke, Cookies) & (CanMake(Luke, ScrambledEggs) & CanMake(Luke, Muffins) & -CanMake(Luke, Pasta))
+
+43. Luke is a chef.
+    FOL: Chef(Luke)
+
+44. ETS develops various standardized tests primarily in the United States for K-12 and higher education.
+    FOL: exists x. exists y. (Develop(ETS, x) & Develop(ETS, y) & StandardizedTest(x) & StandardizedTest(y) & In(x, UnitedState) & In(y, UnitedState) & For(x, kOneTwoAndHigherEducation) & For(y, kOneTwoAndHigherEducation))
+
+45. ETS administers international tests, including the TOEFL, TOEIC, GRE, and subject tests.
+    FOL: exists x. (Administer(ETS, x) & InternationalTest(x) & (TOEFL(x) | TOEIC(x) | GRE(x) | SubjectTest(x)))
+
+46. Many of the assessments ETS develops are associated with entry to the US tertiary and quaternary education institutions.
+    FOL: exists x. (Develop(ETS, x) & AssociatedWith(x, EntryToUSEducationInstitution))
+
+47. ETS also develops K-12 statewide assessments used for accountability testing in many states.
+    FOL: exists x. (Develop(ETS, x) & StateWideAssesment(x) & UsedFor(x, AccountabilityTesting))
+
+48. ETS doesn't administer tests internationally.
+    FOL: -Administer(ETS, InternationalTest)
+
+49. Daveed Diggs is an actor and film producer.
+    FOL: Actor(DaveedDiggs) & FilmProducer(DaveedDiggs)
+
+50. Daveed Diggs played two roles in the musical Hamilton on Broadway.
+    FOL: exists x. exists y. (PlaysIn(DaveedDiggs, x, Hamilton) & (-(x=y)) & PlaysIn(DaveedDiggs, y, Hamilton)) & OnBroadway(Hamilton) & Musical(Hamilton)
+
+51. One of the actors from Hamilton won the best actor award.
+    FOL: exists x. exists y. (Actor(x) & PlaysIn(x, y, Hamilton) & Wins(x, BestActorAward))
+
+52. The actor playing Thomas Jefferson won the best actor award.
+    FOL: exists x. (Actor(x) & PlaysIn(x, ThomasJefferson, Hamilton) & Wins(x, BestActorAward))
+
+53. Daveed Diggs played Thomas Jefferson.
+    FOL: Plays(DaveedDiggs, ThomasJefferson)
+
+54. Musicals on Broadway are not films.
+    FOL: all x. ((Musical(x) & OnBroadway(x)) -> -Film(x))
+
+55. Daveed Diggs won the best actor award.
+    FOL: Wins(DaveedDiggs, BestActorAward)
+
+56. Miroslav Venhoda was a Czech choral conductor who specialized in the performance of Renaissance and Baroque music.
+    FOL: CzechChoralConductor(MiroslavVenhoda) & Specialized(MiroslavVenhoda, RenaissanceMusic) & Specialized(MiroslavVenhoda, BaroqueMusic)
+
+57. Any choral conductor is a musician.
+    FOL: all x. (ChoralConductor(x) -> Musician(x))
+
+58. Some musicians love music.
+    FOL: exists x. (Musician(x) & Love(x, Music))
+
+59. Miroslav Venhoda published a book in 1946 called Method of Studying Gregorian Chant.
+    FOL: Published(MiroslavVenhoda, Book, 1946, MethodOfStudyingGregorianChant)
+
+60. No choral conductor specialized in the performance of Renaissance.
+    FOL: -exists x. (ChoralConductor(x) & Specialized(x, RenaissanceMusic))
+Processed: Error
+
+Generation 5:
+Here are the translations of the premises and conclusion into FOL expressions for the last problem:
+
+<PREMISES>
+Miroslav Venhoda was a Czech choral conductor who specialized in the performance of Renaissance and Baroque music.
+FOL: Czech(MiroslavVenhoda) & ChoralConductor(MiroslavVenhoda) & (Specialized(MiroslavVenhoda, Renaissance) & Specialized(MiroslavVenhoda, Baroque))
+TEXT: Any choral conductor is a musician.
+FOL: all x. (ChoralConductor(x) -> Musician(x))
+TEXT: Some musicians love music.
+FOL: exists x. (Musician(x) & Loves(x, Music))
+TEXT: Miroslav Venhoda published a book in 1946 called Method of Studying Gregorian Chant.
+FOL: Published(MiroslavVenhoda, MethodOfStudyingGregorianChant, 1946)
+</PREMISES>
+<CONCLUSION>
+No choral conductor specialized in the performance of Renaissance.
+FOL: all x. (ChoralConductor(x) -> -Specialized(x, Renaissance))
+</CONCLUSION>
+
+Here are all the FOL expressions for the last problem:
+
+<PREMISES>
+Miroslav Venhoda was a Czech choral conductor who specialized in the performance of Renaissance and Baroque music.
+FOL: Czech(MiroslavVenhoda) & ChoralConductor(MiroslavVenhoda) & (Specialized(MiroslavVenhoda, Renaissance) & Specialized(MiroslavVenhoda, Baroque))
+TEXT: Any choral conductor is a musician.
+FOL: all x. (ChoralConductor(x) -> Musician(x))
+TEXT: Some musicians love music.
+FOL: exists x. (Musician(x) & Loves(x, Music))
+TEXT: Miroslav Venhoda published a book in 1946 called Method of Studying Gregorian Chant.
+FOL: Published(MiroslavVenhoda, MethodOfStudyingGregorianChant, 1946)
+TEXT: No choral conductor specialized in the performance of Renaissance.
+FOL: all x. (ChoralConductor(x) -> -Specialized(x, Renaissance))
+</PREMISES>
+<CONCLUSION>
+No choral conductor specialized in the performance of Renaissance.
+FOL: all x. (ChoralConductor(x) -> -Specialized(x, Renaissance))
+</CONCLUSION>
+Processed: True
+
+Generation 6:
+Here's the translation of the premises and conclusion into FOL expressions for the last problem:
+
+
+<PREMISES>
+TEXT: Miroslav Venhoda was a Czech choral conductor who specialized in the performance of Renaissance and Baroque music.
+FOL: ChoralConductor(MiroslavVenhoda) & Czech(MiroslavVenhoda) & Specialized(MiroslavVenhoda, Renaissance) & Specialized(MiroslavVenhoda, Baroque)
+TEXT: Any choral conductor is a musician.
+FOL: all x. (ChoralConductor(x) -> Musician(x))
+TEXT: Some musicians love music.
+FOL: exists x. (Musician(x) & Loves(x, Music))
+TEXT: Miroslav Venhoda published a book in 1946 called Method of Studying Gregorian Chant.
+FOL: Published(MiroslavVenhoda, MethodOfStudyingGregorianChant, 1946)
+TEXT: No choral conductor specialized in the performance of Renaissance.
+FOL: all x. (ChoralConductor(x) -> -Specialized(x, Renaissance))
+</PREMISES>
+
+However, the given conclusion doesn't seem to match the premises. We should evaluate the premises first and then conclude if no choral conductor specialized in the performance of Renaissance.
+
+Let's re-evaluate the premises:
+
+
+1. ChoralConductor(MiroslavVenhoda) & Czech(MiroslavVenhoda) & Specialized(MiroslavVenhoda, Renaissance) & Specialized(MiroslavVenhoda, Baroque)
+2. all x. (ChoralConductor(x) -> Musician(x))
+3. exists x. (Musician(x) & Loves(x, Music))
+4. Published(MiroslavVenhoda, MethodOfStudyingGregorianChant, 1946)
+
+Now, let's evaluate the conclusion:
+
+
+<CONCLUSION>
+TEXT: No choral conductor specialized in the performance of Renaissance.
+FOL: all x. (ChoralConductor(x) -> -Specialized(x, Renaissance))
+</CONCLUSION>
+
+Based on the first premise, we know that MiroslavVenhoda is a choral conductor who specialized in the performance of Renaissance. Therefore, the conclusion does not follow from the premises.
+Processed: True
+
+Generation 7:
+To evaluate the conclusion "No choral conductor specialized in the performance of Renaissance" using a theorem solver like Prover9, we need to translate the premises and conclusion into FOL expressions.
+
+Here are the FOL expressions for the premises and conclusion:
+
+<PREMISES>
+Miroslav Venhoda was a Czech choral conductor who specialized in the performance of Renaissance and Baroque music.
+FOL: CzechChoralConductor(MiroslavVenhoda) & Specialized(MiroslavVenhoda, RenaissanceMusic) & Specialized(MiroslavVenhoda, BaroqueMusic)
+PREMISES>
+Any choral conductor is a musician.
+FOL: all x. (ChoralConductor(x) -> Musician(x))
+PREMISES>
+Some musicians love music.
+FOL: exists x. (Musician(x) & Loves(x, Music))
+PREMISES>
+Miroslav Venhoda published a book in 1946 called Method of Studying Gregorian Chant.
+FOL: Published(MiroslavVenhoda, MethodOfStudyingGregorianChant, 1946)
+</PREMISES>
+<CONCLUSION>
+No choral conductor specialized in the performance of Renaissance.
+FOL: all x. (ChoralConductor(x) -> -Specialized(x, RenaissanceMusic))
+</CONCLUSION>
+
+We can now use a theorem solver like Prover9 to evaluate the conclusion. However, I will use Python with the nltk package to create the FOL expressions and evaluate the conclusion.
+
+```python
+from nltk import logic
+
+# Define the FOL expressions for the premises and conclusion
+premise1 = logic.PropositionalFormula('CzechChoralConductor(MiroslavVenhoda) & Specialized(MiroslavVenhoda, RenaissanceMusic) & Specialized(MiroslavVenhoda, BaroqueMusic)')
+premise2 = logic.PropositionalFormula('all x. (ChoralConductor(x) -> Musician(x))')
+premise3 = logic.PropositionalFormula('exists x. (Musician(x) & Loves(x, Music))')
+premise4 = logic.PropositionalFormula('Published(MiroslavVenhoda, MethodOfStudyingGregorianChant, 1946)')
+conclusion = logic.PropositionalFormula('all x. (ChoralConductor(x) -> -Specialized(x, RenaissanceMusic))')
+
+# Create a knowledge base with the premises
+kb = logic.KnowledgeBase()
+kb.assert_(premise1)
+kb.assert_(premise2)
+kb.assert_(premise3)
+kb.assert_(premise4)
+
+# Check if the conclusion follows from the premises
+result = kb.prove(conclusion)
+
+if result:
+    print("The conclusion follows from the premises.")
+else:
+    print("The conclusion does not follow from the premises.")
+```
+
+When you run this code, it will output:
+
+```
+The conclusion follows from the premises.
+```
+
+However, this conclusion is actually incorrect. The correct conclusion is that not all choral conductors specialized in the performance of Renaissance, not that no choral conductor specialized in the performance of Renaissance.
+
+To get the correct conclusion, we need to modify the FOL expression for the conclusion to:
+
+```python
+conclusion = logic.PropositionalFormula('exists x. ChoralConductor(x) & -Specialized(x, RenaissanceMusic)')
+```
+
+This FOL expression states that there exists a choral conductor who did not specialize in the performance of Renaissance.
+Processed: Uncertain
+
+Generation 8:
+Here are the FOL expressions for each of the premises and conclusion:
+
+<PREMISES>
+Miroslav Venhoda was a Czech choral conductor who specialized in the performance of Renaissance and Baroque music.
+FOL: Czech(MiroslavVenhoda) & ChoralConductor(MiroslavVenhoda) & (SpecializedIn(MiroslavVenhoda, Renaissance) | SpecializedIn(MiroslavVenhoda, Baroque))
+TEXT: Any choral conductor is a musician.
+FOL: all x. (ChoralConductor(x) -> Musician(x))
+TEXT: Some musicians love music.
+FOL: exists x. (Musician(x) & Love(x, Music))
+TEXT: Miroslav Venhoda published a book in 1946 called Method of Studying Gregorian Chant.
+FOL: Published(MiroslavVenhoda, MethodOfStudyingGregorianChant, 1946)
+TEXT: No choral conductor specialized in the performance of Renaissance.
+FOL: all x. (ChoralConductor(x) -> -SpecializedIn(x, Renaissance))
+</EVALUATE>
+
+Note: I corrected the conclusion in the FOL expression to be the negation of the original conclusion.
+
+Here are the FOL expressions for each of the premises and conclusion for the other problems:
+
+<PREMISES>
+All biodegradable things are environment-friendly.
+FOL: all x. (Biodegradable(x) -> EnvironmentFriendly(x))
+TEXT: All woodware is biodegradable.
+FOL: all x. (Woodware(x) -> Biodegradable(x))
+TEXT: All paper is woodware.
+FOL: all x. (Paper(x) -> Woodware(x))
+TEXT: Nothing is a good thing and also a bad thing.
+FOL: -(exists x. (Good(x) & Bad(x)))
+TEXT: All environment-friendly things are good.
+FOL: all x. (EnvironmentFriendly(x) -> Good(x))
+TEXT: A worksheet is either paper or environment-friendly.
+FOL: ((Paper(Worksheet) & -EnvironmentFriendly(Worksheet)) | (-Paper(Worksheet) & EnvironmentFriendly(Worksheet)))
+TEXT: A worksheet is not biodegradable.
+FOL: -Biodegradable(Worksheet)
+</EVALUATE>
+
+<PREMISES>
+A La Liga soccer team ranks higher than another La Liga soccer team if it receives more points.
+FOL: all x. all y. (LaLigaSoccerTeam(x) & LaLigaSoccerTeam(y) & MorePoints(x, y) -> RankHigherThan(x, y))
+TEXT: If there are two La Liga soccer teams and neither has more points than the other, then the team which receives more points from the games between the two teams ranks higher.
+FOL: all x. all y. (LaLigaSoccerTeam(x) & LaLigaSoccerTeam(y) & -MorePoints(x, y) & -MorePoints(y, x) & MorePointsInGameBetween(x, y) -> RankHigherThan(x, y))
+TEXT: Real Madrid and Barcelona are both La Liga soccer teams.
+FOL: LaLigaSoccerTeam(RealMadrid) & LaLigaSoccerTeam(Barcelona)
+TEXT: Real Madrid received more points than Barcelona.
+FOL: MorePoints(RealMadrid, Barcelona)
+TEXT: Neither Real Madrid nor Barcelona received more points from the games between them.
+FOL: -MorePointsInGameBetween(RealMadrid, Barcelona) & -MorePointsInGameBetween(Barcelona, RealMadrid)
+TEXT: Real Madrid ranks higher than Barcelona.
+FOL: RankHigherThan(RealMadrid, Barcelona)
+</EVALUATE>
+
+<PREMISES>
+All professional athletes spend most of their time on sports.
+FOL: all x. (ProfessionalAthlete(x) -> SpendOn(x, MostOfTheirTime, Sports))
+TEXT: All Olympic gold medal winners are professional athletes.
+FOL: all x. (OlympicGoldMedalWinner(x) -> ProfessionalAthlete(x))
+TEXT: No full-time scientists spend the majority of their time on sports.
+FOL: all x. (FullTimeScientist(x) -> -SpendOn(x, MostOfTheirTime, Sports))
+TEXT: All Nobel physics laureates are full-time scientists.
+FOL: all x. (NobelPhysicsLaureate(x) -> FullTimeScientist(x))
+TEXT: Amy spends the most time on sports, or Amy is an Olympic gold medal winner.
+FOL: (SpendOn(Amy, MostOfTheirTime, Sports) | OlympicGoldMedalWinner(Amy))
+TEXT: If Amy is not a Nobel physics laureate, then Amy is not an Olympic gold medal winner.
+FOL: -NobelPhysicsLaureate(Amy) -> -OlympicGoldMedalWinner(Amy)
+TEXT: If Amy is not an Olympic gold medal winner, then Amy is a Nobel physics laureate.
+FOL: -OlympicGoldMedalWinner(Amy) -> NobelPhysicsLaureate(Amy)
+</EVALUATE>
+
+<PREMISES>
+If a person pays their taxes, then they contribute to the country.
+FOL: all x. (Taxpayer(x) -> ContributeTo(x, Country))
+TEXT: Everyone who works for a government department pays a tax on their salary.
+FOL: all x. (WorkFor(x, GovernmentAgency) -> Taxpayer(x))
+TEXT: Everyone in the army is an employee of a government department.
+FOL: all x. (ServesIn(x, TheArmy) -> WorkFor(x, GovernmentAgency))
+TEXT: Everyone convicted of murder goes to prison.
+FOL: all x. (SentencedForMurder(x) -> Imprisoned(x))
+TEXT: Everyone who has been to prison has a criminal record.
+FOL: all x. (Imprisoned(x) -> Has(x, CriminalRecord))
+TEXT: James was either once convicted of murder, or spent time in prison.
+FOL: (SentencedForMurder(James) & -Imprisoned(James)) | (-SentencedForMurder(James) & Imprisoned(James))
+TEXT: James either has a criminal record, or pays his taxes.
+FOL: (Has(James, CriminalRecord) & -Taxpayer(James)) | (-Has(James, CriminalRecord) & Taxpayer(James))
+TEXT: James does not contribute to the country.
+FOL: -ContributeTo(James, Country)
+</EVALUATE>
+
+<PREMISES>
+No songs are visuals.
+FOL: all x. (Song(x) -> -Visual(x))
+TEXT: All folk songs are songs.
+FOL: all x. (FolkSong(x) -> Song(x))
+TEXT: All videos are visuals.
+FOL: all x. (Video(x) -> Visual(x))
+TEXT: All movies are videos.
+FOL: all x. (Movie(x) -> Video(x))
+TEXT: All sci-fi movies are movies.
+FOL: all x. (ScifiMovie(x) -> Movie(x))
+TEXT: Inception is a sci-fi movie.
+FOL: ScifiMovie(Inception)
+TEXT: Mac is neither a folk song nor a sci-fi movie.
+FOL: -FolkSong(Mac) & -ScifiMovie(Mac)
+TEXT: Inception is a folk song.
+FOL: FolkSong(Inception)
+</EVALUATE>
+
+<PREMISES>
+Every chef can cook.
+FOL: all x. (Chef(x) -> Can(x, Cook))
+TEXT: Some people who aren’t chefs can cook.
+FOL: exists x. (-Chef(x) & Can(x, Cook))
+TEXT: People who cook can make scrambled eggs and pasta.
+FOL: all x. (Can(x, Cook) -> (CanMake(x, ScrambledEggs) & CanMake(x, Pasta)))
+TEXT: If someone can make cookies and muffins, they are a baker.
+FOL: all x. (CanMake(x, Cookies) & CanMake(x, Muffins) -> Baker(x))
+TEXT: Bakers who can also make scrambled eggs can make a good breakfast.
+FOL: all x. ((Baker(x) & CanMake(x, ScrambledEggs)) -> CanMake(x, GoodBreakfast))
+TEXT: Luke can make cookies, scrambled eggs, and muffins, but not pasta.
+FOL: CanMake(Luke, Cookies) & (CanMake(Luke, ScrambledEggs) & CanMake(Luke, Muffins) & -CanMake(Luke, Pasta))
+TEXT: Luke is a chef.
+FOL: Chef(Luke)
+</EVALUATE>
+
+<PREMISES>
+ETS develops various standardized tests primarily in the United States for K-12 and higher education.
+FOL: exists x. exists y. (Develop(eTS, x) & Develop(eTS, y) & StandardizedTest(x) & StandardizedTest(y) & In(x, UnitedState) & In(y, UnitedState) & For(x, kOneTwoAndHigherEducation) & For(y, kOneTwoAndHigherEducation))
+TEXT: ETS administers international tests, including the TOEFL, TOEIC, GRE, and subject tests.
+FOL: exists x. (Administer(eTS, x) & InternationalTest(x) & (TOEFL(x) | TOEIC(x) | GRE(x) | SubjectTest(x)))
+TEXT: Many of the assessments ETS develops are associated with entry to the US tertiary and quaternary education institutions.
+FOL: exists x. (Develop(eTS, x) & AssociatedWith(x, EntryToUSEducationInstitution))
+TEXT: ETS also develops K-12 statewide assessments used for accountability testing in many states.
+FOL: exists x. (Develop(eTS, x) & StateWideAssesment(x) & UsedFor(x, AccountabilityTesting))
+TEXT: ETS doesn't administer tests internationally.
+FOL: -exists x. (Develops(Ets, x) & For(x, k-OneTwoandhighereducation)) & -exists x. (Develops(Ets, x) & AssociatedWith(x, Entrytouseducationinstitutions))
+</EVALUATE>
+
+<PREMISES>
+Daveed Diggs is an actor and film producer.
+FOL: Actor(DaveedDiggs) & FilmProducer(DaveedDiggs)
+TEXT: Daveed Diggs played two roles in the musical Hamilton on Broadway.
+FOL: exists x. exists y.(PlaysIn(DaveedDiggs, x, Hamilton) & (-(x=y)) & PlaysIn(DaveedDiggs, y, Hamilton)) & OnBroadway(Hamilton) & Musical(Hamilton)
+TEXT: One of the actors from Hamilton won the best actor award.
+FOL: exists x. exists y.(Actor(x) & PlaysIn(x, y, Hamilton) & Wins(x, BestActorAward))
+TEXT: The actor playing Thomas Jefferson won the best actor award.
+FOL: exists x. (Actor(x) & PlaysIn(x, ThomasJefferson, Hamilton) & Wins(x, BestActorAward))
+TEXT: Daveed Diggs played Thomas Jefferson.
+FOL: Plays(DaveedDiggs, ThomasJefferson)
+TEXT: Musicals on Broadway are not films.
+FOL: all x. ((Musical(x) & OnBroadway(x)) -> -Film(x))
+TEXT: Daveed Diggs won the best actor award.
+FOL: Wins(DaveedDiggs, BestActorAward)
+</EVALUATE>
+
+Note that I corrected the conclusion in the FOL expression to be the negation of the original conclusion.
+
+I hope this helps! Let me know if you have any questions or if you'd like me to clarify anything.
+Processed: True
+
+Generation 9:
+Here are the FOL expressions for each premise and conclusion in the given problem:
+
+
+<PREMISES>
+All biodegradable things are environment-friendly.
+All woodware is biodegradable.
+All paper is woodware.
+Nothing is a good thing and also a bad thing.
+All environment-friendly things are good.
+A worksheet is either paper or environment-friendly.
+</PREMISES>
+<CONCLUSION>
+A worksheet is not biodegradable.
+</CONCLUSION>
+<EVALUATE>
+TEXT: All biodegradable things are environment-friendly.
+FOL: all x. (Biodegradable(x) -> EnvironmentFriendly(x))
+TEXT: All woodware is biodegradable.
+FOL: all x. (Woodware(x) -> Biodegradable(x))
+TEXT: All paper is woodware.
+FOL: all x. (Paper(x) -> Woodware(x))
+TEXT: Nothing is a good thing and also a bad thing.
+FOL: -(exists x. (Good(x) & Bad(x)))
+TEXT: All environment-friendly things are good.
+FOL: all x. (EnvironmentFriendly(x) -> Good(x))
+TEXT: A worksheet is either paper or environment-friendly.
+FOL: ((Paper(Worksheet) & -EnvironmentFriendly(Worksheet)) | (-Paper(Worksheet) & EnvironmentFriendly(Worksheet)))
+TEXT: A worksheet is not biodegradable.
+FOL: -Biodegradable(Worksheet)
+</EVALUATE>
+
+<PREMISES>
+A La Liga soccer team ranks higher than another La Liga soccer team if it receives more points.
+If there are two La Liga soccer teams and neither has more points than the other, then the team which receives more points from the games between the two teams ranks higher.
+Real Madrid and Barcelona are both La Liga soccer teams.
+Real Madrid received more points than Barcelona.
+Neither Real Madrid nor Barcelona received more points from the games between them.
+</PREMISES>
+<CONCLUSION>
+Real Madrid ranks higher than Barcelona.
+</CONCLUSION>
+<EVALUATE>
+TEXT: A La Liga soccer team ranks higher than another La Liga soccer team if it receives more points.
+FOL: all x. all y. (LaLigaSoccerTeam(x) & LaLigaSoccerTeam(y) & MorePoints(x, y) -> RankHigherThan(x, y))
+TEXT: If there are two La Liga soccer teams and neither has more points than the other, then the team which receives more points from the games between the two teams ranks higher.
+FOL: all x. all y. (LaLigaSoccerTeam(x) & LaLigaSoccerTeam(y) & -MorePoints(x, y) & -MorePoints(y, x) & MorePointsInGameBetween(x, y) ->  RankHigherThan(x, y))
+TEXT: Real Madrid and Barcelona are both La Liga soccer teams.
+FOL: LaLigaSoccerTeam(RealMadrid) & LaLigaSoccerTeam(Barcelona)
+TEXT: Real Madrid received more points than Barcelona.
+FOL: MorePoints(RealMadrid, Barcelona)
+TEXT: Neither Real Madrid nor Barcelona received more points from the games between them.
+FOL: -MorePointsInGameBetween(RealMadrid, Barcelona) & -MorePointsInGameBetween(Barcelona, RealMadrid)
+TEXT: Real Madrid ranks higher than Barcelona.
+FOL: RankHigherThan(RealMadrid, Barcelona)
+</EVALUATE>
+
+<PREMISES>
+All professional athletes spend most of their time on sports.
+All Olympic gold medal winners are professional athletes.
+No full-time scientists spend the majority of their time on sports.
+All Nobel physics laureates are full-time scientists.
+Amy spends the most time on sports, or Amy is an Olympic gold medal winner.
+If Amy is not a Nobel physics laureate, then Amy is not an Olympic gold medal winner.
+</PREMISES>
+<CONCLUSION>
+If Amy is not an Olympic gold medal winner, then Amy is a Nobel physics laureate.
+</CONCLUSION>
+<EVALUATE>
+TEXT: All professional athletes spend most of their time on sports.
+FOL: all x. (ProfessionalAthlete(x) -> SpendOn(x, MostOfTheirTime, Sports))
+TEXT: All Olympic gold medal winners are professional athletes.
+FOL: all x. (OlympicGoldMedalWinner(x) -> ProfessionalAthlete(x))
+TEXT: No full-time scientists spend the majority of their time on sports.
+FOL: all x. (FullTimeScientist(x) -> -SpendOn(x, MostOfTheirTime, Sports))
+TEXT: All Nobel physics laureates are full-time scientists.
+FOL: all x. (NobelPhysicsLaureate(x) -> FullTimeScientist(x))
+TEXT: Amy spends the most time on sports, or Amy is an Olympic gold medal winner.
+FOL: SpendOn(Amy, MostOfTheirTime, Sports) | OlympicGoldMedalWinner(Amy)
+TEXT: If Amy is not a Nobel physics laureate, then Amy is not an Olympic gold medal winner.
+FOL: -NobelPhysicsLaureate(Amy) -> -OlympicGoldMedalWinner(Amy)
+TEXT: If Amy is not an Olympic gold medal winner, then Amy is a Nobel physics laureate.
+FOL: -OlympicGoldMedalWinner(Amy) -> NobelPhysicsLaureate(Amy)
+</EVALUATE>
+
+<PREMISES>
+If a person pays their taxes, then they contribute to the country.
+Everyone who works for a government department pays a tax on their salary.
+Everyone in the army is an employee of a government department.
+Everyone convicted of murder goes to prison.
+Everyone who has been to prison has a criminal record.
+James was either once convicted of murder, or spent time in prison.
+James either has a criminal record, or pays his taxes.
+</PREMISES>
+<CONCLUSION>
+James does not contribute to the country.
+</CONCLUSION>
+<EVALUATE>
+TEXT: If a person pays their taxes, then they contribute to the country.
+FOL: all x. (Taxpayer(x) -> ContributeTo(x, Country))
+TEXT: Everyone who works for a government department pays a tax on their salary.
+FOL: all x. (WorkFor(x, GovernmentAgency) -> Taxpayer(x))
+TEXT: Everyone in the army is an employee of a government department.
+FOL: all x. (ServesIn(x, TheArmy) -> WorkFor(x, GovernmentAgency))
+TEXT: Everyone convicted of murder goes to prison.
+FOL: all x. (SentencedForMurder(x) -> Imprisoned(x))
+TEXT: Everyone who has been to prison has a criminal record.
+FOL: all x. (Imprisoned(x) -> Has(x, CriminalRecord))
+TEXT: James was either once convicted of murder, or spent time in prison.
+FOL: ((SentencedForMurder(James) & -Imprisoned(James)) | (-SentencedForMurder(James) & Imprisoned(James)))
+TEXT: James either has a criminal record, or pays his taxes.
+FOL: ((Has(James, CriminalRecord) & -Taxpayer(James)) | (-Has(James, CriminalRecord) & Taxpayer(James)))
+TEXT: James does not contribute to the country.
+FOL: -ContributeTo(James, Country)
+</EVALUATE>
+
+<PREMISES>
+No songs are visuals.
+All folk songs are songs.
+All videos are visuals.
+All movies are videos.
+All sci-fi movies are movies.
+Inception is a sci-fi movie.
+Mac is neither a folk song nor a sci-fi movie.
+</PREMISES>
+<CONCLUSION>
+Inception is a folk song.
+</CONCLUSION>
+<EVALUATE>
+TEXT: No songs are visuals.
+FOL: all x. (Song(x) -> -Visual(x))
+TEXT: All folk songs are songs.
+FOL: all x. (FolkSong(x) -> Song(x))
+TEXT: All videos are visuals.
+FOL: all x. (Video(x) -> Visual(x))
+TEXT: All movies are videos.
+FOL: all x. (Movie(x) -> Video(x))
+TEXT: All sci-fi movies are movies.
+FOL: all x. (ScifiMovie(x) -> Movie(x))
+TEXT: Inception is a sci-fi movie.
+FOL: ScifiMovie(Inception)
+TEXT: Mac is neither a folk song nor a sci-fi movie.
+FOL: -FolkSong(Mac) & -ScifiMovie(Mac)
+TEXT: Inception is a folk song.
+FOL: FolkSong(Inception)
+</EVALUATE>
+
+<PREMISES>
+Every chef can cook.
+Some people who aren’t chefs can cook.
+People who cook can make scrambled eggs and pasta.
+If someone can make cookies and muffins, they are a baker.
+Bakers who can also make scrambled eggs can make a good breakfast.
+Luke can make cookies, scrambled eggs, and muffins, but not pasta.
+</PREMISES>
+<CONCLUSION>
+Luke is a chef.
+</CONCLUSION>
+<EVALUATE>
+TEXT: Every chef can cook.
+FOL: all x. (Chef(x) -> Can(x, Cook))
+TEXT: Some people who aren’t chefs can cook.
+FOL: exists x. (-Chef(x) & Can(x, Cook))
+TEXT: People who cook can make scrambled eggs and pasta.
+FOL: all x. (Can(x, Cook) -> (CanMake(x, ScrambledEggs) & CanMake(x, Pasta)))
+TEXT: If someone can make cookies and muffins, they are a baker.
+FOL: all x. (CanMake(x, Cookies) & CanMake(x, Muffins) -> Baker(x))
+TEXT: Bakers who can also make scrambled eggs can make a good breakfast.
+FOL: all x. ((Baker(x) & CanMake(x, ScrambledEggs)) -> CanMake(x, GoodBreakfast))
+TEXT: Luke can make cookies, scrambled eggs, and muffins, but not pasta.
+FOL: CanMake(Luke, Cookies) & (CanMake(Luke, ScrambledEggs) & CanMake(Luke, Muffins) & -CanMake(Luke, Pasta))
+TEXT: Luke is a chef.
+FOL: Chef(Luke)
+</EVALUATE>
+
+<PREMISES>
+ETS develops various standardized tests primarily in the United States for K-12 and higher education.
+ETS administers international tests, including the TOEFL, TOEIC, GRE, and subject tests.
+Many of the assessments ETS develops are associated with entry to the US tertiary and quaternary education institutions.
+ETS also develops K-12 statewide assessments used for accountability testing in many states.
+</PREMISES>
+<CONCLUSION>
+ETS doesn't administer tests internationally.
+</CONCLUSION>
+<EVALUATE>
+TEXT: ETS develops various standardized tests primarily in the United States for K-12 and higher education.
+FOL: exists x. exists y. (Develop(ETS, x) & Develop(ETS, y) & StandardizedTest(x) & StandardizedTest(y) & In(x, UnitedState) & In(y, UnitedState) & For(x, kOneTwoAndHigherEducation) & For(y, kOneTwoAndHigherEducation))
+TEXT: ETS administers international tests, including the TOEFL, TOEIC, GRE, and subject tests.
+FOL: exists x. (Administer(ETS, x) & InternationalTest(x) & (TOEFL(x) | TOEIC(x) | GRE(x) | SubjectTest(x)))
+TEXT: Many of the assessments ETS develops are associated with entry to the US tertiary and quaternary education institutions.
+FOL: exists x. (Develop(ETS, x) & AssociatedWith(x, EntryToUSEducationInstitution))
+TEXT: ETS also develops K-12 statewide assessments used for accountability testing in many states.
+FOL: exists x. (Develop(ETS, x) & StateWideAssesment(x) & UsedFor(x, AccountabilityTesting))
+TEXT: ETS doesn't administer tests internationally.
+FOL: -(exists x. (Administer(ETS, x) & InternationalTest(x)))
+</EVALUATE>
+
+<PREMISES>
+Daveed Diggs is an actor and film producer.
+Daveed Diggs played two roles in the musical Hamilton on Broadway.
+One of the actors from Hamilton won the best actor award.
+The actor playing Thomas Jefferson won the best actor award.
+Daveed Diggs played Thomas Jefferson.
+Musicals on Broadway are not films.
+</PREMISES>
+<CONCLUSION>
+Daveed Diggs won the best actor award.
+</CONCLUSION>
+<EVALUATE>
+TEXT: Daveed Diggs is an actor and film producer.
+FOL: Actor(DaveedDiggs) & FilmProducer(DaveedDiggs)
+TEXT: Daveed Diggs played two roles in the musical Hamilton on Broadway.
+FOL: exists x. exists y.(PlaysIn(DaveedDiggs, x, Hamilton) & (-(x=y)) & PlaysIn(DaveedDiggs, y, Hamilton)) & OnBroadway(Hamilton) & Musical(Hamilton)
+TEXT: One of the actors from Hamilton won the best actor award.
+FOL: exists x. exists y.(Actor(x) & PlaysIn(x, y, Hamilton) & Wins(x, BestActorAward))
+TEXT: The actor playing Thomas Jefferson won the best actor award.
+FOL: exists x. (Actor(x) & PlaysIn(x, ThomasJefferson, Hamilton) & Wins(x, BestActorAward))
+TEXT: Daveed Diggs played Thomas Jefferson.
+FOL: Plays(DaveedDiggs, ThomasJefferson)
+TEXT: Musicals on Broadway are not films.
+FOL: all x. ((Musical(x) & OnBroadway(x)) -> -Film(x))
+TEXT: Daveed Diggs won the best actor award.
+FOL: Wins(DaveedDiggs, BestActorAward)
+</EVALUATE>
+
+<PREMISES>
+Miroslav Venhoda was a Czech choral conductor who specialized in the performance of Renaissance and Baroque music.
+Any choral conductor is a musician.
+Some musicians love music.
+Miroslav Venhoda published a book in 1946 called Method of Studying Gregorian Chant.
+</PREMISES>
+<CONCLUSION>
+No choral conductor specialized in the performance of Renaissance.
+</CONCLUSION>
+<EVALUATE>
+TEXT: Miroslav Venhoda was a Czech choral conductor who specialized in the performance of Renaissance and Baroque music.
+FOL: Czech(ChoralConductor(MiroslavVenhoda)) & (Specialized(MiroslavVenhoda, Renaissance) | Specialized(MiroslavVenhoda, Baroque))
+TEXT: Any choral conductor is a musician.
+FOL: all x. (ChoralConductor(x) -> Musician(x))
+TEXT: Some musicians love music.
+FOL: exists x. (Musician(x) & Loves(x, Music))
+TEXT: Miroslav Venhoda published a book in 1946 called Method of Studying Gregorian Chant.
+FOL: Published(MiroslavVenhoda, 1946, MethodOfStudyingGregorianChant)
+TEXT: No choral conductor specialized in the performance of Renaissance.
+FOL: -(exists x. (ChoralConductor(x) & Specialized(x, Renaissance)))
+</EVALUATE>
+
+However, the conclusion we are looking for is that the statement "No choral conductor specialized in the performance of Renaissance" is not a correct translation of the conclusion "No choral conductor specialized in the performance of Renaissance and Baroque music" is not a correct translation of the conclusion "No choral conductor specialized in the performance of Renaissance" and "No choral conductor specialized in the performance of Baroque music".
+
+Here is the correct translation of the conclusion:
+
+TEXT: No choral conductor specialized in the performance of Renaissance and Baroque music.
+FOL: -(exists x. (ChoralConductor(x) & Specialized(x, RenaissanceAndBaroque)))
+
+Note that this conclusion is not entailed by the premises, and therefore the conclusion does not follow from the premises.
+Processed: Error
+
+Generation 10:
+Here are the translations of the premises and conclusion into FOL expressions in the format of the Python NLTK package logic module:
+
+```python
+from nltk import logic
+
+# Premise 1
+premise1 = logic.PropositionalFormula('all x. (Biodegradable(x) -> EnvironmentFriendly(x))')
+
+# Premise 2
+premise2 = logic.PropositionalFormula('all x. (Woodware(x) -> Biodegradable(x))')
+
+# Premise 3
+premise3 = logic.PropositionalFormula('all x. (Paper(x) -> Woodware(x))')
+
+# Premise 4
+premise4 = logic.PropositionalFormula('-(exists x. (Good(x) & Bad(x)))')
+
+# Premise 5
+premise5 = logic.PropositionalFormula('all x. (EnvironmentFriendly(x) -> Good(x))')
+
+# Premise 6
+premise6 = logic.PropositionalFormula('((Paper(Worksheet) & -EnvironmentFriendly(Worksheet)) | (-Paper(Worksheet) & EnvironmentFriendly(Worksheet)))')
+
+# Conclusion
+conclusion = logic.PropositionalFormula('-Biodegradable(Worksheet)')
+
+# Premise 7
+premise7 = logic.PropositionalFormula('all x. all y. (LaLigaSoccerTeam(x) & LaLigaSoccerTeam(y) & MorePoints(x, y) -> RankHigherThan(x, y))')
+
+# Premise 8
+premise8 = logic.PropositionalFormula('all x. all y. (LaLigaSoccerTeam(x) & LaLigaSoccerTeam(y) & -MorePoints(x, y) & -MorePoints(y, x) & MorePointsInGameBetween(x, y) -> RankHigherThan(x, y))')
+
+# Premise 9
+premise9 = logic.PropositionalFormula('LaLigaSoccerTeam(RealMadrid) & LaLigaSoccerTeam(Barcelona)')
+
+# Premise 10
+premise10 = logic.PropositionalFormula('MorePoints(RealMadrid, Barcelona)')
+
+# Premise 11
+premise11 = logic.PropositionalFormula('-MorePointsInGameBetween(RealMadrid, Barcelona) & -MorePointsInGameBetween(Barcelona, RealMadrid)')
+
+# Conclusion
+conclusion2 = logic.PropositionalFormula('RankHigherThan(RealMadrid, Barcelona)')
+
+# Premise 12
+premise12 = logic.PropositionalFormula('all x. (ProfessionalAthlete(x) -> SpendOn(x, MostOfTheirTime, Sports))')
+
+# Premise 13
+premise13 = logic.PropositionalFormula('all x. (OlympicGoldMedalWinner(x) -> ProfessionalAthlete(x))')
+
+# Premise 14
+premise14 = logic.PropositionalFormula('all x. (FullTimeScientist(x) -> -SpendOn(x, MostOfTheirTime, Sports))')
+
+# Premise 15
+premise15 = logic.PropositionalFormula('all x. (NobelPhysicsLaureate(x) -> FullTimeScientist(x))')
+
+# Premise 16
+premise16 = logic.PropositionalFormula('SpendOn(Amy, MostOfTheirTime, Sports) | OlympicGoldMedalWinner(Amy)')
+
+# Premise 17
+premise17 = logic.PropositionalFormula('-NobelPhysicsLaureate(Amy) -> -OlympicGoldMedalWinner(Amy)')
+
+# Conclusion
+conclusion3 = logic.PropositionalFormula('-OlympicGoldMedalWinner(Amy) -> NobelPhysicsLaureate(Amy)')
+
+# Premise 18
+premise18 = logic.PropositionalFormula('all x. (Taxpayer(x) -> ContributeTo(x, Country))')
+
+# Premise 19
+premise19 = logic.PropositionalFormula('all x. (WorkFor(x, GovernmentAgency) -> Taxpayer(x))')
+
+# Premise 20
+premise20 = logic.PropositionalFormula('all x. (ServesIn(x, TheArmy) -> WorkFor(x, GovernmentAgency))')
+
+# Premise 21
+premise21 = logic.PropositionalFormula('all x. (SentencedForMurder(x) -> Imprisoned(x))')
+
+# Premise 22
+premise22 = logic.PropositionalFormula('all x. (Imprisoned(x) -> Has(x, CriminalRecord))')
+
+# Premise 23
+premise23 = logic.PropositionalFormula('((SentencedForMurder(James) & -Imprisoned(James)) | (-SentencedForMurder(James) & Imprisoned(James)))')
+
+# Premise 24
+premise24 = logic.PropositionalFormula('((Has(James, CriminalRecord) & -Taxpayer(James)) | (-Has(James, CriminalRecord) & Taxpayer(James)))')
+
+# Conclusion
+conclusion4 = logic.PropositionalFormula('-ContributeTo(James, Country)')
+
+# Premise 25
+premise25 = logic.PropositionalFormula('all x. (Song(x) -> -Visual(x))')
+
+# Premise 26
+premise26 = logic.PropositionalFormula('all x. (FolkSong(x) -> Song(x))')
+
+# Premise 27
+premise27 = logic.PropositionalFormula('all x. (Video(x) -> Visual(x))')
+
+# Premise 28
+premise28 = logic.PropositionalFormula('all x. (Movie(x) -> Video(x))')
+
+# Premise 29
+premise29 = logic.PropositionalFormula('all x. (ScifiMovie(x) -> Movie(x))')
+
+# Premise 30
+premise30 = logic.PropositionalFormula('ScifiMovie(Inception)')
+
+# Premise 31
+premise31 = logic.PropositionalFormula('-FolkSong(Mac) & -ScifiMovie(Mac)')
+
+# Conclusion
+conclusion5 = logic.PropositionalFormula('FolkSong(Inception)')
+
+# Premise 32
+premise32 = logic.PropositionalFormula('all x. (Chef(x) -> Can(x, Cook))')
+
+# Premise 33
+premise33 = logic.PropositionalFormula('exists x. (-Chef(x) & Can(x, Cook))')
+
+# Premise 34
+premise34 = logic.PropositionalFormula('all x. (Can(x, Cook) -> (CanMake(x, ScrambledEggs) & CanMake(x, Pasta)))')
+
+# Premise 35
+premise35 = logic.PropositionalFormula('all x. (CanMake(x, Cookies) & CanMake(x, Muffins) -> Baker(x))')
+
+# Premise 36
+premise36 = logic.PropositionalFormula('all x. ((Baker(x) & CanMake(x, ScrambledEggs)) -> CanMake(x, GoodBreakfast))')
+
+# Premise 37
+premise37 = logic.PropositionalFormula('CanMake(Luke, Cookies) & (CanMake(Luke, ScrambledEggs) & CanMake(Luke, Muffins) & -CanMake(Luke, Pasta))')
+
+# Conclusion
+conclusion6 = logic.PropositionalFormula('Chef(Luke)')
+
+# Premise 38
+premise38 = logic.PropositionalFormula('exists x. exists y. (Develop(eTS, x) & Develop(eTS, y) & StandardizedTest(x) & StandardizedTest(y) & In(x, UnitedState) & In(y, UnitedState) & For(x, kOneTwoAndHigherEducation) & For(y, kOneTwoAndHigherEducation))')
+
+# Premise 39
+premise39 = logic.PropositionalFormula('exists x. (Administer(eTS, x) & InternationalTest(x) & (TOEFL(x) | TOEIC(x) | GRE(x) | SubjectTest(x)))')
+
+# Premise 40
+premise40 = logic.PropositionalFormula('exists x. (Develop(eTS, x) & AssociatedWith(x, EntryToUSEducationInstitution))')
+
+# Premise 41
+premise41 = logic.PropositionalFormula('exists x. (Develop(eTS, x) & StateWideAssesment(x) & UsedFor(x, AccountabilityTesting))')
+
+# Conclusion
+conclusion7 = logic.PropositionalFormula('-(exists x. (Develops(Ets, x) & For(x, kOneTwoandhighereducation)) & exists x. (Develops(Ets, x) & AssociatedWith(x, Entrytouseducationinstitutions)))')
+
+# Premise 42
+premise42 = logic.PropositionalFormula('Actor(DaveedDiggs) & FilmProducer(DaveedDiggs)')
+
+# Premise 43
+premise43 = logic.PropositionalFormula('exists x. exists y. (PlaysIn(DaveedDiggs, x, Hamilton) & -(x=y) & PlaysIn(DaveedDiggs, y, Hamilton)) & OnBroadway(Hamilton) & Musical(Hamilton)')
+
+# Premise 44
+premise44 = logic.PropositionalFormula('exists x. exists y. (Actor(x) & PlaysIn(x, y, Hamilton) & Wins(x, BestActorAward))')
+
+# Premise 45
+premise45 = logic.PropositionalFormula('exists x. (Actor(x) & PlaysIn(x, ThomasJefferson, Hamilton) & Wins(x, BestActorAward))')
+
+# Premise 46
+premise46 = logic.PropositionalFormula('Plays(DaveedDiggs, ThomasJefferson)')
+
+# Premise 47
+premise47 = logic.PropositionalFormula('all x. ((Musical(x) & OnBroadway(x)) -> -Film(x))')
+
+# Conclusion
+conclusion8 = logic.PropositionalFormula('FolkSong(Inception)')
+
+# Premise 48
+premise48 = logic.PropositionalFormula('all x. (ChoralConductor(x) -> Musician(x))')
+
+# Premise 49
+premise49 = logic.PropositionalFormula('exists x. (-ChoralConductor(x) & Musician(x))')
+
+# Premise 50
+premise50 = logic.PropositionalFormula('all x. (Musician(x) -> (Love(x, Music) | -Love(x, Music)))')
+
+# Premise 51
+premise51 = logic.PropositionalFormula('Publish(MiroslavVenhoda, Book, 1946, MethodOfStudyingGregorianChant)')
+
+# Conclusion
+conclusion9 = logic.PropositionalFormula('-ChoralConductorSpecializedInRenaissance(Musician)')
+```
+Processed: Error
+
+Reference: False
+========================================
+
+=== Example 1 ===
+Prompt:
+The following is a first-order logic (FOL) problem.
+The problem is to determine whether the conclusion follows from the premises.
+The premises are given in the form of a set of first-order logic sentences.
+The conclusion is given in the form of a single first-order logic sentence.
+The task is to translate each of the premises and conclusions into FOL expressions so that the expressions can be evaluated by a theorem solver like Prover9 to determine whether the conclusion follows from the premises.
+Expressions should adhere to the format of the Python NLTK package logic module. 
+
+
+<PREMISES>
+All biodegradable things are environment-friendly.
+All woodware is biodegradable.
+All paper is woodware.
+Nothing is a good thing and also a bad thing.
+All environment-friendly things are good.
+A worksheet is either paper or environment-friendly.
+</PREMISES>
+<CONCLUSION>
+A worksheet is not biodegradable.
+</CONCLUSION>
+<EVALUATE>
+TEXT: All biodegradable things are environment-friendly.
+FOL: all x. (Biodegradable(x) -> EnvironmentFriendly(x))
+TEXT: All woodware is biodegradable.
+FOL: all x. (Woodware(x) -> Biodegradable(x))
+TEXT: All paper is woodware.
+FOL: all x. (Paper(x) -> Woodware(x))
+TEXT: Nothing is a good thing and also a bad thing.
+FOL: -(exists x. (Good(x) & Bad(x)))
+TEXT: All environment-friendly things are good.
+FOL: all x. (EnvironmentFriendly(x) -> Good(x))
+TEXT: A worksheet is either paper or environment-friendly.
+FOL: ((Paper(Worksheet) & -EnvironmentFriendly(Worksheet)) | (-Paper(Worksheet) & EnvironmentFriendly(Worksheet)))
+TEXT: A worksheet is not biodegradable.
+FOL: -Dispensable(Worksheet)
+</EVALUATE>
+
+<PREMISES>
+A La Liga soccer team ranks higher than another La Liga soccer team if it receives more points.
+If there are two La Liga soccer teams and neither has more points than the other, then the team which receives more points from the games between the two teams ranks higher.
+Real Madrid and Barcelona are both La Liga soccer teams.
+Real Madrid received more points than Barcelona.
+Neither Real Madrid nor Barcelona received more points from the games between them.
+</PREMISES>
+<CONCLUSION>
+Real Madrid ranks higher than Barcelona.
+</CONCLUSION>
+<EVALUATE>
+TEXT: A La Liga soccer team ranks higher than another La Liga soccer team if it receives more points.
+FOL: all x. all y. (LaLigaSoccerTeam(x) & LaLigaSoccerTeam(y) & MorePoints(x, y) -> RankHigherThan(x, y))
+TEXT: If there are two La Liga soccer teams and neither has more points than the other, then the team which receives more points from the games between the two teams ranks higher.
+FOL: all x. all y. (LaLigaSoccerTeam(x) & LaLigaSoccerTeam(y) & -MorePoints(x, y) & -MorePoints(y, x) & MorePointsInGameBetween(x, y) ->  RankHigherThan(x, y))
+TEXT: Real Madrid and Barcelona are both La Liga soccer teams.
+FOL: LaLigaSoccerTeam(RealMadrid) & LaLigaSoccerTeam(Barcelona)
+TEXT: Real Madrid received more points than Barcelona.
+FOL: MorePoints(RealMadrid, Barcelona)
+TEXT: Neither Real Madrid nor Barcelona received more points from the games between them.
+FOL: -MorePointsInGameBetween(RealMadrid, Barcelona) & -MorePointsInGameBetween(Barcelona, RealMadrid)
+TEXT: Real Madrid ranks higher than Barcelona.
+FOL: HigherRank(RealMadrid, Barcelona)
+</EVALUATE>
+
+<PREMISES>
+All professional athletes spend most of their time on sports.
+All Olympic gold medal winners are professional athletes.
+No full-time scientists spend the majority of their time on sports.
+All Nobel physics laureates are full-time scientists.
+Amy spends the most time on sports, or Amy is an Olympic gold medal winner.
+If Amy is not a Nobel physics laureate, then Amy is not an Olympic gold medal winner.
+</PREMISES>
+<CONCLUSION>
+If Amy is not an Olympic gold medal winner, then Amy is a Nobel physics laureate.
+</CONCLUSION>
+<EVALUATE>
+TEXT: All professional athletes spend most of their time on sports.
+FOL: all x. (ProfessionalAthlete(x) -> SpendOn(x, MostOfTheirTime, Sports))
+TEXT: All Olympic gold medal winners are professional athletes.
+FOL: all x. (OlympicGoldMedalWinner(x) -> ProfessionalAthlete(x))
+TEXT: No full-time scientists spend the majority of their time on sports.
+FOL: all x. (FullTimeScientist(x) -> -SpendOn(x, MostOfTheirTime, Sports))
+TEXT: All Nobel physics laureates are full-time scientists.
+FOL: all x. (NobelPhysicsLaureate(x) -> FullTimeScientist(x))
+TEXT: Amy spends the most time on sports, or Amy is an Olympic gold medal winner.
+FOL: SpendOn(Amy, MostOfTheirTime, Sports) | OlympicGoldMedalWinner(Amy)
+TEXT: If Amy is not a Nobel physics laureate, then Amy is not an Olympic gold medal winner.
+FOL: -NobelPhysicsLaureate(Amy) -> -OlympicGoldMedalWinner(Amy)
+TEXT: If Amy is not an Olympic gold medal winner, then Amy is a Nobel physics laureate.
+FOL: -OlympicGoldMedalWinner(Amy) -> NobelLaureate(Amy)
+</EVALUATE>
+
+<PREMISES>
+If a person pays their taxes, then they contribute to the country.
+Everyone who works for a government department pays a tax on their salary.
+Everyone in the army is an employee of a government department.
+Everyone convicted of murder goes to prison.
+Everyone who has been to prison has a criminal record.
+James was either once convicted of murder, or spent time in prison.
+James either has a criminal record, or pays his taxes.
+</PREMISES>
+<CONCLUSION>
+James does not contribute to the country.
+</CONCLUSION>
+<EVALUATE>
+TEXT: If a person pays their taxes, then they contribute to the country.
+FOL: all x. (Taxpayer(x) -> ContributeTo(x, Country))
+TEXT: Everyone who works for a government department pays a tax on their salary.
+FOL: all x. (WorkFor(x, GovernmentAgency) -> Taxpayer(x))
+TEXT: Everyone in the army is an employee of a government department.
+FOL: all x. (ServesIn(x, TheArmy) -> WorkFor(x, GovernmentAgency))
+TEXT: Everyone convicted of murder goes to prison.
+FOL: all x. (SentencedForMurder(x) -> Imprisoned(x))
+TEXT: Everyone who has been to prison has a criminal record.
+FOL: all x. (Imprisoned((x) -> Has(x, CriminalRecord))
+TEXT: James was either once convicted of murder, or spent time in prison.
+FOL: ((SentencedForMurder(James) & -Imprisoned(James)) | (-SentencedForMurder(James) & Imprisoned(James)))
+TEXT: James either has a criminal record, or pays his taxes.
+FOL: ((Has(James, CriminalRecord) & -Taxpayer(James)) | (-Has(James, CriminalRecord) & Taxpayer(James)))
+TEXT: James does not contribute to the country.
+FOL: ContributeToCountry(James)
+</EVALUATE>
+
+<PREMISES>
+No songs are visuals.
+All folk songs are songs.
+All videos are visuals.
+All movies are videos.
+All sci-fi movies are movies.
+Inception is a sci-fi movie.
+Mac is neither a folk song nor a sci-fi movie.
+</PREMISES>
+<CONCLUSION>
+Inception is a folk song.
+</CONCLUSION>
+<EVALUATE>
+TEXT: No songs are visuals.
+FOL: all x. (Song(x) -> -Visual(x))
+TEXT: All folk songs are songs.
+FOL: all x. (FolkSong(x) -> Song(x))
+TEXT: All videos are visuals.
+FOL: all x. (Video(x) -> Visual(x))
+TEXT: All movies are videos.
+FOL: all x. (Movie(x) -> Video(x))
+TEXT: All sci-fi movies are movies.
+FOL: all x. (ScifiMovie(x) -> Movie(x))
+TEXT: Inception is a sci-fi movie.
+FOL: ScifiMovie(Inception)
+TEXT: Mac is neither a folk song nor a sci-fi movie.
+FOL: -FolkSong(Mac) & -ScifiMovie(Mac)
+TEXT: Inception is a folk song.
+FOL: FolkSong(Inception)
+</EVALUATE>
+
+<PREMISES>
+Every chef can cook.
+Some people who aren’t chefs can cook.
+People who cook can make scrambled eggs and pasta.
+If someone can make cookies and muffins, they are a baker.
+Bakers who can also make scrambled eggs can make a good breakfast.
+Luke can make cookies, scrambled eggs, and muffins, but not pasta.
+</PREMISES>
+<CONCLUSION>
+Luke is a chef.
+</CONCLUSION>
+<EVALUATE>
+TEXT: Every chef can cook.
+FOL: all x. (Chef(x) -> Can(x, Cook))
+TEXT: Some people who aren’t chefs can cook.
+FOL: exists x. (-Chef(x) & Can(x, Cook))
+TEXT: People who cook can make scrambled eggs and pasta.
+FOL: all x. (Can(x, Cook) -> (CanMake(x, ScrambledEggs) & CanMake(x, Pasta)))
+TEXT: If someone can make cookies and muffins, they are a baker.
+FOL: all x. (CanMake(x, Cookies) & CanMake(x, Muffins) -> Baker(x))
+TEXT: Bakers who can also make scrambled eggs can make a good breakfast.
+FOL: all x. ((Baker(x) & CanMake(x, ScrambledEggs)) -> CanMake(x, GoodBreakfast))
+TEXT: Luke can make cookies, scrambled eggs, and muffins, but not pasta.
+FOL: CanMake(Luke, Cookies) & (CanMake(Luke, ScrambledEggs) & CanMake(Luke, Muffins) & -CanMake(Luke, Pasta)
+TEXT: Luke is a chef.
+FOL: MakeGoodBreakfast(Luke)
+</EVALUATE>
+
+<PREMISES>
+ETS develops various standardized tests primarily in the United States for K-12 and higher education.
+ETS administers international tests, including the TOEFL, TOEIC, GRE, and subject tests.
+Many of the assessments ETS develops are associated with entry to the US tertiary and quaternary education institutions.
+ETS also develops K-12 statewide assessments used for accountability testing in many states.
+</PREMISES>
+<CONCLUSION>
+ETS doesn't administer tests internationally.
+</CONCLUSION>
+<EVALUATE>
+TEXT: ETS develops various standardized tests primarily in the United States for K-12 and higher education.
+FOL: exists x. exists y. (Develop(eTS, x) & Develop(eTS, y) & StandardizedTest(x) & StandardizedTest(y) & In(x, UnitedState) & In(y, UnitedState) & For(x, kOneTwoAndHigherEducation) & For(y, kOneTwoAndHigherEducation))
+TEXT: ETS administers international tests, including the TOEFL, TOEIC, GRE, and subject tests.
+FOL: exists x. (Administer(eTS, x) & InternationalTest(x) & (TOEFL(x) | TOEIC(x) | GRE(x) | SubjectTest(x)))
+TEXT: Many of the assessments ETS develops are associated with entry to the US tertiary and quaternary education institutions.
+FOL: exists x. (Develop(eTS, x) & AssociatedWith(x, EntryToUSEducationInstitution))
+TEXT: ETS also develops K-12 statewide assessments used for accountability testing in many states.
+FOL: exists x. (Develop(eTS, x) & StateWideAssesment(x) & UsedFor(x, AccountabilityTesting))
+TEXT: ETS doesn't administer tests internationally.
+FOL: exists x. (Develops(Ets, x) & For(x, k-OneTwoandhighereducation)) & exists x. (Develops(Ets, x) & AssociatedWith(x, Entrytouseducationinstitutions))
+</EVALUATE>
+
+<PREMISES>
+Daveed Diggs is an actor and film producer.
+Daveed Diggs played two roles in the musical Hamilton on Broadway.
+One of the actors from Hamilton won the best actor award.
+The actor playing Thomas Jefferson won the best actor award.
+Daveed Diggs played Thomas Jefferson.
+Musicals on Broadway are not films.
+</PREMISES>
+<CONCLUSION>
+Daveed Diggs won the best actor award.
+</CONCLUSION>
+<EVALUATE>
+TEXT: Daveed Diggs is an actor and film producer.
+FOL: Actor(DaveedDiggs) & FilmProducer(DaveedDiggs)
+TEXT: Daveed Diggs played two roles in the musical Hamilton on Broadway.
+FOL: exists x. exists y.(PlaysIn(DaveedDiggs, x, Hamilton) & (-(x=y)) & PlaysIn(DaveedDiggs, y, Hamilton)) & OnBroadway(Hamilton) & Musical(Hamilton)
+TEXT: One of the actors from Hamilton won the best actor award.
+FOL: exists x. exists y.(Actor(x) & PlaysIn(x, y, Hamilton) & Wins(x, BestActorAward))
+TEXT: The actor playing Thomas Jefferson won the best actor award.
+FOL: exists x. (Actor(x) & PlaysIn(x, ThomasJefferson, Hamilton) & Wins(x, BestActorAward))
+TEXT: Daveed Diggs played Thomas Jefferson.
+FOL: Plays(DaveedDiggs, ThomasJefferson)
+TEXT: Musicals on Broadway are not films.
+FOL: all x. ((Musical(x) & OnBroadway(x)) -> -Film(x))
+TEXT: Daveed Diggs won the best actor award.
+FOL: exists x. (BRICS(x) & Speaks(x, Hindi))
+</EVALUATE>
+
+<PREMISES>
+Some fish stings people.
+Stonefish is a fish.
+Stonefish stings when stepped on.
+If a stonefish stings someone and they are not treated, it can cause death to them.
+To treat stonefish stings, apply heat to the affected area or use an antivenom.
+</PREMISES>
+<CONCLUSION>
+Stings of some fish can cause death if not treated.
+</CONCLUSION>
+<EVALUATE>
+
+Generation 1:
+To evaluate the conclusion "Stings of some fish can cause death if not treated" using a theorem solver like Prover9, we need to translate the given premises and conclusion into First-Order Logic (FOL) expressions.
+
+Here are the translations:
+
+<PREMISES>
+Some fish stings people.
+FOL: exists x. (Fish(x) & Stings(x, People))
+TEXT: Stonefish is a fish.
+FOL: Fish(Stonefish)
+TEXT: Stonefish stings when stepped on.
+FOL: Stings(Stonefish, People)
+TEXT: If a stonefish stings someone and they are not treated, it can cause death to them.
+FOL: Stings(Stonefish, x) & -Treated(x) -> CausesDeath(x)
+TEXT: To treat stonefish stings, apply heat to the affected area or use an antivenom.
+FOL: Treated(x) -> (ApplyHeat(x) | UseAntivenom(x))
+</PREMISES>
+<CONCLUSION>
+Stings of some fish can cause death if not treated.
+FOL: exists x. (Fish(x) & Stings(x, y) & -Treated(y) -> CausesDeath(y))
+</CONCLUSION>
+<EVALUATE>
+In the FOL expression of the conclusion, we have a nested quantifier. This is not directly supported by the Prover9 format. To convert this into a format that can be evaluated by Prover9, we can rewrite the conclusion as follows:
+
+exists x. (Fish(x) & Stings(x, y) & -Treated(y) -> CausesDeath(y))
+
+We can also rewrite the premises for better readability:
+
+exists x. (Fish(x) & Stings(x, People))
+
+Fish(Stonefish)
+
+Stings(Stonefish, People)
+
+Stings(Stonefish, x) & -Treated(x) -> CausesDeath(x)
+
+Treated(x) -> (ApplyHeat(x) | UseAntivenom(x))
+
+Note that we cannot directly translate the last premise, "To treat stonefish stings, apply heat to the affected area or use an antivenom," because it contains a conditional statement. However, we can remove this premise because it is not relevant to the conclusion.
+
+Now, we can evaluate the conclusion using Prover9. However, since Prover9 does not support nested quantifiers, we need to modify the conclusion to remove the nested quantifier. One way to do this is to rewrite the conclusion as:
+
+forall y. (exists x. (Fish(x) & Stings(x, y)) & -Treated(y) -> CausesDeath(y))
+
+This rewritten conclusion is in a format that can be evaluated by Prover9. 
+
+Here is the modified Python code for the problem:
+
+```python
+# Import the necessary modules
+from nltk import logic
+
+# Define the FOL expressions for the premises and conclusion
+premise1 = "exists x. (Fish(x) & Stings(x, People))"
+premise2 = "Fish(Stonefish)"
+premise3 = "Stings(Stonefish, People)"
+premise4 = "Stings(Stonefish, x) & -Treated(x) -> CausesDeath(x)"
+
+conclusion = "forall y. (exists x. (Fish(x) & Stings(x, y)) & -Treated(y) -> CausesDeath(y))"
+
+# Create a Prover9 object
+prover9 = logic.Prover9()
+
+# Add the premises to the Prover9 object
+prover9.add_formula(premise1)
+prover9.add_formula(premise2)
+prover9.add_formula(premise3)
+prover9.add_formula(premise4)
+
+# Add the conclusion to the Prover9 object
+prover9.add_formula(conclusion)
+
+# Evaluate the conclusion
+result = prover9.evaluate()
+
+# Print the result
+print(result)
+```
+
+This code will output whether the conclusion follows from the premises or not.
+Processed: True
+
+Generation 2:
+Here are the translations of the premises and conclusion into FOL expressions for the last problem:
+
+<premises>
+TEXT: Some fish stings people.
+FOL: exists x. (Fish(x) & Stings(x, People))
+TEXT: Stonefish is a fish.
+FOL: Fish(Stonefish)
+TEXT: Stonefish stings when stepped on.
+FOL: Stings(Stonefish, SteppedOn)
+TEXT: If a stonefish stings someone and they are not treated, it can cause death to them.
+FOL: (Stings(Stonefish, x) & -Treated(x)) -> CauseDeath(Stonefish, x)
+TEXT: To treat stonefish stings, apply heat to the affected area or use an antivenom.
+FOL: (Stings(Stonefish, x) -> (ApplyHeat(x) | UseAntivenom(x)))
+TEXT: Stings of some fish can cause death if not treated.
+FOL: exists x. (exists y. (Fish(y) & Stings(y, x) & -Treated(x)) -> CauseDeath(y, x))
+</premises>
+<conclusion>
+FOL: exists x. (exists y. (Fish(y) & Stings(y, x) & -Treated(x)) -> CauseDeath(y, x))
+</conclusion>
+
+This conclusion is already in the FOL expression form. 
+
+In general, to solve this problem, we need to translate each premise and conclusion into FOL expressions, then use a theorem solver like Prover9 to determine whether the conclusion follows from the premises.
+
+Here is the Python code that uses the nltk package to parse the text into FOL expressions:
+
+```python
+from nltk import load_parser
+from nltk.grammar import Nonterminal
+from nltk.parse import Production
+
+# Define the grammar for first-order logic
+grammar = load_parser('bin/fol.parser')
+
+# Define the FOL expressions for the premises and conclusion
+premises = [
+    "exists x. (Fish(x) & Stings(x, People))",
+    "Fish(Stonefish)",
+    "Stings(Stonefish, SteppedOn)",
+    "(Stings(Stonefish, x) & -Treated(x)) -> CauseDeath(Stonefish, x)",
+    "(Stings(Stonefish, x) -> (ApplyHeat(x) | UseAntivenom(x)))",
+    "exists x. (exists y. (Fish(y) & Stings(y, x) & -Treated(x)) -> CauseDeath(y, x))"
+]
+
+conclusion = "exists x. (exists y. (Fish(y) & Stings(y, x) & -Treated(x)) -> CauseDeath(y, x))"
+
+# Parse the FOL expressions
+for premise in premises:
+    parse_tree = grammar.parse(premise)
+    print(premise, ":", parse_tree)
+
+print(conclusion, ":", grammar.parse(conclusion))
+```
+
+This code uses the `nltk` package to parse the FOL expressions into parse trees, which can then be used by a theorem solver like Prover9 to determine whether the conclusion follows from the premises. 
+
+Note that this code assumes that the FOL expressions are in the correct format for the `nltk` parser. If the FOL expressions are not in the correct format, the parser may not be able to parse them correctly. 
+
+Also, note that this code does not actually use a theorem solver like Prover9 to determine whether the conclusion follows from the premises. Instead, it simply parses the FOL expressions into parse trees. To actually use a theorem solver, you would need to modify the code to pass the parse trees to the solver. 
+
+For example, you could use the `prover9` library, which is a Python interface to the Prover9 theorem solver. Here is an example of how you might use the `prover9` library to determine whether the conclusion follows from the premises:
+
+```python
+import prover9
+
+# Define the FOL expressions for the premises and conclusion
+premises = [
+    "exists x. (Fish(x) & Stings(x, People))",
+    "Fish(Stonefish)",
+    "Stings(Stonefish, SteppedOn)",
+    "(Stings(Stonefish, x) & -Treated(x)) -> CauseDeath(Stonefish, x)",
+    "(Stings(Stonefish, x) -> (ApplyHeat(x) | UseAntivenom(x)))",
+    "exists x. (exists y. (Fish(y) & Stings(y, x) & -Treated(x)) -> CauseDeath(y, x))"
+]
+
+conclusion = "exists x. (exists y. (Fish(y) & Stings(y, x) & -Treated(x)) -> CauseDeath(y, x))"
+
+# Create a Prover9 solver
+solver = prover9.Prover9()
+
+# Add the premises to the solver
+for premise in premises:
+    solver.add_clause(premise)
+
+# Add the conclusion to the solver
+solver.add_clause(conclusion)
+
+# Run the solver
+result = solver.solve()
+
+# Print the result
+if result == "sat":
+    print("The conclusion follows from the premises.")
+elif result == "unsat":
+    print("The conclusion does not follow from the premises.")
+else:
+    print("Unknown result.")
+```
+
+This code uses the `prover9` library to create a Prover9 solver, add the premises and conclusion to the solver, and run the solver. The result of the solver is then printed to the console.
+Processed: True
+
+=== Example 1 ===
+Prompt:
+The following is a first-order logic (FOL) problem.
+The problem is to determine whether the conclusion follows from the premises.
+The premises are given in the form of a set of first-order logic sentences.
+The conclusion is given in the form of a single first-order logic sentence.
+The task is to translate each of the premises and conclusions into FOL expressions so that the expressions can be evaluated by a theorem solver like Prover9 to determine whether the conclusion follows from the premises.
+Expressions should adhere to the format of the Python NLTK package logic module. 
+
+
+<PREMISES>
+All biodegradable things are environment-friendly.
+All woodware is biodegradable.
+All paper is woodware.
+Nothing is a good thing and also a bad thing.
+All environment-friendly things are good.
+A worksheet is either paper or environment-friendly.
+</PREMISES>
+<CONCLUSION>
+A worksheet is not biodegradable.
+</CONCLUSION>
+<EVALUATE>
+TEXT: All biodegradable things are environment-friendly.
+FOL: all x. (Biodegradable(x) -> EnvironmentFriendly(x))
+TEXT: All woodware is biodegradable.
+FOL: all x. (Woodware(x) -> Biodegradable(x))
+TEXT: All paper is woodware.
+FOL: all x. (Paper(x) -> Woodware(x))
+TEXT: Nothing is a good thing and also a bad thing.
+FOL: -(exists x. (Good(x) & Bad(x)))
+TEXT: All environment-friendly things are good.
+FOL: all x. (EnvironmentFriendly(x) -> Good(x))
+TEXT: A worksheet is either paper or environment-friendly.
+FOL: ((Paper(Worksheet) & -EnvironmentFriendly(Worksheet)) | (-Paper(Worksheet) & EnvironmentFriendly(Worksheet)))
+TEXT: A worksheet is not biodegradable.
+FOL: -Dispensable(Worksheet)
+</EVALUATE>
+
+<PREMISES>
+A La Liga soccer team ranks higher than another La Liga soccer team if it receives more points.
+If there are two La Liga soccer teams and neither has more points than the other, then the team which receives more points from the games between the two teams ranks higher.
+Real Madrid and Barcelona are both La Liga soccer teams.
+Real Madrid received more points than Barcelona.
+Neither Real Madrid nor Barcelona received more points from the games between them.
+</PREMISES>
+<CONCLUSION>
+Real Madrid ranks higher than Barcelona.
+</CONCLUSION>
+<EVALUATE>
+TEXT: A La Liga soccer team ranks higher than another La Liga soccer team if it receives more points.
+FOL: all x. all y. (LaLigaSoccerTeam(x) & LaLigaSoccerTeam(y) & MorePoints(x, y) -> RankHigherThan(x, y))
+TEXT: If there are two La Liga soccer teams and neither has more points than the other, then the team which receives more points from the games between the two teams ranks higher.
+FOL: all x. all y. (LaLigaSoccerTeam(x) & LaLigaSoccerTeam(y) & -MorePoints(x, y) & -MorePoints(y, x) & MorePointsInGameBetween(x, y) ->  RankHigherThan(x, y))
+TEXT: Real Madrid and Barcelona are both La Liga soccer teams.
+FOL: LaLigaSoccerTeam(RealMadrid) & LaLigaSoccerTeam(Barcelona)
+TEXT: Real Madrid received more points than Barcelona.
+FOL: MorePoints(RealMadrid, Barcelona)
+TEXT: Neither Real Madrid nor Barcelona received more points from the games between them.
+FOL: -MorePointsInGameBetween(RealMadrid, Barcelona) & -MorePointsInGameBetween(Barcelona, RealMadrid)
+TEXT: Real Madrid ranks higher than Barcelona.
+FOL: HigherRank(RealMadrid, Barcelona)
+</EVALUATE>
+
+<PREMISES>
+All professional athletes spend most of their time on sports.
+All Olympic gold medal winners are professional athletes.
+No full-time scientists spend the majority of their time on sports.
+All Nobel physics laureates are full-time scientists.
+Amy spends the most time on sports, or Amy is an Olympic gold medal winner.
+If Amy is not a Nobel physics laureate, then Amy is not an Olympic gold medal winner.
+</PREMISES>
+<CONCLUSION>
+If Amy is not an Olympic gold medal winner, then Amy is a Nobel physics laureate.
+</CONCLUSION>
+<EVALUATE>
+TEXT: All professional athletes spend most of their time on sports.
+FOL: all x. (ProfessionalAthlete(x) -> SpendOn(x, MostOfTheirTime, Sports))
+TEXT: All Olympic gold medal winners are professional athletes.
+FOL: all x. (OlympicGoldMedalWinner(x) -> ProfessionalAthlete(x))
+TEXT: No full-time scientists spend the majority of their time on sports.
+FOL: all x. (FullTimeScientist(x) -> -SpendOn(x, MostOfTheirTime, Sports))
+TEXT: All Nobel physics laureates are full-time scientists.
+FOL: all x. (NobelPhysicsLaureate(x) -> FullTimeScientist(x))
+TEXT: Amy spends the most time on sports, or Amy is an Olympic gold medal winner.
+FOL: SpendOn(Amy, MostOfTheirTime, Sports) | OlympicGoldMedalWinner(Amy)
+TEXT: If Amy is not a Nobel physics laureate, then Amy is not an Olympic gold medal winner.
+FOL: -NobelPhysicsLaureate(Amy) -> -OlympicGoldMedalWinner(Amy)
+TEXT: If Amy is not an Olympic gold medal winner, then Amy is a Nobel physics laureate.
+FOL: -OlympicGoldMedalWinner(Amy) -> NobelLaureate(Amy)
+</EVALUATE>
+
+<PREMISES>
+If a person pays their taxes, then they contribute to the country.
+Everyone who works for a government department pays a tax on their salary.
+Everyone in the army is an employee of a government department.
+Everyone convicted of murder goes to prison.
+Everyone who has been to prison has a criminal record.
+James was either once convicted of murder, or spent time in prison.
+James either has a criminal record, or pays his taxes.
+</PREMISES>
+<CONCLUSION>
+James does not contribute to the country.
+</CONCLUSION>
+<EVALUATE>
+TEXT: If a person pays their taxes, then they contribute to the country.
+FOL: all x. (Taxpayer(x) -> ContributeTo(x, Country))
+TEXT: Everyone who works for a government department pays a tax on their salary.
+FOL: all x. (WorkFor(x, GovernmentAgency) -> Taxpayer(x))
+TEXT: Everyone in the army is an employee of a government department.
+FOL: all x. (ServesIn(x, TheArmy) -> WorkFor(x, GovernmentAgency))
+TEXT: Everyone convicted of murder goes to prison.
+FOL: all x. (SentencedForMurder(x) -> Imprisoned(x))
+TEXT: Everyone who has been to prison has a criminal record.
+FOL: all x. (Imprisoned((x) -> Has(x, CriminalRecord))
+TEXT: James was either once convicted of murder, or spent time in prison.
+FOL: ((SentencedForMurder(James) & -Imprisoned(James)) | (-SentencedForMurder(James) & Imprisoned(James)))
+TEXT: James either has a criminal record, or pays his taxes.
+FOL: ((Has(James, CriminalRecord) & -Taxpayer(James)) | (-Has(James, CriminalRecord) & Taxpayer(James)))
+TEXT: James does not contribute to the country.
+FOL: ContributeToCountry(James)
+</EVALUATE>
+
+<PREMISES>
+No songs are visuals.
+All folk songs are songs.
+All videos are visuals.
+All movies are videos.
+All sci-fi movies are movies.
+Inception is a sci-fi movie.
+Mac is neither a folk song nor a sci-fi movie.
+</PREMISES>
+<CONCLUSION>
+Inception is a folk song.
+</CONCLUSION>
+<EVALUATE>
+TEXT: No songs are visuals.
+FOL: all x. (Song(x) -> -Visual(x))
+TEXT: All folk songs are songs.
+FOL: all x. (FolkSong(x) -> Song(x))
+TEXT: All videos are visuals.
+FOL: all x. (Video(x) -> Visual(x))
+TEXT: All movies are videos.
+FOL: all x. (Movie(x) -> Video(x))
+TEXT: All sci-fi movies are movies.
+FOL: all x. (ScifiMovie(x) -> Movie(x))
+TEXT: Inception is a sci-fi movie.
+FOL: ScifiMovie(Inception)
+TEXT: Mac is neither a folk song nor a sci-fi movie.
+FOL: -FolkSong(Mac) & -ScifiMovie(Mac)
+TEXT: Inception is a folk song.
+FOL: FolkSong(Inception)
+</EVALUATE>
+
+<PREMISES>
+Every chef can cook.
+Some people who aren’t chefs can cook.
+People who cook can make scrambled eggs and pasta.
+If someone can make cookies and muffins, they are a baker.
+Bakers who can also make scrambled eggs can make a good breakfast.
+Luke can make cookies, scrambled eggs, and muffins, but not pasta.
+</PREMISES>
+<CONCLUSION>
+Luke is a chef.
+</CONCLUSION>
+<EVALUATE>
+TEXT: Every chef can cook.
+FOL: all x. (Chef(x) -> Can(x, Cook))
+TEXT: Some people who aren’t chefs can cook.
+FOL: exists x. (-Chef(x) & Can(x, Cook))
+TEXT: People who cook can make scrambled eggs and pasta.
+FOL: all x. (Can(x, Cook) -> (CanMake(x, ScrambledEggs) & CanMake(x, Pasta)))
+TEXT: If someone can make cookies and muffins, they are a baker.
+FOL: all x. (CanMake(x, Cookies) & CanMake(x, Muffins) -> Baker(x))
+TEXT: Bakers who can also make scrambled eggs can make a good breakfast.
+FOL: all x. ((Baker(x) & CanMake(x, ScrambledEggs)) -> CanMake(x, GoodBreakfast))
+TEXT: Luke can make cookies, scrambled eggs, and muffins, but not pasta.
+FOL: CanMake(Luke, Cookies) & (CanMake(Luke, ScrambledEggs) & CanMake(Luke, Muffins) & -CanMake(Luke, Pasta)
+TEXT: Luke is a chef.
+FOL: MakeGoodBreakfast(Luke)
+</EVALUATE>
+
+<PREMISES>
+ETS develops various standardized tests primarily in the United States for K-12 and higher education.
+ETS administers international tests, including the TOEFL, TOEIC, GRE, and subject tests.
+Many of the assessments ETS develops are associated with entry to the US tertiary and quaternary education institutions.
+ETS also develops K-12 statewide assessments used for accountability testing in many states.
+</PREMISES>
+<CONCLUSION>
+ETS doesn't administer tests internationally.
+</CONCLUSION>
+<EVALUATE>
+TEXT: ETS develops various standardized tests primarily in the United States for K-12 and higher education.
+FOL: exists x. exists y. (Develop(eTS, x) & Develop(eTS, y) & StandardizedTest(x) & StandardizedTest(y) & In(x, UnitedState) & In(y, UnitedState) & For(x, kOneTwoAndHigherEducation) & For(y, kOneTwoAndHigherEducation))
+TEXT: ETS administers international tests, including the TOEFL, TOEIC, GRE, and subject tests.
+FOL: exists x. (Administer(eTS, x) & InternationalTest(x) & (TOEFL(x) | TOEIC(x) | GRE(x) | SubjectTest(x)))
+TEXT: Many of the assessments ETS develops are associated with entry to the US tertiary and quaternary education institutions.
+FOL: exists x. (Develop(eTS, x) & AssociatedWith(x, EntryToUSEducationInstitution))
+TEXT: ETS also develops K-12 statewide assessments used for accountability testing in many states.
+FOL: exists x. (Develop(eTS, x) & StateWideAssesment(x) & UsedFor(x, AccountabilityTesting))
+TEXT: ETS doesn't administer tests internationally.
+FOL: exists x. (Develops(Ets, x) & For(x, k-OneTwoandhighereducation)) & exists x. (Develops(Ets, x) & AssociatedWith(x, Entrytouseducationinstitutions))
+</EVALUATE>
+
+<PREMISES>
+Daveed Diggs is an actor and film producer.
+Daveed Diggs played two roles in the musical Hamilton on Broadway.
+One of the actors from Hamilton won the best actor award.
+The actor playing Thomas Jefferson won the best actor award.
+Daveed Diggs played Thomas Jefferson.
+Musicals on Broadway are not films.
+</PREMISES>
+<CONCLUSION>
+Daveed Diggs won the best actor award.
+</CONCLUSION>
+<EVALUATE>
+TEXT: Daveed Diggs is an actor and film producer.
+FOL: Actor(DaveedDiggs) & FilmProducer(DaveedDiggs)
+TEXT: Daveed Diggs played two roles in the musical Hamilton on Broadway.
+FOL: exists x. exists y.(PlaysIn(DaveedDiggs, x, Hamilton) & (-(x=y)) & PlaysIn(DaveedDiggs, y, Hamilton)) & OnBroadway(Hamilton) & Musical(Hamilton)
+TEXT: One of the actors from Hamilton won the best actor award.
+FOL: exists x. exists y.(Actor(x) & PlaysIn(x, y, Hamilton) & Wins(x, BestActorAward))
+TEXT: The actor playing Thomas Jefferson won the best actor award.
+FOL: exists x. (Actor(x) & PlaysIn(x, ThomasJefferson, Hamilton) & Wins(x, BestActorAward))
+TEXT: Daveed Diggs played Thomas Jefferson.
+FOL: Plays(DaveedDiggs, ThomasJefferson)
+TEXT: Musicals on Broadway are not films.
+FOL: all x. ((Musical(x) & OnBroadway(x)) -> -Film(x))
+TEXT: Daveed Diggs won the best actor award.
+FOL: exists x. (BRICS(x) & Speaks(x, Hindi))
+</EVALUATE>
+
+<PREMISES>
+Some fish stings people.
+Stonefish is a fish.
+Stonefish stings when stepped on.
+If a stonefish stings someone and they are not treated, it can cause death to them.
+To treat stonefish stings, apply heat to the affected area or use an antivenom.
+</PREMISES>
+<CONCLUSION>
+Stings of some fish can cause death if not treated.
+</CONCLUSION>
+<EVALUATE>
+

@@ -2,6 +2,10 @@ import re
 import nltk
 from nltk.sem import logic
 from nltk.sem import Expression
+import datetime
+import os
+import json 
+import traceback
 
 logic._counter._value = 0
 read_expr = Expression.fromstring
@@ -103,21 +107,49 @@ def reformat_fol(fol):
         fol = fol.replace(variable, variable_new)
     return fol
 
-def evaluate(premises, conclusion):
+def evaluate(premises, conclusion, save_dir):
+    error_log = []
     premises = [reformat_fol(p) for p in premises]
     conclusion = reformat_fol(conclusion)
-
-    c = read_expr(conclusion)
-    p_list = []
-    for p in premises:
-        p_list.append(read_expr(p))
-    truth_value = prover.prove(c, p_list)
-    if truth_value:
-        return "True"
-    else:
-        neg_c = read_expr("-(" + conclusion + ")")
-        negation_true = prover.prove(neg_c, p_list)
-        if negation_true:
-            return "False"
+    # os.path.join(save_dir)
+    # Create error directory if it doesn't exist
+    # error_dir = "prover_errors"
+    # os.makedirs(error_dir, exist_ok=True)
+    
+    try:
+        c = read_expr(conclusion)
+        p_list = [read_expr(p) for p in premises]
+        
+        # Attempt proof
+        truth_value = prover.prove(c, p_list)
+        
+        if truth_value:
+            return "True"
         else:
-            return "Uncertain"
+            # Attempt negation proof
+            neg_c = read_expr("-(" + conclusion + ")")
+            negation_true = prover.prove(neg_c, p_list)
+            
+            if negation_true:
+                return "False"
+            else:
+                return "Uncertain"
+                
+    except Exception as e:
+        # Save error details
+        error_data = {
+            "timestamp": datetime.datetime.now().isoformat(),
+            "premises": premises,
+            "conclusion": conclusion,
+            "error_type": str(type(e)),
+            "error_message": str(e),
+            "stack_trace": traceback.format_exc()
+        }
+        
+        exp_dir = os.path.join("results", save_dir)
+        # Append to error log file
+        error_file = os.path.join(exp_dir, "prover_errors.jsonl")
+        with open(error_file, "a") as f:
+            f.write(json.dumps(error_data) + "\n")
+            
+        return "Error"

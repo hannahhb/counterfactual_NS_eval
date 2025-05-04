@@ -1,0 +1,3 @@
+Accuracy: 66.00%
+Correct: 66/100
+Parameters: mode=neurosymbolic, shots=3, model=Qwen/Qwen2.5-7B-Instruct, k=3

@@ -1,0 +1,4 @@
+Accuracy: 67.16%
+Correct: 137/204
+Parameters: mode=baseline, shots=1, model=google/gemini-2.5-flash-preview-05-20, k=2
+Notes: base

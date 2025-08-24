@@ -1,0 +1,4 @@
+Accuracy: 65.69%
+Correct: 134/204
+Parameters: mode=neurocot, shots=8, model=meta-llama/Llama-3.1-8B-Instruct, k=10
+Notes: base

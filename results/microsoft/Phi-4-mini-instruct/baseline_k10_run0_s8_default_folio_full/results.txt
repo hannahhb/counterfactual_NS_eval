@@ -1,0 +1,4 @@
+Accuracy: 54.90%
+Correct: 112/204
+Parameters: mode=baseline, shots=8, model=microsoft/Phi-4-mini-instruct, k=10
+Notes: base

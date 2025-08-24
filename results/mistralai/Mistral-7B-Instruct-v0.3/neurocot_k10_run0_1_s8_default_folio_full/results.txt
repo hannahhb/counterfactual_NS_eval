@@ -1,0 +1,4 @@
+Accuracy: 50.49%
+Correct: 103/204
+Parameters: mode=neurocot, shots=8, model=mistralai/Mistral-7B-Instruct-v0.3, k=10
+Notes: base

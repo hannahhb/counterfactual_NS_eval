@@ -1,0 +1,4 @@
+Accuracy: 59.80%
+Correct: 122/204
+Parameters: mode=neurostep, shots=8, model=Qwen/Qwen2.5-7B-Instruct, k=10
+Notes: verification = 2 for output

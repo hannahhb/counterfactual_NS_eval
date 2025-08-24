@@ -1,0 +1,4 @@
+Accuracy: 26.47%
+Correct: 54/204
+Parameters: mode=neurostep, shots=8, model=mistralai/Mistral-7B-Instruct-v0.3, k=10
+Notes: base

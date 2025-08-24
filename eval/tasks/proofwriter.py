@@ -1,4 +1,5 @@
-from linc2.eval.tasks import OWAFOLTask
+from .owafoltask import OWAFOLTask
+from datasets import load_dataset
 
 _CITATION = """
 @inproceedings{Tafjord2020ProofWriterGI,
@@ -9,7 +10,6 @@ _CITATION = """
 }
 """
 
-
 class ProofWriterTask(OWAFOLTask):
     """Use ProofWriter’s balanced deduction test split as the test set."""
     PROOFWRITER_HF = "theoxo/proofwriter-deduction-balanced"
@@ -17,8 +17,8 @@ class ProofWriterTask(OWAFOLTask):
     def __init__(self, model_name, model_server, mode="baseline",
                  n_shot=3, k=5, run=1, seed=7):
         super().__init__(model_name, model_server, mode, n_shot, k, run,
-                         dataset_type="proofwriter")
-        pw = load_dataset(self.PROOFWRITER_HF, split="test")
+                         dataset_type="default")
+        pw = load_dataset(self.PROOFWRITER_HF, split="test").select(range(100))
         # apply your reformat_proofwriter helper
         self.test_dataset = self.reformat_proofwriter(pw).shuffle(seed)
         self.exp_name += "_proofwriter"      # optional suffix
@@ -46,9 +46,18 @@ class ProofWriterTask(OWAFOLTask):
         concl = 'conclusion'
         
         premises = doc[prem]
-        print(premises)
+        # print(premises)
+        
+        if isinstance(premises, list):
+            # already a list of sentences
+            premises = premises
+        else:
+            # split a multiline string into lines, drop blank lines
+            premises = [line.strip() for line in premises.splitlines() if line.strip()]
+
         for premise in premises:
-            example += f"{premise}\n"  
+            example += f"{premise}"  
+            example += "\n"
       
         example += "</PREMISES>\n"
         example += f"<CONCLUSION>\n{doc[concl].strip()}\n</CONCLUSION>\n"

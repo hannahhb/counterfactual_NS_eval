@@ -1,0 +1,75 @@
+{
+    "125": [
+      "We universally quantify over every entity, asserting that being dispensable implies being environment-friendly.",
+      "Every instance of woodware falls under the dispensable category.",
+      "Paper is a subset of woodware, so paper implies woodware.",
+      "For every x, if x is good then x cannot be bad.",
+      "Environment-friendly implies good.",
+      "Worksheet must be in exactly one of those two categories.",
+      "We assert the negation of dispensability for the specific constant Worksheet."
+    ],
+    "23": [
+      "If both are in La Liga and x has strictly more total points than y, then x outranks y.",
+      "If neither has more overall points but x outscored y in their head-to-head matches, then x outranks y.",
+      "Membership in La Liga is asserted for both Real Madrid and Barcelona.",
+      "We record that Real Madrid has more total points.",
+      "Neither team outscored the other in their direct matches.",
+      "We test whether the ranking relation holds under these facts."
+    ],
+    "60": [
+      "Every athlete excels at sports, so we quantify universally over Athlete(x) implying GoodAtSports(x).",
+      "Gold-medal winners are a subclass of athletes, so OlympicGoldMedalWinner(x) → Athlete(x).",
+      "Scientists cannot be good at sports, eliminating overlap between those classes.",
+      "Nobel laureates inherit scientist status, capturing the relationship to scientists.",
+      "Amy must satisfy at least one: being good at sports or being a gold-medal winner.",
+      "Non-laureates cannot be gold-medal winners, linking laureate status to medal wins.",
+      "We check whether the inverted implication ‘not gold medal → laureate’ follows."
+    ],
+    "275": [
+      "Respect implies contribution, so anyone respected by others contributes to the country.",
+      "We restate that respect carries the same implication to reinforce it.",
+      "Fee-free visitors must be respected, creating a chain from visit status to respect.",
+      "Veterans (Army service) are granted fee-free access, linking army(x) → HaveVisitWithoutAnyFees(x).",
+      "Thieves go to prison, capturing wrongdoing leading to punishment.",
+      "Prison time entails a bad record, chaining Prison(x) → BadRecord(x).",
+      "James has exactly one of {Thief, Prison}, so we model that exclusive or.",
+      "James has exactly one of {BadRecord, Respected}, defining his status.",
+      "We verify whether those statuses guarantee that James contributes to the country."
+    ],
+    "148": [
+      "Songs cannot be visual, so we universally quantify Song(x) → ¬Visual(x).",
+      "Folk songs are a subset of songs, capturing FolkSong(x) → Song(x).",
+      "Videos are inherently visual, so Video(x) → Visual(x).",
+      "Movies are a subclass of videos, linking Movie(x) → Video(x).",
+      "Sci-fi movies are movies, giving ScifiMovie(x) → Movie(x).",
+      "We assert the specific instance Inception is a sci-fi movie.",
+      "Mac is neither a folk song nor a sci-fi movie, ruling out both classes.",
+      "We then test the (false) claim that Inception is a folk song under these constraints."
+    ], 
+    "261": [
+      "We use a universal quantifier (“all x”) to capture “every chef,” and the implication “Chef(x) → Cook(x)” asserts that being a chef entails the ability to cook.",
+      "An existential quantifier (“exists x”) models “some people,” and the conjunction “¬Chef(x) & Cook(x)” picks out those non-chefs who nonetheless can cook.",
+      "Universally we assert that cooking implies the ability to make both scrambled eggs and pasta, hence the nested implication into a conjunction.",
+      "Again a universal rule: anyone satisfying both “MakeCookies(x)” and “MakeMuffins(x)” must be classified as a baker.",
+      "We restrict to those who are bakers and can make scrambled eggs, and assert they can make a good breakfast.",
+      "A ground conjunction records exactly which components Luke can (and cannot) make.",
+      "A simple atomic fact concluding that Luke meets the criteria for “good breakfast.”"
+    ],
+    "263": [
+      "We introduce some test x such that ETS develops it, it’s standardized, its location is the U.S., and its target is K-12 and higher education.",
+      "There exists a test x that ETS administers, which is international and one of the listed exams (TOEFL, TOEIC, GRE, or subject test).",
+      "Some development x by ETS is tied to entry to U.S. tertiary and quaternary education institutions.",
+      "There is an assessment x that ETS develops, is statewide, and is used for accountability testing.",
+      "We conjoin two existentials to capture both that ETS develops K-12 statewide assessments and those associated with entry to U.S. tertiary/quaternary institutions."
+    ],
+    "683": [
+      "A universal rule: if something is China, then it belongs to BRICS and is an emerging economy.",
+      "Analogous universal rule for India: India(x) → (BRICS(x) & EmergingEconomy(x)).",
+      "For any person x and country y, if x is from y and y is China, then x speaks Chinese.",
+      "Similarly, being from India forces speaking either Hindi or English.",
+      "An existential quantifier picks out that there is at least one person from India.",
+      "We assert that there exists someone who is both a member of BRICS and speaks Hindi."
+    ]
+
+  }
+  

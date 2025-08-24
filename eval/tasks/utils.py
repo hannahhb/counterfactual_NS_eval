@@ -36,6 +36,8 @@ def convert_to_nltk_rep(logic_formula):
         "Ś": "S",
         "ą": "a",
         "’": "",
+        "! ": "", 
+        "!": "",
     }
 
     constant_pattern = r'\b([a-z]{2,})(?!\()'
@@ -68,49 +70,142 @@ def convert_to_nltk_rep(logic_formula):
     def replace_special_xor(match):
         return ("(((" + match.group(1) + ")) & -" + match.group(2) + ") | (-(" + match.group(1) + ")) & " + match.group(2) + ")")
     logic_formula = re.sub(special_xor_pattern, replace_special_xor, logic_formula)
-    
     return logic_formula
 
-def get_all_variables(text):
-    pattern = r'\([^()]+\)'
-    matches = re.findall(pattern, text)
-    all_variables = []
-    for m in matches:
-        m = m[1:-1]
-        m = m.split(",")
-        all_variables += [i.strip() for i in m]
-    return list(set(all_variables))
 
-def reformat_fol(fol):
+# import re
+
+import re
+from collections import defaultdict
+
+def sanitize_fol(s: str) -> str:
+    """
+    1) Convert Unicode symbols and numerals to ASCII/NLTK form
+    2) Normalize reverse arrows `<-` to `(...) -> (...)`
+    3) Protect decimal dots in tokens like '42.3billion' -> '42Dot3billion'
+    """
+    def _unquote(match):
+        inner = match.group(1)
+        # remove non‐alphanumeric, then capitalize words and join
+        parts = re.findall(r"[A-Za-z0-9]+", inner)
+        return "".join(w.capitalize() for w in parts)
+    
+    s = re.sub(r'"([^"]+)"', _unquote, s)
+
+    # 1) Unicode / simple replacements
     translation_map = {
-        "0": "Zero", 
-        "1": "One",
-        "2": "Two",
-        "3": "Three",
-        "4": "Four",
-        "5": "Five",
-        "6": "Six",
-        "7": "Seven",
-        "8": "Eight",
-        "9": "Nine",
-        ".": "Dot",
-        "’": "",
-        "-": "_",
-        "'": "",
-        " ": "_"
+        "∀": "all",
+        "All": "all",
+        "∃": "exists",
+        "Exists": "exists",
+        "→": "->",
+        "¬": "-",
+        "~": "-"
+        
+    #     "∧": "&",
+    #     "∨": "|",
+    #     "⟷": "<->",
+    #     "↔": "<->",
+    #     # Note: we’ll handle “.” below for numerics, so remove from here
+    #     "Ś": "S",
+    #     "ą": "a",
+    #     "’": "",
+    #     "! ": "",
+    #     "!": "",
     }
-    all_variables = get_all_variables(fol)
-    for variable in all_variables:
-        variable_new = variable[:]
-        for k, v in translation_map.items():
-            variable_new = variable_new.replace(k, v)
-        fol = fol.replace(variable, variable_new)
-    return fol
+    
+    for u, ascii_ in translation_map.items():
+        s = s.replace(u, ascii_)
+   
+   
 
-def evaluate(premises, conclusion, save_dir):
-    error_log = []
-    premises = [reformat_fol(p) for p in premises]
-    conclusion = reformat_fol(conclusion)
+    def protect_decimal_tokens(formula: str) -> str:
+        return re.sub(
+            r"(\d+)\.(\d+)([A-Za-z]\w*)",
+            lambda m: f"{m.group(1)}Dot{m.group(2)}{m.group(3)}",
+            formula
+        )
+
+    def normalize_comparisons(formula: str) -> str:
+        # Handle <= and >= first
+        formula = re.sub(
+            r"(\b[A-Za-z][A-Za-z0-9_]*\b)\s*<=\s*([A-Za-z0-9_'.]+)",
+            r"LesserThanOrEqual(\1,\2)", formula
+        )
+        formula = re.sub(
+            r"(\b[A-Za-z][A-Za-z0-9_]*\b)\s*>=\s*([A-Za-z0-9_'.]+)",
+            r"GreaterThanOrEqual(\1,\2)", formula
+        )
+        # Now standard <, >, =
+        formula = re.sub(
+            r"(\b[A-Za-z][A-Za-z0-9_]*\b)\s*<\s*([A-Za-z0-9_'.]+)",
+            r"LesserThan(\1,\2)", formula
+        )
+        formula = re.sub(
+            r"(\b[A-Za-z][A-Za-z0-9_]*\b)\s*>\s*([A-Za-z0-9_'.]+)",
+            r"GreaterThan(\1,\2)", formula
+        )
+        formula = re.sub(
+            r"(\b[A-Za-z][A-Za-z0-9_]*\b)\s*=\s*([A-Za-z0-9_'.]+)",
+            r"Equal(\1,\2)", formula
+        )
+        return formula
+
+    def normalize_biconditional(formula: str) -> str:
+        """
+        Convert all occurrences of (A <-> B) into ((A -> B) & (B -> A)).
+        """
+        # non-greedy match inside parentheses
+        pattern = r"\(([^()]*?)\s*<->\s*([^()]*?)\)"
+        while re.search(pattern, formula):
+            formula = re.sub(pattern, r"((\1 -> \2) & (\2 -> \1))", formula)
+        return formula
+    
+    def fix_misparsed_negations(formula: str) -> str:
+        """
+        Convert '(> ANY)' back to '-(ANY)', supporting compound expressions inside.
+        """
+        # match '(> <content>)' and replace with '-(content)'
+        return re.sub(r"\(>\s*([^)]+)\)", r"-(\1)", formula)
+   
+   
+    s = re.sub(
+        r'(\d+)\.(\d+)([A-Za-z]\w*)',
+        lambda m: f"{m.group(1)}Dot{m.group(2)}{m.group(3)}",
+        s
+    )
+    
+    # 5) Remove spurious dots after variables: “x.y” → “xy”
+    s = re.sub(r"([a-z])\.(?=[a-z])", lambda m: m.group(1), s)
+
+    # 6) Normalize reverse-implication arrows
+    s = re.sub(
+        r'(.+?)\s*<-\s*(.+)',
+        lambda m: f"({m.group(2).strip()} -> {m.group(1).strip()})",
+        s
+    )
+    
+   
+    s = re.sub(r'"([^"]+)"', _unquote, s)
+    s =  normalize_biconditional(s)
+    s = fix_misparsed_negations(s)
+    s = normalize_comparisons(s)
+    s = protect_decimal_tokens(s)
+    
+    return s
+
+def evaluate_math():
+    pass
+
+def evaluate(premises, conclusion, save_dir=False):
+    # all_forms = premises + [conclusion]
+    # all_forms = disambiguate_arities(all_forms)
+
+    # # split them back out
+    # premises, conclusion = all_forms[:-1], all_forms[-1]
+    
+    premises = [sanitize_fol(p) for p in premises]
+    conclusion = sanitize_fol(conclusion)
     # os.path.join(save_dir)
     # Create error directory if it doesn't exist
     # error_dir = "prover_errors"
@@ -145,11 +240,12 @@ def evaluate(premises, conclusion, save_dir):
             "error_message": str(e),
             "stack_trace": traceback.format_exc()
         }
+        if save_dir:
+            exp_dir = os.path.join("results", save_dir)
+            # Append to error log file
+            error_file = os.path.join(exp_dir, "prover_errors.jsonl")
+            with open(error_file, "a") as f:
+                f.write(json.dumps(error_data) + "\n")
+        # print(error_data)
+        return error_data
         
-        exp_dir = os.path.join("results", save_dir)
-        # Append to error log file
-        error_file = os.path.join(exp_dir, "prover_errors.jsonl")
-        with open(error_file, "a") as f:
-            f.write(json.dumps(error_data) + "\n")
-            
-        return "Error"

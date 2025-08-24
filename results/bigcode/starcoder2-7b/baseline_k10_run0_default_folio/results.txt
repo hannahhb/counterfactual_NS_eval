@@ -1,3 +1,0 @@
-Accuracy: 48.15%
-Correct: 39/81
-Parameters: mode=baseline, shots=8, model=bigcode/starcoder2-7b, k=10

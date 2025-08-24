@@ -1,3 +1,0 @@
-Accuracy: 81.48%
-Correct: 66/81
-Parameters: mode=baseline, shots=3, model=Qwen/Qwen2.5-32B-Instruct, k=1

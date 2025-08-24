@@ -1,3 +1,0 @@
-Accuracy: 58.02%
-Correct: 47/81
-Parameters: mode=scratchpad, shots=8, model=bigcode/starcoder2-7b, k=10

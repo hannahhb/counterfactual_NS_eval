@@ -1,3 +1,0 @@
-Accuracy: 55.17%
-Correct: 112/203
-Parameters: mode=cot, shots=3, model=Qwen/Qwen2.5-7B-Instruct, k=3

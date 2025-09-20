@@ -1,4 +1,0 @@
-Accuracy: 48.15%
-Correct: 39/81
-Parameters: mode=baseline, shots=8, model=meta-llama/Llama-3.1-8B-Instruct, k=10
-Notes: base + python mode

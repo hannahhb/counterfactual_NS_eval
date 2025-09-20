@@ -1,4 +1,0 @@
-Accuracy: 42.65%
-Correct: 87/204
-Parameters: mode=neurocot, shots=8, model=microsoft/Phi-4-mini-instruct, k=10
-Notes: base

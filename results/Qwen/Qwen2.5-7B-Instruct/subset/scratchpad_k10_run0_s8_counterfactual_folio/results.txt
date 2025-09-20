@@ -1,3 +1,0 @@
-Accuracy: 76.54%
-Correct: 62/81
-Parameters: mode=scratchpad, shots=8, model=Qwen/Qwen2.5-7B-Instruct, k=10

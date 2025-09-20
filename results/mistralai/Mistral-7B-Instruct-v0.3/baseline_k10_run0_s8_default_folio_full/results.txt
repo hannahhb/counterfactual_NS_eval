@@ -1,4 +1,0 @@
-Accuracy: 53.43%
-Correct: 109/204
-Parameters: mode=baseline, shots=8, model=mistralai/Mistral-7B-Instruct-v0.3, k=10
-Notes: base

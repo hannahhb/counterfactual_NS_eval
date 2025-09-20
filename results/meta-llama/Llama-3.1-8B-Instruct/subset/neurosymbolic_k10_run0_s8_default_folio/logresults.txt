@@ -1,7 +1,0 @@
-Mode:                 neurocot
-Log path:             /data/gpfs/projects/punim0478/bansaab/linc2/results/meta-llama/Llama-3.1-8B-Instruct/subset/neurosymbolic_k10_run0_s8_default_folio/log.jsonl
-Reeval path:          /data/gpfs/projects/punim0478/bansaab/linc2/results/meta-llama/Llama-3.1-8B-Instruct/subset/neurosymbolic_k10_run0_s8_default_folio/log_reeval.jsonl
-Total gens processed: 810
-Error generations:    215
-Error rate:           26.54%
-Overall accuracy:     53/81 = 65.43%

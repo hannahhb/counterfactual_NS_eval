@@ -1,4 +1,0 @@
-Accuracy: 67.90%
-Correct: 55/81
-Parameters: mode=neurosymbolic, shots=8, model=google/gemma-3-27b-it, k=10
-Notes: base

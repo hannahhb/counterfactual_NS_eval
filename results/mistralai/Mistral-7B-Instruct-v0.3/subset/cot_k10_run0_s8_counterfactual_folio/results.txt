@@ -1,3 +1,0 @@
-Accuracy: 65.43%
-Correct: 53/81
-Parameters: mode=cot, shots=8, model=mistralai/Mistral-7B-Instruct-v0.3, k=10

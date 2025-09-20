@@ -1,4 +1,0 @@
-Accuracy: 85.19%
-Correct: 69/81
-Parameters: mode=baseline, shots=8, model=Qwen/Qwen2.5-Coder-7B-Instruct, k=10
-Notes: base

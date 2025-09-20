@@ -1,3 +1,0 @@
-Accuracy: 55.56%
-Correct: 45/81
-Parameters: mode=neurosymbolic, shots=8, model=meta-llama/Llama-3.1-8B-Instruct, k=10

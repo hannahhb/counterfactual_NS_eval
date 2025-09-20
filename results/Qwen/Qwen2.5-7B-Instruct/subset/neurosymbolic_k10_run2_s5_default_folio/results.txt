@@ -1,4 +1,0 @@
-Accuracy: 54.32%
-Correct: 44/81
-Parameters: mode=neurosymbolic, shots=5, model=Qwen/Qwen2.5-7B-Instruct, k=10
-Notes: json structured output

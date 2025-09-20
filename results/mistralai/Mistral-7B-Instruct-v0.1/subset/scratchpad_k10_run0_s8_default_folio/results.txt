@@ -1,3 +1,0 @@
-Accuracy: 71.60%
-Correct: 58/81
-Parameters: mode=scratchpad, shots=8, model=mistralai/Mistral-7B-Instruct-v0.1, k=10

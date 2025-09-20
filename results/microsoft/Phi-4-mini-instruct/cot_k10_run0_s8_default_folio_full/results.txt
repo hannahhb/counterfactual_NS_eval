@@ -1,4 +1,0 @@
-Accuracy: 71.57%
-Correct: 146/204
-Parameters: mode=cot, shots=8, model=microsoft/Phi-4-mini-instruct, k=10
-Notes: base

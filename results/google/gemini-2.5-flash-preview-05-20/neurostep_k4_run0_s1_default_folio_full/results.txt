@@ -1,4 +1,0 @@
-Accuracy: 65.20%
-Correct: 133/204
-Parameters: mode=neurostep, shots=1, model=google/gemini-2.5-flash-preview-05-20, k=4
-Notes: base

@@ -1,4 +1,0 @@
-Accuracy: 70.59%
-Correct: 144/204
-Parameters: mode=cot, shots=8, model=meta-llama/Llama-3.1-8B-Instruct, k=10
-Notes: base

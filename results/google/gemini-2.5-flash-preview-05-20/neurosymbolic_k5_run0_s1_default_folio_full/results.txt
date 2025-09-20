@@ -1,2 +1,0 @@
-Accuracy: 69.61%
-Correct: 142/204

@@ -1,4 +1,0 @@
-Accuracy: 56.37%
-Correct: 115/204
-Parameters: mode=neurostep, shots=8, model=meta-llama/Llama-3.1-8B-Instruct, k=10
-Notes: base

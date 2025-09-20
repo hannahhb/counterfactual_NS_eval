@@ -1,4 +1,0 @@
-Accuracy: 90.12%
-Correct: 73/81
-Parameters: mode=cot, shots=8, model=google/gemma-3-12b-it, k=10
-Notes: base

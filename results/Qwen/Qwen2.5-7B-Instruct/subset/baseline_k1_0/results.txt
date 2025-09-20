@@ -1,3 +1,0 @@
-Accuracy: 0.00%
-Correct: 0/3
-Parameters: mode=baseline, shots=3, model=Qwen/Qwen2.5-7B-Instruct, k=1

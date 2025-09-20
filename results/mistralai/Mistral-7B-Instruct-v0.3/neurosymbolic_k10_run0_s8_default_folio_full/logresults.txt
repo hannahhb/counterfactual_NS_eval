@@ -1,7 +1,0 @@
-Mode:                 neurocot
-Log path:             /data/gpfs/projects/punim0478/bansaab/linc2/results/mistralai/Mistral-7B-Instruct-v0.3/neurosymbolic_k10_run0_s8_default_folio_full/log.jsonl
-Reeval path:          /data/gpfs/projects/punim0478/bansaab/linc2/results/mistralai/Mistral-7B-Instruct-v0.3/neurosymbolic_k10_run0_s8_default_folio_full/log_reeval.jsonl
-Total gens processed: 2040
-Error generations:    768
-Error rate:           37.65%
-Overall accuracy:     116/204 = 56.86%

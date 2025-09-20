@@ -1,0 +1,36 @@
+Running on node: spartan-gpgpu168.hpc.unimelb.edu.au
+GPU information: NVIDIA A100 80GB PCIe
+Start time: Thu 28 Aug 2025 12:27:15 AEST
+INFO 08-28 12:27:38 [__init__.py:239] Automatically detected platform cuda.
+🚀 Initializing python mode for Qwen/Qwen2.5-7B-Instruct
+INFO 08-28 12:28:01 [config.py:600] This model supports multiple tasks: {'score', 'embed', 'reward', 'generate', 'classify'}. Defaulting to 'generate'.
+INFO 08-28 12:28:01 [config.py:1780] Chunked prefill is enabled with max_num_batched_tokens=8192.
+WARNING 08-28 12:28:03 [utils.py:2273] We must use the `spawn` multiprocessing start method. Overriding VLLM_WORKER_MULTIPROC_METHOD to 'spawn'. See https://docs.vllm.ai/en/latest/getting_started/troubleshooting.html#python-multiprocessing for more information. Reason: CUDA is initialized
+INFO 08-28 12:28:13 [__init__.py:239] Automatically detected platform cuda.
+INFO 08-28 12:28:16 [core.py:61] Initializing a V1 LLM engine (v0.8.3) with config: model='Qwen/Qwen2.5-7B-Instruct', speculative_config=None, tokenizer='Qwen/Qwen2.5-7B-Instruct', skip_tokenizer_init=False, tokenizer_mode=auto, revision=None, override_neuron_config=None, tokenizer_revision=None, trust_remote_code=False, dtype=torch.bfloat16, max_seq_len=18000, download_dir=None, load_format=auto, tensor_parallel_size=1, pipeline_parallel_size=1, disable_custom_all_reduce=False, quantization=None, enforce_eager=False, kv_cache_dtype=auto,  device_config=cuda, decoding_config=DecodingConfig(guided_decoding_backend='xgrammar', reasoning_backend=None), observability_config=ObservabilityConfig(show_hidden_metrics=False, otlp_traces_endpoint=None, collect_model_forward_time=False, collect_model_execute_time=False), seed=None, served_model_name=Qwen/Qwen2.5-7B-Instruct, num_scheduler_steps=1, multi_step_stream_outputs=True, enable_prefix_caching=True, chunked_prefill_enabled=True, use_async_output_proc=True, disable_mm_preprocessor_cache=False, mm_processor_kwargs=None, pooler_config=None, compilation_config={"level":3,"custom_ops":["none"],"splitting_ops":["vllm.unified_attention","vllm.unified_attention_with_output"],"use_inductor":true,"compile_sizes":[],"use_cudagraph":true,"cudagraph_num_of_warmups":1,"cudagraph_capture_sizes":[512,504,496,488,480,472,464,456,448,440,432,424,416,408,400,392,384,376,368,360,352,344,336,328,320,312,304,296,288,280,272,264,256,248,240,232,224,216,208,200,192,184,176,168,160,152,144,136,128,120,112,104,96,88,80,72,64,56,48,40,32,24,16,8,4,2,1],"max_capture_size":512}
+WARNING 08-28 12:28:17 [utils.py:2413] Methods determine_num_available_blocks,device_config,get_cache_block_size_bytes,initialize_cache not implemented in <vllm.v1.worker.gpu_worker.Worker object at 0x153815712c50>
+INFO 08-28 12:28:18 [parallel_state.py:957] rank 0 in world size 1 is assigned as DP rank 0, PP rank 0, TP rank 0
+INFO 08-28 12:28:18 [cuda.py:221] Using Flash Attention backend on V1 engine.
+INFO 08-28 12:28:18 [gpu_model_runner.py:1258] Starting to load model Qwen/Qwen2.5-7B-Instruct...
+INFO 08-28 12:28:18 [topk_topp_sampler.py:59] Using FlashInfer for top-p & top-k sampling.
+INFO 08-28 12:28:22 [weight_utils.py:265] Using model weights format ['*.safetensors']
+INFO 08-28 12:28:37 [loader.py:447] Loading weights took 14.07 seconds
+INFO 08-28 12:28:37 [gpu_model_runner.py:1273] Model loading took 14.2487 GiB and 18.800937 seconds
+INFO 08-28 12:28:48 [backends.py:416] Using cache directory: /home/bansaab/.cache/vllm/torch_compile_cache/0b4804296f/rank_0_0 for vLLM's torch.compile
+INFO 08-28 12:28:48 [backends.py:426] Dynamo bytecode transform time: 11.58 s
+INFO 08-28 12:28:49 [backends.py:115] Directly load the compiled graph for shape None from the cache
+INFO 08-28 12:29:00 [monitor.py:33] torch.compile takes 11.58 s in total
+INFO 08-28 12:29:00 [kv_cache_utils.py:578] GPU KV cache size: 1,090,912 tokens
+INFO 08-28 12:29:00 [kv_cache_utils.py:581] Maximum concurrency for 18,000 tokens per request: 60.61x
+INFO 08-28 12:29:18 [gpu_model_runner.py:1608] Graph capturing finished in 18 secs, took 0.48 GiB
+INFO 08-28 12:29:18 [core.py:162] init engine (profile, create kv cache, warmup model) took 41.54 seconds
+✅ Initialization complete
+Num errors in ds:  0
+Successfully loaded 81 examples from data/folio_v2_perturbed.jsonl
+Loaded test data
+Final Accuracy: 58.02%
+Num errors in ds:  0
+Successfully loaded 81 examples from data/folio_v2_perturbed.jsonl
+Loaded test data
+Final Accuracy: 59.26%
+End time: Thu 28 Aug 2025 13:52:54 AEST

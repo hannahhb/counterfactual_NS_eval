@@ -1,0 +1,6 @@
+Running on node: spartan-gpgpu094.hpc.unimelb.edu.au
+GPU information: NVIDIA A100-PCIE-40GB
+Start time: Tue 16 Sep 2025 15:06:33 AEST
+INFO 09-16 15:09:05 [__init__.py:239] Automatically detected platform cuda.
+🚀 Initializing python mode for mistralai/Mistral-7B-Instruct-v0.1
+End time: Tue 16 Sep 2025 15:09:34 AEST

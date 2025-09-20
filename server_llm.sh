@@ -30,6 +30,6 @@ set USE_FLASH_ATTENTION=1
 export PYTORCH_CUDA_ALLOC_CONF=expandable_segments:False
 
 TORCH_DISTRIBUTED_DEBUG=INFO VLLM_USE_V1=0 CUDA_VISIBLE_DEVICES=0,1 \
-  python -m vllm.entrypoints.openai.api_server --model $qwen32b -tp 2 --max-model-len 18000  \
+  python -m vllm.entrypoints.openai.api_server --model $mistral01 -tp 1 --max-model-len 18000  \
   --dtype bfloat16 --gpu-memory-utilization 0.95 --port 8000 \
   --uvicorn-log-level debug  --trust-remote-code

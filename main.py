@@ -1,4 +1,4 @@
-from vllm import LLM, SamplingParams
+# from vllm import LLM, SamplingParams
 
 from eval.server import ModelServer
 from eval.tasks import *
@@ -23,15 +23,16 @@ phi4_mini="microsoft/Phi-4-mini-instruct"
 gemini_flash_2="google/gemini-2.0-flash-exp:free"
 gemini_flash_2_5 = "google/gemini-2.5-flash-preview-05-20"
 
-model_mode = "python"
-MODELS = [qwen7b]
+
+model_mode = "server"
+MODELS = [mistral01]
 datasets = ["default"]
-modes = ["neurosymbolic"]
+modes = ["neurocot"]
 
 cfgs = [
     {
-        "run": "1",
-        "do_verify": True, 
+        "run": "0",
+        "do_verify": False, 
         "structured": False, 
         "notes": "base + verify=2 mode"
     }
@@ -62,9 +63,9 @@ K=10
 
 if __name__ == "__main__":
     for model_name in MODELS:
-        if model_mode == "openrouter":
-            SHOTS = 1
-            K=5
+        # if model_mode == "openrouter":
+        #     SHOTS = 1
+        #     K=10
             
         vllm_server = ModelServer(
             model_name=model_name, 

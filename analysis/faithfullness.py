@@ -10,13 +10,11 @@ import matplotlib.pyplot as plt
 sys.path.insert(0, "/data/projects/punim0478/bansaab/linc2/")
 from eval.server import ModelServer                   # ← your wrapper
 
-# ---------- helper to pull ANSWER token -----------------------------------
 ANSWER_RE = re.compile(r'ANSWER\s*:\s*(True|False|Uncertain)', re.I)
 def extract_answer(text: str) -> str:
     m = ANSWER_RE.search(text)
     return m.group(1).capitalize() if m else "Error"
 
-# ---------- probing routine ----------------------------------------------
 def probe_file(jsonl_path: Path, model_server: ModelServer,
                fractions: List[float]=(0, .25, .5, .75, 1),
                t=0.0, max_tokens=8) -> List[Dict[str,Any]]:

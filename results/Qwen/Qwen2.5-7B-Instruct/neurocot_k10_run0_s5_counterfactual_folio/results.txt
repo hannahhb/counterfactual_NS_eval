@@ -1,0 +1,4 @@
+Accuracy: 59.26%
+Correct: 48/81
+Parameters: mode=neurocot, shots=5, model=Qwen/Qwen2.5-7B-Instruct, k=10
+Notes: base + verify=2 mode

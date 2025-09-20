@@ -1,0 +1,7 @@
+Mode:                 neurocot
+Log path:             /data/gpfs/projects/punim0478/bansaab/linc2/results/Qwen/Qwen2.5-7B-Instruct/neurosymbolic_k10_run0_s8_default_folio_full/log.jsonl
+Reeval path:          /data/gpfs/projects/punim0478/bansaab/linc2/results/Qwen/Qwen2.5-7B-Instruct/neurosymbolic_k10_run0_s8_default_folio_full/log_reeval.jsonl
+Total gens processed: 2040
+Error generations:    341
+Error rate:           16.72%
+Overall accuracy:     121/204 = 59.31%

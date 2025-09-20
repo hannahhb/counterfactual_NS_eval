@@ -6,15 +6,16 @@ from tqdm import tqdm
 from collections import Counter
 import numpy as np
 from warnings import warn
+import io 
 
-sys.path.insert(0, "/data/projects/punim0478/bansaab/linc2/")
+sys.path.insert(0, "/data/gpfs/projects/punim0478/bansaab/linc2")
 
 from eval.tasks.utils import evaluate
 
 # --- Configuration ---
 LOG_PATH = sys.argv[1]  # e.g. "results/.../log.jsonl"
 OUTPUT_PATH = LOG_PATH.replace(".jsonl", "_reeval.jsonl")
-RESULTS_PATH = LOG_PATH.replace("log.jsonl", "results.txt")
+RESULTS_PATH = LOG_PATH.replace(".jsonl", "results.txt")
 SAVE_DIR = False  # or your save directory string
 ERROR_TOKEN = "Error"
 
@@ -108,13 +109,13 @@ def _process_neurosymbolic(gen):
 
 # --- Main loop ---
 
-total = 204                # number of examples
+total = 81                # number of examples
 total_gens = 0           # total number of generations seen
 error_gens = 0           # total number of “Error” generations
 correct = 0
 
 #MODES = cot, neurosymbolic, neurostep, neurocot
-mode = "neurosymbolic"
+mode = "neurocot"
 
 with open(LOG_PATH) as fin, open(OUTPUT_PATH, "w") as fout:
     for line in tqdm(fin, desc="Re-evaluating", total=total):
@@ -145,9 +146,17 @@ with open(LOG_PATH) as fin, open(OUTPUT_PATH, "w") as fout:
         entry["majority_reeval"] = maj
         fout.write(json.dumps(entry) + "\n")
 
-# at the end
-print(f"Total gens processed: {total_gens}")
-print(f"Error generations:     {error_gens}")
-print(f"Error rate:            {error_gens/total_gens:.2%}")
-print(f"Overall accuracy:      {correct}/{total} = {correct/total:.2%}")
 
+buf = io.StringIO()
+buf.write(f"Mode:                 {mode}\n")
+buf.write(f"Log path:             {LOG_PATH}\n")
+buf.write(f"Reeval path:          {OUTPUT_PATH}\n")
+buf.write(f"Total gens processed: {total_gens}\n")
+buf.write(f"Error generations:    {error_gens}\n")
+buf.write(f"Error rate:           {error_gens/total_gens:.2%}\n")
+buf.write(f"Overall accuracy:     {correct}/{total} = {correct/total:.2%}\n")
+results_text = buf.getvalue()
+
+with open(RESULTS_PATH, "w") as f:
+    f.write(results_text)
+    

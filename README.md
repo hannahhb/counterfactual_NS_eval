@@ -23,8 +23,7 @@ dataset = ["default"] # default or counterfactual
 mode = ["cot"] # baseline, scratchpad, neurocot (NSCoT), or neurosymbolic (linc)
 ```
 
-- Results and logs will be written to the output directory specified in the code.
-- Prover9 is required for LINC/NSCoT runs (ensure it is installed and in your PATH).
+- Results and logs will be written to the output directory specified in the code (`results/model_name/mode`).
 - Multiple generations with majority voting are used for robustness in all methods. You can change K (=number of generations) and shots in `main.py` as well.
 
 ## Installation
